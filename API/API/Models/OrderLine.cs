@@ -29,9 +29,8 @@ namespace API.Models
         public Consumable Consumable { get; private set; }
         #endregion
 
-        public OrderLine(int orderLineId, int amount, Consumable consumable)
+        public OrderLine(int amount, Consumable consumable)
         {
-            OrderLineId = orderLineId;
             Amount = amount;
             Consumable = consumable;
         }

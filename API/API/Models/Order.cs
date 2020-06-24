@@ -13,10 +13,9 @@ namespace API.Models
         public OrderStatus OrderStatus { get; private set; } 
         #endregion
 
-        public Order(int orderId, List<OrderLine> orderLines, OrderStatus orderStatus)
+        public Order(OrderStatus orderStatus)
         {
-            OrderId = orderId;
-            OrderLines = orderLines;
+            OrderLines = new List<OrderLine>();
             OrderStatus = orderStatus;
         }
 
