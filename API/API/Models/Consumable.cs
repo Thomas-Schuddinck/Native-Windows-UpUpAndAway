@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Models
 {
@@ -14,7 +11,7 @@ namespace API.Models
         #endregion
 
         #region Properties
-        public int ConsumableId { get; private set; }
+        public int ConsumableId { get; set; }
         public double Price
         {
             get

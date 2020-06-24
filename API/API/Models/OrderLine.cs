@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Models
 {
@@ -12,7 +9,7 @@ namespace API.Models
         #endregion
 
         #region Properties
-        public int OrderLineId { get; private set; }
+        public int OrderLineId { get; set; }
         public int Amount
         {
             get

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Models
 {
     public class Order
     {
         #region Properties
-        public int OrderId { get; private set; }
+        public int OrderId { get; set; }
         public List<OrderLine> OrderLines { get; private set; }
         public OrderStatus OrderStatus { get; private set; } 
         #endregion

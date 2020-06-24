@@ -12,7 +12,7 @@ namespace API.Models
         #endregion
 
         #region Properties
-        public int PassengerId { get; private set; }
+        public int PassengerId { get; set; }
         public string FirstName
         {
             get
