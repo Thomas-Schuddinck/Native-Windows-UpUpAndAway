@@ -119,6 +119,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Consumable.cs" />
+    <Compile Include="Models\Episode.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderLine.cs" />
+    <Compile Include="Models\Enums\OrderStatus.cs" />
+    <Compile Include="Models\Passenger.cs" />
+    <Compile Include="Models\PassengerParty.cs" />
+    <Compile Include="Models\PrivateMessage.cs" />
+    <Compile Include="Models\Enums\VisualMediaType.cs" />
+    <Compile Include="Models\Serie.cs" />
+    <Compile Include="Models\Singleton\FlightInfoSingleton.cs" />
+    <Compile Include="Models\VisualMedia.cs" />
     <Compile Include="Pages\FlightInformation.xaml.cs">
       <DependentUpon>FlightInformation.xaml</DependentUpon>
     </Compile>
@@ -169,6 +182,7 @@
       <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
