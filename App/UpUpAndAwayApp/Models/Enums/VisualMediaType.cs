@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UpUpAndAwayApp.Models.Singleton
+namespace UpUpAndAwayApp.Models.Enums
 {
     public enum VisualMediaType
     {
