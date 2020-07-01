@@ -4,25 +4,9 @@ namespace API.Models
 {
     public class OrderLine
     {
-        #region Fields
-        private int _amount;
-        #endregion
-
         #region Properties
         public int OrderLineId { get; set; }
-        public int Amount
-        {
-            get
-            {
-                return Amount;
-            }
-            private set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Amount cannot be zero or less!");
-                _amount = value;
-            }
-        }
+        public int Amount { get; set; }
         public Consumable Consumable { get; private set; }
         #endregion
 

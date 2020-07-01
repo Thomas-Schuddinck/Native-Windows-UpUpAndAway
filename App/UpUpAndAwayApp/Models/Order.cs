@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API.Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace API.Models
