@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Models
 {
@@ -12,7 +9,7 @@ namespace API.Models
         #endregion
 
         #region Properties
-        public int OrderLineId { get; private set; }
+        public int OrderLineId { get; set; }
         public int Amount
         {
             get
@@ -29,9 +26,8 @@ namespace API.Models
         public Consumable Consumable { get; private set; }
         #endregion
 
-        public OrderLine(int orderLineId, int amount, Consumable consumable)
+        public OrderLine(int amount, Consumable consumable)
         {
-            OrderLineId = orderLineId;
             Amount = amount;
             Consumable = consumable;
         }

@@ -12,7 +12,7 @@ namespace API.Models
         #endregion
 
         #region Properties
-        public int PassengerId { get; private set; }
+        public int PassengerId { get; set; }
         public string FirstName
         {
             get
@@ -55,9 +55,8 @@ namespace API.Models
         public string FullName => FirstName + " " + LastName;
         #endregion
 
-        public Passenger(int passengerId, string firstName, string lastName, int seatNumber)
+        public Passenger(string firstName, string lastName, int seatNumber)
         {
-            PassengerId = passengerId;
             FirstName = firstName;
             LastName = lastName;
             SeatNumber = seatNumber;
