@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Models
 {
     public class Order
     {
         #region Properties
-        public int OrderId { get; private set; }
+        public int OrderId { get; set; }
         public List<OrderLine> OrderLines { get; private set; }
         public OrderStatus OrderStatus { get; private set; } 
         #endregion
 
-        public Order(int orderId, List<OrderLine> orderLines, OrderStatus orderStatus)
+        public Order(OrderStatus orderStatus)
         {
-            OrderId = orderId;
-            OrderLines = orderLines;
+            OrderLines = new List<OrderLine>();
             OrderStatus = orderStatus;
         }
 
