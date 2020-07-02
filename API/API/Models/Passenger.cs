@@ -52,7 +52,7 @@ namespace API.Models
                 _seatNumber = value;
             }
         }
-        public string FullName => FirstName + " " + LastName; 
+        public string FullName => FirstName + " " + LastName;
         #endregion
 
         public Passenger(int passengerId, string firstName, string lastName, int seatNumber)
@@ -72,6 +72,6 @@ namespace API.Models
             SeatNumber += otherPassenger.SeatNumber;
             otherPassenger.SeatNumber = SeatNumber - otherPassenger.SeatNumber;
             SeatNumber -= otherPassenger.SeatNumber;
-        }
+        }//#WUT Gewoon via temp omwisselen? Is iets duidelijker.
     }
 }

@@ -24,7 +24,7 @@ namespace API.Models
         {
             try
             {
-                orderLine.SetNewAmount(amount);
+                orderLine.SetNewAmount(amount);//#Wut throwt niet eens een exception
             }
             catch (ArgumentException ex)
             {
