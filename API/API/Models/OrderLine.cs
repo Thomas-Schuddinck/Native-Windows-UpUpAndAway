@@ -32,7 +32,7 @@ namespace API.Models
             Consumable = consumable;
         }
 
-        public void SetNewAmount(int value)
+        public void SetNewAmount(int value)//#Wut Dubbele code, same als setter van amount
         {
             Amount =value;
         }
