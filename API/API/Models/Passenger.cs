@@ -46,7 +46,7 @@ namespace API.Models
             {
                 return _seatNumber;
             }
-            private set
+            set
             {
                 if (value < 0)
                     throw new ArgumentException("Seat number cannot be negative!");
@@ -69,15 +69,6 @@ namespace API.Models
             SeatNumber = seatNumber;
         }
 
-        /// <summary>
-        /// Swap the seat numbers of this passenger and a given other passenger
-        /// </summary>
-        /// <param name="otherPassenger">the other passenger whose seat number will be swapped with this passenger</param>
-        public void SwapSeats(Passenger otherPassenger)
-        {
-            SeatNumber += otherPassenger.SeatNumber;
-            otherPassenger.SeatNumber = SeatNumber - otherPassenger.SeatNumber;
-            SeatNumber -= otherPassenger.SeatNumber;
-        }//#WUT Gewoon via temp omwisselen? Is iets duidelijker.
+        
     }
 }
