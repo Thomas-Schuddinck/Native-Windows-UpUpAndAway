@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace API.Models.Singleton
 {
     public class Plane
     {
-        private int _totalNumberOfSeats;
+        #region Fields
+        private int _totalNumberOfSeats; 
+        #endregion
+
         private static readonly Plane instance = new Plane();
         public FlightInfoSingleton FlightInfo = FlightInfoSingleton.GetInstance();
-        public Dictionary<int, Passenger> Seats = new Dictionary<int, Passenger>();
-        
+        public List<Seat> Seats;        
 
         public int TotalNumberOfSeats
         {
@@ -25,10 +28,13 @@ namespace API.Models.Singleton
             }
         }
 
+        #region Constructors
         private Plane()
         {
             TotalNumberOfSeats = 50; //Dit is gewoon een constante (voorbeeld)-waarde
-        }
+            Seats = new List<Seat>();
+        } 
+        #endregion
 
         #region Methods
         public static Plane GetInstance() => instance;
@@ -42,8 +48,7 @@ namespace API.Models.Singleton
             List<Passenger> remainingPassengerList = passengers;
             for(int i = 0; i < TotalNumberOfSeats; i++)
             {
-                Passenger tempPassenger = FillSeat(i, remainingPassengerList);
-                remainingPassengerList.Remove(tempPassenger);
+                remainingPassengerList.Remove(FillSeat(i, remainingPassengerList));
             }
         }
 
@@ -55,15 +60,9 @@ namespace API.Models.Singleton
         /// <returns>returns passenger if one's designated, else null</returns>
         public Passenger FillSeat(int seatnumber, List<Passenger> passengers)
         {
-            foreach(Passenger passenger in passengers){
-                if(passenger.SeatNumber == seatnumber)
-                {
-                    SetupPassengerWithSeat(seatnumber, passenger);
-                    return passenger;
-                }
-            }
-            SetupPassengerWithSeat(seatnumber);
-            return null;
+            Passenger passenger = FindPassengerBySeatNumber(seatnumber);                
+            SetupPassengerWithSeat(seatnumber, passenger);
+            return passenger;
         }
 
         /// <summary>
@@ -74,9 +73,7 @@ namespace API.Models.Singleton
         public void SetupPassengerWithSeat(int seatnumber, Passenger passenger = null)
         {
             CheckValidSeat(seatnumber);
-            Seats[seatnumber] = passenger;
-            if (passenger != null)
-                passenger.SeatNumber = seatnumber;
+            Seats.Add(new Seat(seatnumber, passenger));            
         }
 
         /// <summary>
@@ -90,8 +87,8 @@ namespace API.Models.Singleton
             CheckValidSeat(seatnumber2);
             if (seatnumber1 == seatnumber2) //if seats are the same than there's no need to swap
                 return;
-            Passenger passengerTemp = Seats[seatnumber2];
-            SetupPassengerWithSeat(seatnumber2, Seats[seatnumber1]);
+            Passenger passengerTemp = FindPassengerBySeatNumber(seatnumber2);
+            SetupPassengerWithSeat(seatnumber2, FindPassengerBySeatNumber(seatnumber1));
             SetupPassengerWithSeat(seatnumber1, passengerTemp);
         } 
 
@@ -103,6 +100,11 @@ namespace API.Models.Singleton
         {
             if (seatnumber > TotalNumberOfSeats)
                 throw new ArgumentException("Invalid seatnumber");
+        }
+
+        public Passenger FindPassengerBySeatNumber(int seatnumber)
+        {
+            return Seats.FirstOrDefault(s => s.SeatNumber == seatnumber)?.Passenger;
         }
         #endregion
     }

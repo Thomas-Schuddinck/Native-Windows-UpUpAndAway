@@ -9,7 +9,6 @@ namespace API.Models
         #region Fields
         private string _firstName;
         private string _lastName;
-        private int _seatNumber;
         #endregion
 
         #region Properties
@@ -40,19 +39,6 @@ namespace API.Models
                 _lastName = value;
             }
         }
-        public int SeatNumber
-        {
-            get
-            {
-                return _seatNumber;
-            }
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("Seat number cannot be negative!");
-                _seatNumber = value;
-            }
-        }
         public string FullName => FirstName + " " + LastName;
 
 
@@ -62,11 +48,10 @@ namespace API.Models
         public ICollection<Order> PlacedOrders { get; set; }
         #endregion
 
-        public Passenger(string firstName, string lastName, int seatNumber)
+        public Passenger(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
-            SeatNumber = seatNumber;
         }
 
         
