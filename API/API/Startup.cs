@@ -28,6 +28,10 @@ namespace API
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddCors(options =>options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
+            //services.AddDbContext<Context>(options => {
+            //    options.UseSqlServer(Configuration.GetConnectionString("FlightAppContext"));
+            //});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

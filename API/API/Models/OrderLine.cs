@@ -24,17 +24,19 @@ namespace API.Models
             }
         }
         public Consumable Consumable { get; private set; }
+        public int ConsumableId { get; set; }
         #endregion
 
         public OrderLine(int amount, Consumable consumable)
         {
             Amount = amount;
             Consumable = consumable;
+            ConsumableId = Consumable.ConsumableId;
         }
 
         public void SetNewAmount(int value)//#Wut Dubbele code, same als setter van amount
         {
-            Amount =value;
+            Amount = value;
         }
     }
 }
