@@ -22,6 +22,7 @@ namespace API.Models
                 _seatNumber = value;
             }
         }
+
         public Passenger Passenger { get; set; }
         #endregion
 
