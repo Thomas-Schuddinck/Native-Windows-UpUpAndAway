@@ -119,6 +119,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\ApiData.cs" />
+    <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Models\Consumable.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Movie.cs" />
@@ -188,6 +190,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

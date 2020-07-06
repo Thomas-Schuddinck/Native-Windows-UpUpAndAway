@@ -10,33 +10,63 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Pivot Title="Pivot">
+        <Pivot >
             <PivotItem x:Name="Movies" Header="Movies" FontSize="20">
                 <Grid Margin="0,0,0,0">
-                    <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
-                    <ListView HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Grid.Row="1" Grid.Column="10" ItemsSource="{x:Bind ViewModel.Movies}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="1333*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+
+                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Movies}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:Movie">
-                                <Grid Height="180" Width="320" AutomationProperties.Name="{x:Bind Title}">
-                                    <Image Source="Placeholder.png" Stretch="UniformToFill"/>
-                                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="12">
-                                        <TextBlock Text="{x:Bind Title}"/>
-                                        <TextBlock Text="{x:Bind ReleaseDate}" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title}" Margin="10 0 10 30">
+                                    <Image Source="{x:Bind Path=Poster}" Stretch="UniformToFill"/>
+                                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
+                                        <TextBlock Text="{x:Bind Path=Title}"  Foreground="White"/>
+                                        <TextBlock Text="{x:Bind Path=Released}" Style="{ThemeResource CaptionTextBlockStyle}"  Foreground="White"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <ItemsWrapGrid MaximumRowsOrColumns="20" Orientation="Horizontal"/>
+                                <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical"/>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
+
                 </Grid>
             </PivotItem>
             <PivotItem x:Name="Series" Header="Series" FontSize="20">
                 <Grid Margin="0,0,0,0">
-                    <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="1333*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+
+                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:Name="ImageOverlayDataTemplateSerie" x:DataType="Models:Serie">
+                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title}" Margin="10 0 10 30">
+                                    <Image Source="{x:Bind Path=Poster}" Stretch="UniformToFill"/>
+                                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
+                                        <TextBlock Text="{x:Bind Path=Title}" Foreground="White"/>
+                                        <TextBlock Text="{x:Bind Path=Released}"  Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid MaximumRowsOrColumns="1" Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+
                 </Grid>
             </PivotItem>
         </Pivot>
