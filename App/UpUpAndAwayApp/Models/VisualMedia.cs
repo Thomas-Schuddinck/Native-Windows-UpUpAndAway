@@ -13,6 +13,7 @@ namespace UpUpAndAwayApp.Models
         public string Runtime { get; set; }
         public VisualMediaType VisualMediaType { get; set; }
         public string Plot { get; set; }
+        public string Poster { get; set; }
 
 
     }
