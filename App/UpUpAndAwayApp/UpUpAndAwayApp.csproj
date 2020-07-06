@@ -132,11 +132,17 @@
     <Compile Include="Models\Serie.cs" />
     <Compile Include="Models\Singleton\FlightInfoSingleton.cs" />
     <Compile Include="Models\VisualMedia.cs" />
-    <Compile Include="Pages\FlightInformation.xaml.cs">
-      <DependentUpon>FlightInformation.xaml</DependentUpon>
+    <Compile Include="Pages\ClientChat.xaml.cs">
+      <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LoginClient.xaml.cs">
-      <DependentUpon>LoginClient.xaml</DependentUpon>
+    <Compile Include="Pages\ClientFilmsSeries.xaml.cs">
+      <DependentUpon>ClientFilmsSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientVluchtInformatie.xaml.cs">
+      <DependentUpon>ClientVluchtInformatie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientLogin.xaml.cs">
+      <DependentUpon>ClientLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -164,11 +170,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\FlightInformation.xaml">
+    <Page Include="Pages\ClientChat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LoginClient.xaml">
+    <Page Include="Pages\ClientFilmsSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientVluchtInformatie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,7 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.8</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

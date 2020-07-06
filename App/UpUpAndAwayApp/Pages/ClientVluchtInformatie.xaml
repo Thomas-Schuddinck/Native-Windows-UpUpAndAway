@@ -14,10 +14,16 @@
             <GradientStop Color="#FF86D7F1" Offset="0.286"/>
         </LinearGradientBrush>
     </Page.Background>
+    <Page.Resources>
+        <Style x:Key="CustomNavigationMenuStyle" TargetType="Button" BasedOn="{StaticResource PaneToggleButtonStyle}">
+            <Setter Property="Foreground" Value="DarkGray" />
+        </Style>
+    </Page.Resources>
+
     <NavigationView 
         IsSettingsVisible="False" 
         IsBackButtonVisible="Collapsed" 
-        x:Name="NavView" SelectionChanged="NavView_SelectionChanged">
+        x:Name="NavView" SelectionChanged="NavView_SelectionChanged" PaneToggleButtonStyle="{StaticResource CustomNavigationMenuStyle}">
         <NavigationView.MenuItems>
             <NavigationViewItem Tag="flightinfo" Content="Flightinformation">
                 <NavigationViewItem.Icon>
