@@ -22,32 +22,9 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class FlightInformation : Page
     {
-        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-        {
-            ("flightinfo", typeof(FlightInformation)),
-            ("movies/series", typeof(ClientFilmsSeries)),
-            ("food/drinks", typeof(FlightInformation)),
-            ("weather", typeof(FlightInformation)),
-            ("chat", typeof(ClientChat)),
-            ("orders", typeof(FlightInformation)),
-            ("logout", typeof(MainPage))
-        };
         public FlightInformation()
         {
             this.InitializeComponent();
-        }
-        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            var navItemTag = args.SelectedItemContainer.Tag.ToString();
-            NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
-        }
-
-        private void NavView_Navigate( string navItemTag, Windows.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
-        {
-            Type _page = null;
-            var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
-            _page = item.Page;
-            this.Frame.Navigate(_page, null, transitionInfo);
         }
     }
 }

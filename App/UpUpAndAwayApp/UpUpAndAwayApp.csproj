@@ -137,9 +137,6 @@
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ClientFilmsSeries.xaml.cs">
-      <DependentUpon>ClientFilmsSeries.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ClientVluchtInformatie.xaml.cs">
       <DependentUpon>ClientVluchtInformatie.xaml</DependentUpon>
     </Compile>
@@ -148,6 +145,9 @@
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NavigationPage.xaml.cs">
+      <DependentUpon>NavigationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
@@ -180,10 +180,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ClientFilmsSeries.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\ClientVluchtInformatie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +191,10 @@
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\NavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\VisualMediaPage.xaml">
       <SubType>Designer</SubType>

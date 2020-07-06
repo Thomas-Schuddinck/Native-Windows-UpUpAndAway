@@ -30,7 +30,7 @@ namespace UpUpAndAwayApp
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FlightInformation));
+            this.Frame.Navigate(typeof(NavPage));
         }
     }
 }

@@ -20,48 +20,6 @@
         </Style>
     </Page.Resources>
 
-    <NavigationView 
-        IsSettingsVisible="False" 
-        IsBackButtonVisible="Collapsed" 
-        x:Name="NavView" SelectionChanged="NavView_SelectionChanged" PaneToggleButtonStyle="{StaticResource CustomNavigationMenuStyle}">
-        <NavigationView.MenuItems>
-            <NavigationViewItem Tag="flightinfo" Content="Flightinformation">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Home"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="movies/series" Content="Movies/Series">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Video"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="food/drinks" Content="Food/Drinks">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76E;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="weather" Content="Weather">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE753;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="chat" Content="Chat">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Comment"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="orders" Content="Orders">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="AllApps"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="logout" Content="Logout">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="BlockContact"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-        </NavigationView.MenuItems>
-
         <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
             <Canvas Grid.Row="0" HorizontalAlignment="Center" Height="47" Margin="0,20,0,0" VerticalAlignment="Top" Width="200" Canvas.Left="80">
                 <Ellipse HorizontalAlignment="Center" Height="47" VerticalAlignment="Center" Width="200" Stroke="#FF2890B2" Fill="#FFA3E8FE"/>
@@ -76,5 +34,4 @@
                 </Grid.RowDefinitions>
             </Grid>
         </Grid>
-    </NavigationView>
 </Page>
