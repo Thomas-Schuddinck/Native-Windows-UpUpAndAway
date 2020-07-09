@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSwag;
 
 namespace API
 {
@@ -28,6 +29,8 @@ namespace API
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddCors(options =>options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
+            
+            
             //services.AddDbContext<Context>(options => {
             //    options.UseSqlServer(Configuration.GetConnectionString("FlightAppContext"));
             //});
