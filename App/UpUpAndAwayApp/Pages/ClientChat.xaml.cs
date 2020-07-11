@@ -31,6 +31,16 @@ namespace UpUpAndAwayApp.Pages
             items.Add(new PrivateMessage(p, p, "This is message 1", DateTime.Now));
             items.Add(new PrivateMessage(p, p, "This is message 2", DateTime.Now));
             items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3This is message 3This is message 3This is message 3This is message 3This is message 3This is message 3This is message 3This is message 3This is message 3", DateTime.Now));
+            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
 
             ChatBox.ItemsSource = items;
         }

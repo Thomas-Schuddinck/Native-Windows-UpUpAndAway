@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Data\ApiData.cs" />
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Models\Consumable.cs" />
