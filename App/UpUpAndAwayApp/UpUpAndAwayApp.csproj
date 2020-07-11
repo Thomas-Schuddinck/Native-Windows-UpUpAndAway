@@ -124,6 +124,7 @@
     <Compile Include="Models\Consumable.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\OpenWeatherMapResponse.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Models\Enums\OrderStatus.cs" />
@@ -153,6 +154,7 @@
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FlightInfoViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +209,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Unirest-API">
+      <Version>1.0.7.6</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
