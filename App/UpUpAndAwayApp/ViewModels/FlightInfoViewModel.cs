@@ -17,16 +17,16 @@ namespace UpUpAndAwayApp.ViewModels
 
         public async void getWeather()
         {
-            string city = "Los Angeles";
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(ApiData.baseUriOWM);
-                var response = await client.GetAsync($"/data/2.5/weather?q={city}&appid={ApiData.apiKeyOWM}&units=metric");
-
-                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var jsonResponse = await client.GetStringAsync(new Uri(GenerateWeatherRequestString()));
                 Weather = JsonConvert.DeserializeObject<OpenWeatherMapResponse>(jsonResponse);
-
             }
+        }
+
+        public string GenerateWeatherRequestString()
+        {
+            return String.Format("{0}/data/2.5/weather?q={1}&appid={2}&units=metric{1}", ApiData.baseUriOWM, "Los Angeles", ApiData.apiKeyOWM);
         }
     }
 }
