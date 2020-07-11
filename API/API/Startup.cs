@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Data.IServices;
+using API.Data.ServiceInstances;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,8 +29,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<DataInit>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IConsumableService, ConsumableService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting=false);
+            services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
             services.AddSwaggerDocument(config =>
@@ -47,10 +54,12 @@ namespace API
                 options.UseSqlServer(Configuration.GetConnectionString("Context"));
             });
 
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env, DataInit init)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +69,8 @@ namespace API
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseMvc();
+
+            init.InitializeData().Wait();
         }
     }
 }

@@ -25,13 +25,23 @@ namespace API.Models
         }
         public Consumable Consumable { get; private set; }
         public int ConsumableId { get; set; }
+
+        public Order Order { get; set; }
+        public int OrderId { get; set; }
         #endregion
 
-        public OrderLine(int amount, Consumable consumable)
+        public OrderLine(int amount, Consumable consumable, Order order)
         {
             Amount = amount;
             Consumable = consumable;
             ConsumableId = Consumable.ConsumableId;
+            Order = order;
+            OrderId = order.OrderId;
+        }
+
+        public OrderLine()
+        {
+
         }
 
         public void SetNewAmount(int value)//#Wut Dubbele code, same als setter van amount

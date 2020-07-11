@@ -42,10 +42,10 @@ namespace API.Models
         public string FullName => FirstName + " " + LastName;
 
 
-        /// <summary>
-        /// Needed to easily link Order to Passenger
-        /// </summary>
-        public ICollection<Order> PlacedOrders { get; set; }
+        ///// <summary>
+        ///// Needed to easily link Order to Passenger
+        ///// </summary>
+        //public ICollection<Order> PlacedOrders { get; set; }
         #endregion
 
         public Passenger(string firstName, string lastName)
