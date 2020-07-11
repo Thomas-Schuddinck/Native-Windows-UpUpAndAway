@@ -47,7 +47,12 @@ namespace UpUpAndAwayApp.Pages
             Type _page = null;
             var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
             _page = item.Page;
-            this.ContentFrame.Navigate(_page, null, transitionInfo);
+            if (item.Tag.Equals("logout"))
+                this.Frame.Navigate(_page, null, transitionInfo);
+            else
+            {
+                this.ContentFrame.Navigate(_page, null, transitionInfo);
+            }
         }
     }
 }
