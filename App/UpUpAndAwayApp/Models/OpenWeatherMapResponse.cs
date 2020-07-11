@@ -1,12 +1,16 @@
-﻿namespace UpUpAndAwayApp.Models
+﻿using System.Collections.Generic;
+
+namespace UpUpAndAwayApp.Models
 {
     public class OpenWeatherMapResponse
     {
-        public WeatherDescription Weather { get; set; }
+        public string Name { get; set; }
+
+        public IEnumerable<WeatherDescription> Weather { get; set; }
 
         public Main Main { get; set; }
 
-        public Main Wind { get; set; }
+        public Wind Wind { get; set; }
     }
 
     public class WeatherDescription
@@ -17,8 +21,8 @@
 
     public class Main
     {
-        public string Temp { get; set; }
-        public string Humidity { get; set; }
+        public double Temp { get; set; }
+        public double Humidity { get; set; }
     }
 
     public class Wind
