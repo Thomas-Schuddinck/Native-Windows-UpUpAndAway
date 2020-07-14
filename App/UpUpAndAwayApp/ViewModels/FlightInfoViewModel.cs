@@ -15,7 +15,7 @@ namespace UpUpAndAwayApp.ViewModels
             getWeather();
         }
 
-        public async void getWeather()
+        private async void getWeather()
         {
             using (var client = new HttpClient())
             {
@@ -24,7 +24,7 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        public string GenerateWeatherRequestString()
+        private string GenerateWeatherRequestString()
         {
             return String.Format("{0}/data/2.5/weather?q={1}&appid={2}&units=metric{1}", ApiData.baseUriOWM, "Los Angeles", ApiData.apiKeyOWM);
         }
