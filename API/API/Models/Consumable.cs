@@ -39,6 +39,7 @@ namespace API.Models
             }
         }
         public string Description { get; private set; }
+        public string ProductPicture { get; private set; }
         public int Reduction
         {
             get
