@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace UpUpAndAwayApp.Models.Singleton
 {
-    class LoginSingleton
+    public class LoginSingleton
     {
         private static readonly LoginSingleton instance = new LoginSingleton();
-        public Passenger Passenger;
+        public static Passenger Passenger { get; private set; }
         private LoginSingleton()
         {
         }
-        public static void SetPassenger(Passenger passenger) { this.Passenger = passenger; }
+        public static void SetPassenger(Passenger passenger) { Passenger = passenger; }
         public static LoginSingleton GetInstance() => instance;
     }
 }
