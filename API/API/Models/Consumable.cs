@@ -58,12 +58,13 @@ namespace API.Models
         public double SellingPrice => _price * (1 - _reduction); 
         #endregion
 
-        public Consumable(double price, string name, string description, int reduction)
+        public Consumable(double price, string name, string description, int reduction, string productPicture)
         {
             Price = price;
             Name = name;
             Description = description;
             Reduction = reduction;
+            ProductPicture = productPicture;
         }
     }
 }
