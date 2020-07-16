@@ -39,16 +39,27 @@ namespace UpUpAndAwayApp.Pages
             Navigate_To_MovieDetail(clickedMovie);
         }
 
+        private void SerieListItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var clickedSerie = (Serie)e.ClickedItem;
+            Navigate_To_SerieDetail(clickedSerie);
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             ContentFrame = e.Parameter as Frame;
-            var test = 0;
         }
 
         private void Navigate_To_MovieDetail(Movie movie)
         {
             
             this.ContentFrame.Navigate(typeof(MovieDetailPage), movie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight } );
+        }
+
+        private void Navigate_To_SerieDetail(Serie serie)
+        {
+
+            this.ContentFrame.Navigate(typeof(SerieDetailPage), serie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

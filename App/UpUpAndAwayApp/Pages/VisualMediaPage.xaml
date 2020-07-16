@@ -48,7 +48,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
 
-                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True">
+                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True" ItemClick="SerieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplateSerie" x:DataType="Models:Serie">
                                 <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title}" Margin="10 0 10 30">
