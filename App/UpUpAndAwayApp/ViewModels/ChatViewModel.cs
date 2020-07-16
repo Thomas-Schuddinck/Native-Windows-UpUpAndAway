@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace UpUpAndAwayApp.ViewModels
 {
-    class ChatViewModel : INotifyPropertyChanged
+    public class ChatViewModel : INotifyPropertyChanged
     {
         public HubConnection hubConnection; private string _name;
         private string _message;
@@ -31,6 +31,7 @@ namespace UpUpAndAwayApp.ViewModels
         public async Task Connect()
         {
             await hubConnection.StartAsync();
+            _isConnected = true;
         }
 
         public async Task SendMessage(Passenger p, string message)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -19,6 +20,7 @@ namespace UpUpAndAwayApp.Pages
 {
     public partial class NavPage : Page
     {
+        ChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("flightinfo", typeof(FlightInformation)),
@@ -42,17 +44,27 @@ namespace UpUpAndAwayApp.Pages
             NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
         }
 
-        private void NavView_Navigate( string navItemTag, Windows.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
+        private void NavView_Navigate(string navItemTag, Windows.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
             Type _page = null;
             var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
             _page = item.Page;
-            if (item.Tag.Equals("logout"))
+            if (item.Tag.Equals("logout")) {
+                vm.Disconnect();
                 this.Frame.Navigate(_page, null, transitionInfo);
-            else
-            {
+            }
+            else if(item.Tag.Equals("chat")) {
+                this.ContentFrame.Navigate(_page, vm, transitionInfo);
+            }
+            else {
                 this.ContentFrame.Navigate(_page, null, transitionInfo);
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.vm = new ChatViewModel();
+            vm.Connect();
         }
     }
 }

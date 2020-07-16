@@ -10,11 +10,11 @@ namespace UpUpAndAwayApp.Models.Singleton
     class LoginSingleton
     {
         private static readonly LoginSingleton instance = new LoginSingleton();
-        public Passenger Passenger;
+        public static Passenger passenger;
         private LoginSingleton()
         {
         }
-        public static void SetPassenger(Passenger passenger) { this.Passenger = passenger; }
+        public void login(Passenger p) { passenger = p; }
         public static LoginSingleton GetInstance() => instance;
     }
 }

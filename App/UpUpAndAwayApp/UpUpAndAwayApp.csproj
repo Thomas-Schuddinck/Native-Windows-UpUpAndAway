@@ -162,6 +162,7 @@
     <Compile Include="ViewModels\FlightInfoViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
