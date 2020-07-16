@@ -26,7 +26,7 @@
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" PlaceholderText="Flynumber"  Margin="20,0,20,0"/>
+            <TextBox x:Name="Login" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" PlaceholderText="Flynumber"  Margin="20,0,20,0"/>
             <PasswordBox Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" PlaceholderText="Password"  Margin="20,0,20,0"/>
             <Button Click="Login_Click" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Login"  CornerRadius="10" Background="#FF33C2F0" BorderBrush="#FF2890B2" FontSize="10" Padding="4,2,4,2" Margin="5,5,0,0"/>
 

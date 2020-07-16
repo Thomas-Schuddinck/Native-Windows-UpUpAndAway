@@ -5,33 +5,147 @@
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <Page.Background>
-        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="White" Offset="0.0" />
-            <GradientStop Color="#A3E8FE" Offset="0.19" />
-            <GradientStop Color="#86D7F1" Offset="1.0" />
-            <GradientStop Color="#FF86D7F1" Offset="0.286"/>
-        </LinearGradientBrush>
-    </Page.Background>
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style x:Key="CustomNavigationMenuStyle" TargetType="Button" BasedOn="{StaticResource PaneToggleButtonStyle}">
             <Setter Property="Foreground" Value="DarkGray" />
         </Style>
     </Page.Resources>
 
-        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-            <Canvas Grid.Row="0" HorizontalAlignment="Center" Height="47" Margin="0,20,0,0" VerticalAlignment="Top" Width="200" Canvas.Left="80">
+    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="InformationPanel.Margin">
+                            <Setter.Value>
+                                <Thickness>20,20,20,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightCode.Margin">
+                            <Setter.Value>
+                                <Thickness>10,20,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightOrigin.Margin">
+                            <Setter.Value>
+                                <Thickness>10,0,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightDestination.Margin">
+                            <Setter.Value>
+                                <Thickness>10,0,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="InformationPanel.Margin">
+                            <Setter.Value>
+                                <Thickness>30,30,30,30</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightCode.Margin">
+                            <Setter.Value>
+                                <Thickness>20,20,20,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightOrigin.Margin">
+                            <Setter.Value>
+                                <Thickness>20,0,20,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightDestination.Margin">
+                            <Setter.Value>
+                                <Thickness>10,0,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="DesktopLarge">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="InformationPanel.Margin">
+                            <Setter.Value>
+                                <Thickness>35,35,35,35</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightCode.Margin">
+                            <Setter.Value>
+                                <Thickness>50,30,50,30</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightOrigin.Margin">
+                            <Setter.Value>
+                                <Thickness>50,0,50,30</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="FlightDestination.Margin">
+                            <Setter.Value>
+                                <Thickness>50,0,50,30</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Canvas Grid.Row="0" HorizontalAlignment="Center" Height="47" Margin="0,20,0,0" VerticalAlignment="Top" Width="200" Canvas.Left="80">
                 <Ellipse HorizontalAlignment="Center" Height="47" VerticalAlignment="Center" Width="200" Stroke="#FF2890B2" Fill="#FFA3E8FE"/>
                 <TextBlock Text="Up Up And Away" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" Canvas.Left="47" Canvas.Top="10" FontFamily="Brush Script MT" FontSize="24" FontWeight="Bold" Margin="-24.5,-2,0,0"/>
             </Canvas>
             <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+            <Grid x:Name="InformationPanel" Grid.RowSpan="3" Grid.Row="1" Background="#FFC3EFFD">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="FlightCode" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="VluchtCode:&#x09;" Foreground="Black"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.flightcode}" Foreground="Black"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="FlightOrigin" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Vertrek:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.origin}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="FlightDestination" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Destinatie:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <ContentControl Grid.Row="2" Grid.ColumnSpan="4"></ContentControl>
+            </Grid>
             </Grid>
         </Grid>
 </Page>

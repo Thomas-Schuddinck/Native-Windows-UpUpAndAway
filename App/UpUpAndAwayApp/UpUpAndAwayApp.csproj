@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Data\ApiData.cs" />
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Models\Consumable.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Models\Enums\VisualMediaType.cs" />
     <Compile Include="Models\Serie.cs" />
     <Compile Include="Models\Singleton\FlightInfoSingleton.cs" />
+    <Compile Include="Models\Singleton\LoginSingleton.cs" />
     <Compile Include="Models\VisualMedia.cs" />
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
@@ -166,6 +168,7 @@
     <Compile Include="ViewModels\FlightInfoViewModel.cs" />
     <Compile Include="ViewModels\SerieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
     <Compile Include="ViewModels\WebshopViewModel.cs" />
   </ItemGroup>
@@ -229,6 +232,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>3.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
@@ -239,7 +245,9 @@
       <Version>1.0.7.6</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

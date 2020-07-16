@@ -1,9 +1,11 @@
 ﻿using API.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,16 +25,22 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class ClientChat : Page
     {
+
+        List<PrivateMessage> items;
+        ChatViewModel observable;
         public ClientChat()
         {
+            observable = new ChatViewModel();
             this.InitializeComponent();
-            Passenger p = new Passenger("Thomas", "Schuddink", 12);
-            List<PrivateMessage> items = new List<PrivateMessage>();
-            items.Add(new PrivateMessage(p, p, "This is message 1", DateTime.Now));
-            items.Add(new PrivateMessage(p, p, "This is message 2", DateTime.Now));
-            items.Add(new PrivateMessage(p, p, "This is message 3", DateTime.Now));
+            ChatBox.ItemsSource = observable.Chat;
+        }
 
-            ChatBox.ItemsSource = items;
+        private async void SendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            Passenger p = new Passenger("Stef", "Doorbreaker", 13);
+            await observable.Connect();
+            await observable.SendMessage(p, MessageBox.Text);
+            await observable.Disconnect();
         }
     }
 }
