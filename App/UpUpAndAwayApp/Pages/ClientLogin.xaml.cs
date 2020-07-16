@@ -1,8 +1,10 @@
-﻿using System;
+﻿using API.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.Models.Singleton;
 using UpUpAndAwayApp.Pages;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,6 +25,7 @@ namespace UpUpAndAwayApp
     /// </summary>
     public sealed partial class LoginClient : Page
     {
+
         public LoginClient()
         {
             this.InitializeComponent();
@@ -30,6 +33,9 @@ namespace UpUpAndAwayApp
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            string login = Login.Text;
+            Passenger p = new Passenger(login, login, 0);
+            LoginSingleton.SetPassenger(p);
             this.Frame.Navigate(typeof(NavPage));
         }
     }

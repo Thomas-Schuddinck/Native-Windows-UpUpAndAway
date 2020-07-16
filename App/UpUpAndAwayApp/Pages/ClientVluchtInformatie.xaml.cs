@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.Models.Singleton;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,12 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class FlightInformation : Page
     {
+        private FlightInfoSingleton flightInfoSingleton;
+
         public FlightInformation()
         {
             this.InitializeComponent();
+            this.flightInfoSingleton = FlightInfoSingleton.GetInstance();
         }
     }
 }

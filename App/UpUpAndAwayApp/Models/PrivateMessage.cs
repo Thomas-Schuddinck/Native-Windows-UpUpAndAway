@@ -12,10 +12,10 @@ namespace API.Models
         public DateTime TimeSend { get; private set; } 
         #endregion
 
-        public PrivateMessage(Passenger sender, Passenger receiver, string message, DateTime time)
+        public PrivateMessage(Passenger sender, string message, DateTime time)
         {
             Sender = sender;
-            Receiver = receiver;
+            //Receiver = receiver;
             Message = message;
             TimeSend = time;
         }
