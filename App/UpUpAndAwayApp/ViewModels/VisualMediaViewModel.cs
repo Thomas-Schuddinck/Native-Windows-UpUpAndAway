@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading.Tasks;
 using UpUpAndAwayApp.Data;
 using UpUpAndAwayApp.Models;
 using Newtonsoft.Json;
@@ -25,7 +23,7 @@ namespace UpUpAndAwayApp.ViewModels
             GetSeriesFromAPI();
         }
         
-        public async void GetMoviesFromAPI()
+        private async void GetMoviesFromAPI()
         {
             HttpClient client = new HttpClient();
             foreach(string id in VisualMediaData.movieIDs)
@@ -36,8 +34,7 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        
-        public async void GetSeriesFromAPI()
+        private async void GetSeriesFromAPI()
         {
             HttpClient client = new HttpClient();
             foreach (string id in VisualMediaData.serieIDs)
@@ -48,12 +45,12 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        public string GenerateMovieRequestString(string movieId)
+        private string GenerateMovieRequestString(string movieId)
         {
             return String.Format("{0}&i={1}&type=movie", ApiData.baseUriOMDB, movieId);
         }
 
-        public string GenerateSerieRequestString(string serieId)
+        private string GenerateSerieRequestString(string serieId)
         {
             return String.Format("{0}&i={1}&type=series", ApiData.baseUriOMDB, serieId);
         }

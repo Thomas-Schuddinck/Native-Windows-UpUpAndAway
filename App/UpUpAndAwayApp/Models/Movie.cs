@@ -13,7 +13,7 @@ namespace UpUpAndAwayApp.Models
         public string Language { get; set; }
         public string Released { get; set; }
 
-        public Movie(string title, string releaseDate, string runtime, string director, string language, string plot)
+        public Movie(string title, string releaseDate, string runtime, string director, string language, string plot, string genre)
         {
             Title = title;
             Released = releaseDate;
@@ -22,6 +22,7 @@ namespace UpUpAndAwayApp.Models
             Director = director;
             Language = language;
             Plot = plot;
+            Genre = genre;
         }
     }
 }

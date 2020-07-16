@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,7 +26,10 @@ namespace UpUpAndAwayApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.ViewModel = new FlightInfoViewModel();
         }
+        public FlightInfoViewModel ViewModel;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
