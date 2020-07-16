@@ -33,6 +33,7 @@ namespace API
             services.AddScoped<DataInit>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IConsumableService, ConsumableService>();
+            services.AddScoped<IPassengerService, PassengerService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
