@@ -1,7 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.ViewModels;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using UpUpAndAwayApp.Models;
 
 namespace UpUpAndAwayApp.Pages
 {
@@ -13,7 +13,7 @@ namespace UpUpAndAwayApp.Pages
         public MovieDetailPage()
         {
             this.InitializeComponent();
-            
+
         }
         public MovieDetailViewModel ViewModel;
 
@@ -23,6 +23,13 @@ namespace UpUpAndAwayApp.Pages
             var movie = e.Parameter as Movie;
             this.ViewModel = new MovieDetailViewModel(movie);
         }
+        /*
+        private void GoBackToOverview()
+        {
+
+        }
+        */
+
 
     }
 }

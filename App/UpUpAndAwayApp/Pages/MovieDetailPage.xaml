@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Padding="50,50,50,50">
+    <Grid Padding="50,0,50,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -20,11 +20,10 @@
         <AppBar HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal"/>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"/>
+                <Button Style="{StaticResource NavigationBackButtonNormalStyle}"/>
             </Grid>
         </AppBar>
         <Image x:Name="posterBig" Source="{x:Bind Path=ViewModel.CurrentMovie.Poster}" HorizontalAlignment="Center" Stretch="UniformToFill"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Opacity="0.4" RequestedTheme="Dark" Margin="0, 0, 0, 30"/>
@@ -35,14 +34,14 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <Image x:Name="posterSmall" Source="{x:Bind Path=ViewModel.CurrentMovie.Poster}" HorizontalAlignment="Left" Height="300" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
-            <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="1" Margin="20, 0, 0, 0">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="1" Margin="20, 0, 0, 0">
                 <TextBlock x:Name="titelText" Text="{x:Bind Path=ViewModel.CurrentMovie.Title}" HorizontalAlignment="Left" FontSize="28" />
-                <TextBlock x:Name="genreText" Text="{x:Bind Path=ViewModel.CurrentMovie.Genre}" HorizontalAlignment="Left" FontSize="20" />
+                <TextBlock x:Name="genreText" Text="{x:Bind Path=ViewModel.CurrentMovie.Genre}" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" FontStyle="Oblique" />
             </StackPanel>
             <TextBlock x:Name="releaseText" Text="{x:Bind Path=ViewModel.CurrentMovie.Released}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Right" FontSize="20" Grid.Row="0" Grid.Column="2" />
             <Button x:Name="playButton" Content="Watch Movie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F"/>
