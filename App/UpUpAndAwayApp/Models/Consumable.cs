@@ -9,17 +9,19 @@ namespace API.Models
         public double Price { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string ProductPicture { get; set; }
         public int Reduction { get; set; }
 
         public double SellingPrice => Price * (1 - Reduction); 
         #endregion
 
-        public Consumable(double price, string name, string description, int reduction)
+        public Consumable(double price, string name, string description, int reduction, string productPicture)
         {
             Price = price;
             Name = name;
             Description = description;
             Reduction = reduction;
+            ProductPicture = productPicture;
         }
     }
 }

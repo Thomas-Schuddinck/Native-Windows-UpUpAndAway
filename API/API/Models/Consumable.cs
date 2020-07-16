@@ -39,6 +39,7 @@ namespace API.Models
             }
         }
         public string Description { get; private set; }
+        public string ProductPicture { get; private set; }
         public int Reduction
         {
             get
@@ -57,12 +58,13 @@ namespace API.Models
         public double SellingPrice => _price * (1 - _reduction); 
         #endregion
 
-        public Consumable(double price, string name, string description, int reduction)
+        public Consumable(double price, string name, string description, int reduction, string productPicture)
         {
             Price = price;
             Name = name;
             Description = description;
             Reduction = reduction;
+            ProductPicture = productPicture;
         }
     }
 }

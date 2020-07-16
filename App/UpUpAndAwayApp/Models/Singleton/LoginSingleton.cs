@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UpUpAndAwayApp.Models.Singleton
 {
-    class LoginSingleton
+    public class LoginSingleton
     {
         private static readonly LoginSingleton instance = new LoginSingleton();
         public static Passenger passenger;

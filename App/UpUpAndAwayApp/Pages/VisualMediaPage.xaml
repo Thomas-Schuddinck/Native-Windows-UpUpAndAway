@@ -19,14 +19,14 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
 
-                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Movies}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True" ItemClick="MovieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
+                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Movies, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True" ItemClick="MovieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:Movie">
-                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title}" Margin="10 0 10 30">
-                                    <Image Source="{x:Bind Path=Poster}" Stretch="UniformToFill"/>
+                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title, Mode=OneWay, FallbackValue='movie titel'}" Margin="10 0 10 30">
+                                    <Image Source="{x:Bind Path=Poster, Mode=OneWay}" Stretch="UniformToFill"/>
                                     <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
-                                        <TextBlock Text="{x:Bind Path=Title}"  Foreground="White"/>
-                                        <TextBlock Text="{x:Bind Path=Released}" Style="{ThemeResource CaptionTextBlockStyle}"  Foreground="White"/>
+                                        <TextBlock Text="{x:Bind Path=Title, Mode=OneWay, FallbackValue='movie titel'}"  Foreground="White"/>
+                                        <TextBlock Text="{x:Bind Path=Released, Mode=OneWay, FallbackValue='movie release'}" Style="{ThemeResource CaptionTextBlockStyle}"  Foreground="White"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -48,14 +48,14 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
 
-                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True">
+                    <ListView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsHorizontalRailEnabled="True" ItemClick="SerieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplateSerie" x:DataType="Models:Serie">
-                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title}" Margin="10 0 10 30">
-                                    <Image Source="{x:Bind Path=Poster}" Stretch="UniformToFill"/>
+                                <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title, Mode=OneWay, FallbackValue='serie titel'}" Margin="10 0 10 30">
+                                    <Image Source="{x:Bind Path=Poster, Mode=OneWay}" Stretch="UniformToFill"/>
                                     <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
-                                        <TextBlock Text="{x:Bind Path=Title}" Foreground="White"/>
-                                        <TextBlock Text="{x:Bind Path=Released}"  Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                        <TextBlock Text="{x:Bind Path=Title, Mode=OneWay, FallbackValue='serie titel'}" Foreground="White"/>
+                                        <TextBlock Text="{x:Bind Path=Released, Mode=OneWay, FallbackValue='serie release'}"  Foreground="White" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

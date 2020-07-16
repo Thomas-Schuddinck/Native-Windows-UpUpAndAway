@@ -8,20 +8,20 @@ namespace UpUpAndAwayApp.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MovieDetailPage : Page
+    public sealed partial class SerieDetailPage : Page
     {
-        public MovieDetailPage()
+        public SerieDetailPage()
         {
             this.InitializeComponent();
 
         }
-        public MovieDetailViewModel ViewModel;
+        public SerieDetailViewModel ViewModel;
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var movie = e.Parameter as Movie;
-            this.ViewModel = new MovieDetailViewModel(movie);
+            var serie = e.Parameter as Serie;
+            this.ViewModel = new SerieDetailViewModel(serie);
         }
         /*
         private void GoBackToOverview()
@@ -29,7 +29,6 @@ namespace UpUpAndAwayApp.Pages
 
         }
         */
-
 
     }
 }
