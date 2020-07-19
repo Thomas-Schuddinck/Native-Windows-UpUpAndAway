@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UpUpAndAwayApp.Models.Singleton;
 using UpUpAndAwayApp.Pages;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,16 +27,17 @@ namespace UpUpAndAwayApp
     public sealed partial class LoginClient : Page
     {
 
+        public PassengerViewModel ViewModel;
         public LoginClient()
         {
             this.InitializeComponent();
+            this.ViewModel = new PassengerViewModel();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            Passenger p = new Passenger(login, login, 0);
-            LoginSingleton.SetPassenger(p);
+            ViewModel.LoginPassenger(login);
             this.Frame.Navigate(typeof(NavPage));
         }
     }

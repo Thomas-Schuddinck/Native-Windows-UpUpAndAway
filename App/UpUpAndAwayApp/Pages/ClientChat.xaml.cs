@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.Models.Singleton;
 using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,21 +27,22 @@ namespace UpUpAndAwayApp.Pages
     public sealed partial class ClientChat : Page
     {
 
-        List<PrivateMessage> items;
-        ChatViewModel observable;
+        ChatViewModel model;
         public ClientChat()
         {
-            observable = new ChatViewModel();
             this.InitializeComponent();
-            ChatBox.ItemsSource = observable.Chat;
         }
 
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            Passenger p = new Passenger("Stef", "Doorbreaker", 13);
-            await observable.Connect();
-            await observable.SendMessage(p, MessageBox.Text);
-            await observable.Disconnect();
+            Passenger p = LoginSingleton.passenger;
+            await model.SendMessage(p, MessageBox.Text);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.model = (ChatViewModel)e.Parameter;
+            ChatBox.ItemsSource = model.Chat;
         }
     }
 }

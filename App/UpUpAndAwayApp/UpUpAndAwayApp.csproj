@@ -170,6 +170,7 @@
     <Compile Include="ViewModels\SerieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
     <Compile Include="ViewModels\WebshopViewModel.cs" />
   </ItemGroup>
