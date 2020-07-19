@@ -5,7 +5,8 @@
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Models="using:API.Models"
+    xmlns:x1="using:System"
+    xmlns:Models="using:UpUpAndAwayApp.Models.ListItemModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,15 +15,30 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <GridView HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Consumables, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GridView HorizontalAlignment="Left" Margin="0 5 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="0" Grid.Column="0" >
             <GridView.ItemTemplate>
-                <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:Consumable">
-                    <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 30">
-                        <Image Source="{x:Bind Path=ProductPicture, Mode=OneWay}" Stretch="UniformToFill"/>
-                        <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
-                            <TextBlock Text="{x:Bind Path=Name, Mode=OneWay, FallbackValue='item name'}"  Foreground="White"/>
-                            <TextBlock Text="{x:Bind Path=Price, Mode=OneWay, FallbackValue='item price'}" Style="{ThemeResource CaptionTextBlockStyle}"  Foreground="White"/>
-                        </StackPanel>
+                <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:WebshopItem">
+                    <Grid Height="200" Width="200" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
+                        <Image Source="https://i.redd.it/dqwjbw96up451.jpg" Stretch="UniformToFill"/>
+
+                        <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}" Height="80" VerticalAlignment="Bottom"  Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left" Foreground="White"  Grid.Column="0" Grid.Row="0"/>
+                            <TextBlock Text="{x:Bind Path=Consumable.SellingPrice, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0"/>
+                            
+                            <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay}" Margin="10 0 0 0" Foreground="White" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
+                            <Button Click="SendToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
