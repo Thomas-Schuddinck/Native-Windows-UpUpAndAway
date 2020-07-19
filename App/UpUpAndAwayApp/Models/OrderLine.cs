@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace API.Models
+namespace UpUpAndAwayApp.Models
 {
     public class OrderLine
     {
