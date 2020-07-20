@@ -13,6 +13,7 @@ namespace UpUpAndAwayApp.Models
         public string ProductPicture { get; set; }
         public int Reduction { get; set; }
         public double SellingPrice { get; set; }
+        public string PriceAdapter => "€ " + SellingPrice;
         #endregion
 
         public Consumable(double price, string name, string description, int reduction, double sellingPrice)
