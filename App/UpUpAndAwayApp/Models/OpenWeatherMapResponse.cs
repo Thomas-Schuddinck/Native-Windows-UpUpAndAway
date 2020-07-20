@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace UpUpAndAwayApp.Models
 {
@@ -6,11 +7,30 @@ namespace UpUpAndAwayApp.Models
     {
         public string Name { get; set; }
 
-        public IEnumerable<WeatherDescription> Weather { get; set; }
+        public ICollection<WeatherDescription> Weather { get; set; }
 
         public Main Main { get; set; }
 
         public Wind Wind { get; set; }
+
+        public string NameAdapter => "Weather in " + Name;
+        public string WindAdapter => "Windspeed: " + Wind.Speed;
+        public string TempAdapter => "Temperature: " + (Main.Temp - 272.15) + "°C" ;
+        public string HumidityAdapter => "Humidity: " + Main.Humidity + "%";
+        public string GeneralWeatherAdapter => string.Join(", ", GetGeneralWeather());
+        public string DateAdapter => DateTime.Now.DayOfWeek.ToString() + " " + DateTime.Now.ToUniversalTime().AddHours(-7).ToShortTimeString();
+
+
+        public List<string> GetGeneralWeather()
+        {
+            List<string> res = new List<string>();
+            foreach(WeatherDescription wd in Weather)
+            {
+                res.Add(string.Format("{0} ({1})", wd.Main, wd.Description));
+            }
+            return res;
+        }
+
     }
 
     public class WeatherDescription
