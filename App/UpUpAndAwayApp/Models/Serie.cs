@@ -11,10 +11,10 @@ namespace UpUpAndAwayApp.Models
     {
         public string Director { get; set; }
         public string Language { get; set; }
-        public int NumberOfSeasons { get; set; }
+        public int TotalSeasons { get; set; }
         public string Released { get; set; }
 
-        public Serie(string title, string runtime, string director, string language, string plot, int numberOfSeasons, string releaseDate)
+        public Serie(string title, string runtime, string director, string language, string plot, int totalSeasons, string releaseDate, string genre)
         {
             Title = title;
             Released = releaseDate;
@@ -23,7 +23,10 @@ namespace UpUpAndAwayApp.Models
             Director = director;
             Language = language;
             Plot = plot;
-            NumberOfSeasons = numberOfSeasons;
+            TotalSeasons = totalSeasons;
+            Genre = genre;
         }
+
+        public string NumSeasons => TotalSeasons + " seizoenen";
     }
 }
