@@ -41,7 +41,11 @@
                                 <Thickness>10,0,10,20</Thickness>
                             </Setter.Value>
                         </Setter>
-
+                        <Setter Target="Weather.Margin">
+                            <Setter.Value>
+                                <Thickness>10,20,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -62,10 +66,15 @@
                         </Setter>
                         <Setter Target="FlightOrigin.Margin">
                             <Setter.Value>
-                                <Thickness>20,0,20,20</Thickness>
+                                <Thickness>10,0,10,20</Thickness>
                             </Setter.Value>
                         </Setter>
                         <Setter Target="FlightDestination.Margin">
+                            <Setter.Value>
+                                <Thickness>10,0,10,20</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="Weather.Margin">
                             <Setter.Value>
                                 <Thickness>10,0,10,20</Thickness>
                             </Setter.Value>
@@ -94,6 +103,11 @@
                             </Setter.Value>
                         </Setter>
                         <Setter Target="FlightDestination.Margin">
+                            <Setter.Value>
+                                <Thickness>50,0,50,30</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="Weather.Margin">
                             <Setter.Value>
                                 <Thickness>50,0,50,30</Thickness>
                             </Setter.Value>
@@ -144,7 +158,28 @@
                         <TextBlock Text="{x:Bind Path=flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
-                <ContentControl Grid.Row="2" Grid.ColumnSpan="4"></ContentControl>
+                <Grid x:Name="Weather" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0">
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.NameAdapter}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.DateAdapter}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.GeneralWeatherAdapter}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Left"></TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.TempAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.HumidityAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.WindAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
             </Grid>
         </Grid>
