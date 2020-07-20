@@ -6,7 +6,7 @@ using API.Models;
 
 namespace API.Data.IServices
 {
-    public interface IOrderInterface
+    public interface IOrderService
     {
         /// <summary>
         /// Places a new Order.
