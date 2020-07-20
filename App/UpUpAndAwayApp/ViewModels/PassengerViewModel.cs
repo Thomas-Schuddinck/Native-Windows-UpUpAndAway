@@ -13,7 +13,7 @@ namespace UpUpAndAwayApp.ViewModels
     public class PassengerViewModel
     {
         public Passenger Passenger { get; private set; }
-        LoginSingleton login = LoginSingleton.GetInstance();
+        LoginSingleton loggedIn = LoginSingleton.GetInstance();
 
         public PassengerViewModel()
         {
@@ -22,10 +22,13 @@ namespace UpUpAndAwayApp.ViewModels
         public async void LoginPassenger(string id)
         {
             HttpClient client = new HttpClient();
-            var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
-            var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponse);
-            this.Passenger = passenger;
-            login.login(Passenger);
+            var jsonResponsePassenger = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
+            var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponsePassenger);
+            this.Passenger = passenger; 
+            loggedIn.login(Passenger);
+            var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
+            var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
+            loggedIn.joinGroup(party);
             ChatViewModel model = new ChatViewModel();
             await model.Connect();
         }
@@ -33,6 +36,11 @@ namespace UpUpAndAwayApp.ViewModels
         private string GeneratePassengerRequestString(string id)
         {
             return String.Format("http://localhost:5000/api/passenger/{0}", id);
+        }
+
+        private string GeneratePassengerPartyRequestString(string id)
+        {
+            return String.Format("http://localhost:5000/api/passenger/party/{0}", id);
         }
     }
 }

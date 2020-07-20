@@ -8,9 +8,14 @@ namespace API
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string firstname, string lastname, string message)
+        public async Task SendMessage(string group, string name, string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", firstname, lastname, message);
+            await Clients.Group(group).SendAsync("ReceiveMessage", name, message);
+        }
+
+        public Task JoinRoom(string roomName)
+        {
+            return Groups.AddToGroupAsync(Context.ConnectionId, roomName);
         }
     }
 }
