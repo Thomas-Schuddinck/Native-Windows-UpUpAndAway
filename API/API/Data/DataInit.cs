@@ -38,6 +38,21 @@ namespace API.Data
                 context.Consumables.Add(jupiler);
                 context.Consumables.Add(chipsPaprika);
                 context.Consumables.Add(chipsZout);
+
+
+                #region passengers
+                Passenger passenger1 = new Passenger("Tony", "Stark");
+                Passenger passenger2 = new Passenger("Steven", "Rogers");
+                Passenger passenger3 = new Passenger("Clint", "Barton");
+
+                context.Passenger.Add(passenger1);
+                context.Passenger.Add(passenger2);
+                context.Passenger.Add(passenger3);
+
+                PassengerParty p1 = new PassengerParty() { Passengers = { passenger1, passenger2 } };
+
+                context.PassengerParties.Add(p1);
+                #endregion
                 context.SaveChanges();
             }
         }

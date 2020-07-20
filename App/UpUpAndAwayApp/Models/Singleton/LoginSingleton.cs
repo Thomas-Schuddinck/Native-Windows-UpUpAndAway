@@ -11,10 +11,12 @@ namespace UpUpAndAwayApp.Models.Singleton
     {
         private static readonly LoginSingleton instance = new LoginSingleton();
         public static Passenger passenger;
+        public static string passengerGroupId;
         private LoginSingleton()
         {
         }
         public void login(Passenger p) { passenger = p; }
+        public void joinGroup(string id) { passengerGroupId = id; }
         public static LoginSingleton GetInstance() => instance;
     }
 }
