@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace API.Models
+namespace UpUpAndAwayApp.Models
 {
     public class Order
     {
