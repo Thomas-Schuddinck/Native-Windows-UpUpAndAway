@@ -33,6 +33,7 @@ namespace API
             services.AddScoped<DataInit>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IConsumableService, ConsumableService>();
+            services.AddScoped<IPassengerService, PassengerService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
@@ -53,7 +54,7 @@ namespace API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Context"));
             });
-
+            services.AddSignalR();
 
 
         }
@@ -69,6 +70,12 @@ namespace API
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<ChatHub>("/chatHub");
+            });
 
             init.InitializeData().Wait();
         }
