@@ -63,8 +63,8 @@
             <Ellipse HorizontalAlignment="Center" Height="47" VerticalAlignment="Center" Width="200" Stroke="#FF2890B2" Fill="#FFA3E8FE"/>
             <TextBlock Text="Up Up And Away" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" Canvas.Left="47" Canvas.Top="10" FontFamily="Brush Script MT" FontSize="24" FontWeight="Bold" Margin="-24.5,-2,0,0"/>
         </Canvas>
-        <Button x:Name="Client" Click="Button_Click" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Ik Ben Passagier" CornerRadius="10" VerticalAlignment="Center" Grid.Row="2" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
-        <Button x:Name="Personeel" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Ik Ben Personeelslid" CornerRadius="10" VerticalAlignment="Center" Grid.Row="3" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
+        <Button x:Name="Client" Click="Button_Click" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Passenger Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="2" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
+        <Button x:Name="Personeel" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Staff Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="3" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
         <Button x:Name="About" Grid.Row="4" HorizontalAlignment="Stretch" Background="#33C2F0" Content="About" CornerRadius="10" VerticalAlignment="Center" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
     </Grid>
 

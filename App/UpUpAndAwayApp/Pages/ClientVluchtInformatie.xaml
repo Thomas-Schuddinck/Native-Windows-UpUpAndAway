@@ -128,19 +128,19 @@
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="FlightCode" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="VluchtCode:&#x09;" Foreground="Black"></TextBlock>
+                        <TextBlock Text="Flight Code:&#x09;" Foreground="Black"></TextBlock>
                         <TextBlock Text="{x:Bind Path=flightInfoSingleton.flightcode}" Foreground="Black"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="FlightOrigin" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="Vertrek:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="Departure:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock Text="{x:Bind Path=flightInfoSingleton.origin}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="FlightDestination" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="Destinatie:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="Destination:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock Text="{x:Bind Path=flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>

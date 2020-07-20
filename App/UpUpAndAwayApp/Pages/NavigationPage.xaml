@@ -12,7 +12,7 @@
         IsBackButtonVisible="Collapsed" 
         x:Name="NavView" SelectionChanged="NavView_SelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem Tag="flightinfo" Content="Flightinformation">
+            <NavigationViewItem Tag="flightinfo" Content="Flight Information">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Home"/>
                 </NavigationViewItem.Icon>
