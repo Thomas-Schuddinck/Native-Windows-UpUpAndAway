@@ -34,7 +34,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left" Foreground="White"  Grid.Column="0" Grid.Row="0"/>
-                            <TextBlock Text="{x:Bind Path=Consumable.SellingPrice, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0"/>
+                            <TextBlock Text="{x:Bind Path=Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0"/>
                             
                             <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay}" Margin="10 0 0 0" Foreground="White" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
                             <Button Click="SendToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
