@@ -22,6 +22,7 @@ namespace API.Models
             {
                 if (value < 0)
                     throw new ArgumentException("the price cannot be negative!");
+                _price = value;
             }
         }
         public string Name

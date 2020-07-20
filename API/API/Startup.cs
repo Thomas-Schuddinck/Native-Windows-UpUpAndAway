@@ -44,7 +44,7 @@ namespace API
                 {
                     document.Info.Version = "v1";
                     document.Info.Title = "UpUpAndAway API";
-                    document.Info.Description = "Deze keer wel erdoor";
+                    document.Info.Description = "Deze keer wel erdoor \n tzal wel zijn, pietkonijn";
                     document.Info.TermsOfService = "None";
                 };
             });
