@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UpUpAndAwayApp.Pages;
+using UpUpAndAwayApp.Models.Singleton;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -16,21 +17,21 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace UpUpAndAwayApp
+namespace UpUpAndAwayApp.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginClient : Page
+    public sealed partial class FlightInformation : Page
     {
-        public LoginClient()
+        private FlightInfoSingleton flightInfoSingleton;
+        private FlightInfoViewModel ViewModel { get; set; }
+
+        public FlightInformation()
         {
             this.InitializeComponent();
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(FlightInformation));
+            this.flightInfoSingleton = FlightInfoSingleton.GetInstance();
+            ViewModel = new FlightInfoViewModel();
         }
     }
 }

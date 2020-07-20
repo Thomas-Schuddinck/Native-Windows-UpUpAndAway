@@ -12,7 +12,7 @@ namespace UpUpAndAwayApp.Models
         public int SeasonNumber { get; set; }
         public int EpisodeNumber { get; set; }
 
-        public Episode(string title, string runtime, string plot, int seasonNumber, int episodeNumber)
+        public Episode(string title, string runtime, string plot, int seasonNumber, int episodeNumber, string genre)
         {
             Title = title;
             Runtime = runtime;
@@ -20,6 +20,7 @@ namespace UpUpAndAwayApp.Models
             SeasonNumber = seasonNumber;
             EpisodeNumber = episodeNumber;
             Plot = plot;
+            Genre = genre;
         }
 
     }

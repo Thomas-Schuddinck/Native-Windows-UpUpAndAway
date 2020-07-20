@@ -15,6 +15,43 @@
         </LinearGradientBrush>
     </Page.Background>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Client.Height" Value="40"></Setter>
+                        <Setter Target="Personeel.Height" Value="40"></Setter>
+                        <Setter Target="About.Height" Value="40"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Client.Height" Value="50"></Setter>
+                        <Setter Target="Personeel.Height" Value="50"></Setter>
+                        <Setter Target="About.Height" Value="50"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="DesktopLarge">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Client.Height" Value="60"></Setter>
+                        <Setter Target="Personeel.Height" Value="60"></Setter>
+                        <Setter Target="About.Height" Value="60"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="0"/>
             <RowDefinition Height="50*"/>
@@ -26,9 +63,9 @@
             <Ellipse HorizontalAlignment="Center" Height="47" VerticalAlignment="Center" Width="200" Stroke="#FF2890B2" Fill="#FFA3E8FE"/>
             <TextBlock Text="Up Up And Away" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" Canvas.Left="47" Canvas.Top="10" FontFamily="Brush Script MT" FontSize="24" FontWeight="Bold" Margin="-24.5,-2,0,0"/>
         </Canvas>
-        <Button Click="Button_Click" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Ik Ben Passagier" CornerRadius="10" VerticalAlignment="Center" Grid.Row="2" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
-        <Button HorizontalAlignment="Stretch" Background="#33C2F0" Content="Ik Ben Personeelslid" CornerRadius="10" VerticalAlignment="Center" Grid.Row="3" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
-        <Button Grid.Row="4" HorizontalAlignment="Stretch" Background="#33C2F0" Content="About" CornerRadius="10" VerticalAlignment="Center" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
+        <Button x:Name="Client" Click="Button_Click" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Passenger Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="2" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
+        <Button x:Name="Personeel" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Staff Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="3" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
+        <Button x:Name="About" Grid.Row="4" HorizontalAlignment="Stretch" Background="#33C2F0" Content="About" CornerRadius="10" VerticalAlignment="Center" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
     </Grid>
 
 </Page>

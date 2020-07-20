@@ -119,11 +119,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Data\ApiData.cs" />
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Models\Consumable.cs" />
     <Compile Include="Models\Episode.cs" />
+    <Compile Include="Models\ListItemModels\WebshopItem.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\OpenWeatherMapResponse.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Models\Enums\OrderStatus.cs" />
@@ -133,26 +136,49 @@
     <Compile Include="Models\Enums\VisualMediaType.cs" />
     <Compile Include="Models\Serie.cs" />
     <Compile Include="Models\Singleton\FlightInfoSingleton.cs" />
+    <Compile Include="Models\Singleton\LoginSingleton.cs" />
     <Compile Include="Models\VisualMedia.cs" />
-    <Compile Include="Pages\FlightInformation.xaml.cs">
-      <DependentUpon>FlightInformation.xaml</DependentUpon>
+    <Compile Include="Pages\ClientChat.xaml.cs">
+      <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LoginClient.xaml.cs">
-      <DependentUpon>LoginClient.xaml</DependentUpon>
+    <Compile Include="Pages\ClientVluchtInformatie.xaml.cs">
+      <DependentUpon>ClientVluchtInformatie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientLogin.xaml.cs">
+      <DependentUpon>ClientLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SerieDetailPage.xaml.cs">
+      <DependentUpon>SerieDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MovieDetailPage.xaml.cs">
+      <DependentUpon>MovieDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NavigationPage.xaml.cs">
+      <DependentUpon>NavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Webshop.xaml.cs">
+      <DependentUpon>Webshop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FlightInfoViewModel.cs" />
+    <Compile Include="ViewModels\SerieDetailViewModel.cs" />
+    <Compile Include="ViewModels\MovieDetailViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
+    <Compile Include="ViewModels\WebshopViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Design\projectGuides.guides" />
     <None Include="UpUpAndAwayApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +196,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\FlightInformation.xaml">
+    <Page Include="Pages\ClientChat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LoginClient.xaml">
+    <Page Include="Pages\ClientVluchtInformatie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,14 +212,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\SerieDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MovieDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\VisualMediaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Webshop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>3.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.8</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
@@ -197,8 +246,13 @@
     <PackageReference Include="NSwag.AspNetCore">
       <Version>13.6.2</Version>
     </PackageReference>
+    <PackageReference Include="Unirest-API">
+      <Version>1.0.7.6</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
