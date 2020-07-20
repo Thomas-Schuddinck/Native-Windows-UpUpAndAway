@@ -30,7 +30,7 @@ namespace UpUpAndAwayApp.ViewModels
         private async void GetConsumablesFromAPI()
         {
             HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:50962/api/Consumable"));
+            var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Consumable"));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<Consumable>>(json);
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
         }
