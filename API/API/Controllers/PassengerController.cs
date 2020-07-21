@@ -32,6 +32,8 @@ namespace API.Controllers
         [HttpGet("{passengerId}")]
         public ActionResult<Passenger> GetByUser(int passengerId)
         {
+            if (passengerService.GetPassenger(passengerId) == null)
+                return new Passenger("test","test");
             return Ok(passengerService.GetPassenger(passengerId));
         }
     }
