@@ -26,6 +26,11 @@ namespace UpUpAndAwayApp.Pages
             var item = (WebshopItem)button.DataContext;
             ViewModel.AddToShoppingCart(item);
         }
+
+        public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
+        {
+            splitview.IsPaneOpen = !splitview.IsPaneOpen;
+        }
     }
 
 
