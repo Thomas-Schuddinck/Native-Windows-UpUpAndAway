@@ -19,5 +19,10 @@ namespace API.Models
             Message = message;
             TimeSend = DateTime.Now;
         }
+
+        public PrivateMessage()
+        {
+            
+        }
     }
 }

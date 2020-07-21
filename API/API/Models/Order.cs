@@ -49,6 +49,7 @@ namespace API.Models
             PassengerId = Passenger.PassengerId;
         }
 
+
         public bool Finish()
         {
             if (OrderStatus == OrderStatus.Finished)

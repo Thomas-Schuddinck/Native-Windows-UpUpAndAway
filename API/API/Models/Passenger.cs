@@ -54,6 +54,11 @@ namespace API.Models
             LastName = lastName;
         }
 
+        public Passenger()
+        {
+            
+        }
+
         
     }
 }

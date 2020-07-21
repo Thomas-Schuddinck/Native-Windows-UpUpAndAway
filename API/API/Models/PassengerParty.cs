@@ -13,5 +13,7 @@ namespace API.Models
         {
             Passengers = new List<Passenger>();
         }
+
+
     }
 }

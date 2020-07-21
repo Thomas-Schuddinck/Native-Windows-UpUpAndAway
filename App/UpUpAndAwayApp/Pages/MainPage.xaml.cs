@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -31,9 +32,14 @@ namespace UpUpAndAwayApp
         }
         public FlightInfoViewModel ViewModel;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Passenger_OnClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate( typeof(LoginClient));
+        }
+
+        private void Personeel_OnClick(object sender, RoutedEventArgs e)
+        {
+            Debug.Print("Derp");
         }
     }
 }

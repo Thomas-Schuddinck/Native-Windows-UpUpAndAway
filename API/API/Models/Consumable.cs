@@ -67,5 +67,10 @@ namespace API.Models
             Reduction = reduction;
             ProductPicture = productPicture;
         }
+
+        public Consumable()
+        {
+            
+        }
     }
 }
