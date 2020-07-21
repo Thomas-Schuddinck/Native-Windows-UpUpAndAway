@@ -1,4 +1,5 @@
-﻿using UpUpAndAwayApp.Models;
+﻿using System;
+using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
@@ -13,6 +14,11 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class Webshop : Page
     {
+
+
+        public bool IsSideDrawerOpen { get; set; }
+        public bool IsSideDrawerClosed { get; set; }
+
         public Webshop()
         {
             this.InitializeComponent();
@@ -29,7 +35,10 @@ namespace UpUpAndAwayApp.Pages
 
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
         {
-            splitview.IsPaneOpen = !splitview.IsPaneOpen;
+            IsSideDrawerClosed = IsSideDrawerOpen;
+            IsSideDrawerOpen = !IsSideDrawerOpen;
+            //splitview.IsPaneOpen = !splitview.IsPaneOpen;
+            //CartButton.Visibility = splitview.IsPaneOpen ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 

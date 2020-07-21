@@ -8,37 +8,47 @@
     xmlns:x1="using:System"
     xmlns:Models="using:UpUpAndAwayApp.Models.ListItemModels"
     xmlns:Models1="using:UpUpAndAwayApp.Models"
+    xmlns:local1="using:UpUpAndAwayApp.Models.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local1:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <RelativePanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 10 0 0">
-            <Button RelativePanel.AlignRightWithPanel="True" Margin="0 0 10 0" Width="50" Height="50" Click="ChangeSplitviewStatus">
-                <SymbolIcon Symbol="Shop" Margin="-20 -20 0 0" >
-                    <SymbolIcon.RenderTransform>
-                        <CompositeTransform ScaleX="2" ScaleY="2"/>
-                    </SymbolIcon.RenderTransform>
-                </SymbolIcon>
-            </Button>
 
-        </RelativePanel>
-        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PanePlacement="Right" OpenPaneLength="600" IsPaneOpen="False" DisplayMode="Overlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" >
+        <Button x:Name="CartButton" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50" Visibility="{Binding Path=IsSideDrawerClosed,  Converter={StaticResource BoolToVis}, Mode=OneWay}"  Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
+            <SymbolIcon Symbol="Shop" Margin="-20 -20 0 0" >
+                <SymbolIcon.RenderTransform>
+                    <CompositeTransform ScaleX="2" ScaleY="2"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
+        </Button>
+        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PanePlacement="Right" OpenPaneLength="600" IsPaneOpen="{Binding Path=IsSideDrawerOpen,  Mode=OneWay}" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="7*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ListView HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart, Mode=OneWay}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
+                    <Button RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50" Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
+                        <SymbolIcon Symbol="Back" Margin="20 20 -40 -40" >
+                            <SymbolIcon.RenderTransform>
+                                <CompositeTransform ScaleX="-2" ScaleY="-2" />
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                    </Button>
+                    <ListView HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart, Mode=OneWay}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:OrderLine">
                                 <Grid HorizontalAlignment="Stretch">
@@ -46,19 +56,16 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay}" Stretch="Uniform" Width="100" Height="100"  Grid.Column="0" Grid.Row="0" Margin="10 10 10 10 "/>
+                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay}" Stretch="Fill" Width="100" Height="100"  Grid.Column="0" Grid.Row="0" Margin="10 10 10 10 "/>
                                     <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='product titel'}"  Foreground="Black" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBlock Text="{x:Bind Path=AmountPrice, Mode=OneWay, FallbackValue='prijs'}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='amount'}" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10 0 10 "/>
+                                    <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay, FallbackValue='1'}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
+                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='prijs'}" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10 0 10 "/>
                                 </Grid>
-                                
-                                    
-
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.ItemsPanel>
@@ -67,7 +74,7 @@
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
-                    <Button Grid.Column="0" Grid.Row="1" Content="Place Order" FontSize="30" HorizontalAlignment="Center"  />
+                    <Button Grid.Column="0" Grid.Row="2" Content="Place Order" FontSize="30" HorizontalAlignment="Center"  />
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>
