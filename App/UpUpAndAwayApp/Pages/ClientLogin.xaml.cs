@@ -37,8 +37,18 @@ namespace UpUpAndAwayApp
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            ViewModel.LoginPassenger(login);
-            this.Frame.Navigate(typeof(NavPage));
+            try
+            {
+                ViewModel.LoginPassenger(login).RunSynchronously();
+                this.Frame.Navigate(typeof(NavPage));
+            }
+            catch(Exception er)
+            {
+                var p = new ContentDialog();
+                p.Title = "Connection error";
+                p.CloseButtonText = "close";
+                p.ShowAsync();
+            }
         }
     }
 }
