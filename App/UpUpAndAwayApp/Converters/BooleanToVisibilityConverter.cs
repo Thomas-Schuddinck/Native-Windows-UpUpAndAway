@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace UpUpAndAwayApp.Models.Converters
+namespace UpUpAndAwayApp.Converters
 {
     public class BooleanToVisibilityConverter : IValueConverter
     {
