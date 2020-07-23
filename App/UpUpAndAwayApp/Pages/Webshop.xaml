@@ -8,7 +8,7 @@
     xmlns:x1="using:System"
     xmlns:Models="using:UpUpAndAwayApp.Models.ListItemModels"
     xmlns:Models1="using:UpUpAndAwayApp.Models"
-    xmlns:local1="using:UpUpAndAwayApp.Models.Converters"
+    xmlns:local1="using:UpUpAndAwayApp.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
@@ -30,7 +30,7 @@
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
-        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PanePlacement="Right" OpenPaneLength="600" IsPaneOpen="{Binding Path=IsSideDrawerOpen,  Mode=OneWay}" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
+        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PanePlacement="Right" OpenPaneLength="600" IsPaneOpen="True" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -77,20 +77,41 @@
                     <Button Grid.Column="0" Grid.Row="2" Content="Place Order" FontSize="30" HorizontalAlignment="Center"  />
                 </Grid>
             </SplitView.Pane>
-            <SplitView.Content>
+            <SplitView.Content >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <GridView HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="0" Grid.Column="0" >
+                    <StackPanel x:Name="DetailPane" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="0 0 20 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform" Height="300" Width="300" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 0 0" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="32"/>
+                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" FontSize="32"/>
+                            <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBox Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Amount, Mode=TwoWay}" MaxHeight="50" Foreground="White" HorizontalAlignment="Left" Margin="0 0 10 0"/>
+                                <Button Click="SendCurrentToShoppingCart" Content="Add"   Height="50" HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
+                            </StackPanel>
+                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Description, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"  FontSize="20"/>
+                        </Grid>
+                    </StackPanel>
+                    <GridView HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="1" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <GridView.ItemTemplate>
                             <DataTemplate x:Name="itemding" x:DataType="Models:WebshopItem">
                                 <Grid Height="200" Width="200" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
-                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="UniformToFill"/>
+                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform"/>
 
                                     <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}" Height="80" VerticalAlignment="Bottom"  Padding="5">
                                         <Grid.RowDefinitions>
@@ -105,7 +126,7 @@
                                         <TextBlock Text="{x:Bind Path=Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0"/>
 
                                         <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay}" Margin="10 0 0 0" Foreground="White" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
-                                        <Button Click="SendToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
+                                        <Button Click="SendCurrentToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

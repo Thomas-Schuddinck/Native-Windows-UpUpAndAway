@@ -33,12 +33,35 @@ namespace UpUpAndAwayApp.Pages
             ViewModel.AddToShoppingCart(item);
         }
 
+        public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
+        {
+            ViewModel.AddToShoppingCart(ViewModel.CurrentWebshopItem);
+        }
+
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
         {
             IsSideDrawerClosed = IsSideDrawerOpen;
             IsSideDrawerOpen = !IsSideDrawerOpen;
             //splitview.IsPaneOpen = !splitview.IsPaneOpen;
             //CartButton.Visibility = splitview.IsPaneOpen ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public void SetCurrentWebshopItem(WebshopItem webshopItem)
+        {
+            ViewModel.CurrentWebshopItem = webshopItem;
+        }
+
+        public void OpenDetailPanel()
+        {
+            DetailPane.Visibility = Visibility.Visible;
+        }
+
+
+        public void WebshopItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var webshopItem = (WebshopItem)e.ClickedItem;
+            SetCurrentWebshopItem(webshopItem);
+            OpenDetailPanel();
         }
     }
 
