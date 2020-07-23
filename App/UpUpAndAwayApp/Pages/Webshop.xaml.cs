@@ -15,10 +15,6 @@ namespace UpUpAndAwayApp.Pages
     public sealed partial class Webshop : Page
     {
 
-
-        public bool IsSideDrawerOpen { get; set; }
-        public bool IsSideDrawerClosed { get; set; }
-
         public Webshop()
         {
             this.InitializeComponent();
@@ -64,7 +60,21 @@ namespace UpUpAndAwayApp.Pages
             OpenDetailPanel();
         }
     }
+            if (splitview.IsPaneOpen)
+            {
+                splitview.IsPaneOpen = false;
+                CartButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                splitview.IsPaneOpen = true;
+                CartButton.Visibility = Visibility.Collapsed;
+            }
+        }
 
-
-
+        private void splitview_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            CartButton.Visibility = Visibility.Visible;
+        }
+    }
 }

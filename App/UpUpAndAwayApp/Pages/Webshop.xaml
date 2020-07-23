@@ -23,14 +23,14 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="CartButton" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50" Visibility="{Binding Path=IsSideDrawerClosed,  Converter={StaticResource BoolToVis}, Mode=OneWay}"  Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
+        <Button x:Name="CartButton" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50"  Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
             <SymbolIcon Symbol="Shop" Margin="-20 -20 0 0" >
                 <SymbolIcon.RenderTransform>
                     <CompositeTransform ScaleX="2" ScaleY="2"/>
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
-        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PanePlacement="Right" OpenPaneLength="600" IsPaneOpen="True" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
+        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PaneClosing="splitview_PaneClosing" PanePlacement="Right" OpenPaneLength="600" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
