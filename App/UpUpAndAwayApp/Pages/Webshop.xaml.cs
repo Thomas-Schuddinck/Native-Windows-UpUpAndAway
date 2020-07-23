@@ -30,6 +30,13 @@ namespace UpUpAndAwayApp.Pages
             ViewModel.AddToShoppingCart(item);
         }
 
+        public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (OrderLine)button.DataContext;
+            ViewModel.RemoveItemFromCart(item);
+        }
+
         public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
         {
             ViewModel.SendCurrentToShoppingCart();

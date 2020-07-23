@@ -41,6 +41,7 @@ namespace UpUpAndAwayApp.ViewModels
         public WebshopViewModel()
         {
             WebshopItems = new ObservableCollection<WebshopItem>();
+            //should previous cart => nog kijken voor local storage save
             Cart = new ObservableCollection<OrderLine>();
             GetConsumablesFromAPI();
         } 
@@ -58,6 +59,16 @@ namespace UpUpAndAwayApp.ViewModels
         public void SendCurrentToShoppingCart()
         {
             AddToShoppingCart(CurrentWebshopItem);
+        }
+
+        public void RemoveItemFromCart(OrderLine orderLine)
+        {
+            Cart.Remove(orderLine);
+        }
+
+        public void ClearCart()
+        {
+            Cart = new ObservableCollection<OrderLine>();
         }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
