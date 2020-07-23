@@ -30,7 +30,7 @@
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
-        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PaneClosing="splitview_PaneClosing" PanePlacement="Right" OpenPaneLength="600" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
+        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PaneClosing="SplitviewPaneClosing" PanePlacement="Right" OpenPaneLength="600" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>

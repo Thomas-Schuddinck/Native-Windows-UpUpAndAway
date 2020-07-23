@@ -1,27 +1,25 @@
-﻿using API.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace UpUpAndAwayApp.ViewModels
 {
     public class WebshopViewModel : INotifyPropertyChanged
     {
+
+        #region Fields
+        private WebshopItem _currentWebshopItem;
+        #endregion
+
+        #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
 
         public ObservableCollection<OrderLine> Cart { get; private set; }
-
-        private WebshopItem _currentWebshopItem;
 
         public WebshopItem CurrentWebshopItem
         {
@@ -36,14 +34,19 @@ namespace UpUpAndAwayApp.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+
+        #region Constructors
         public WebshopViewModel()
         {
             WebshopItems = new ObservableCollection<WebshopItem>();
             Cart = new ObservableCollection<OrderLine>();
             GetConsumablesFromAPI();
-        }
+        } 
+        #endregion
 
+        #region Methods
         private async void GetConsumablesFromAPI()
         {
             HttpClient client = new HttpClient();
@@ -52,15 +55,23 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
         }
 
+        public void SendCurrentToShoppingCart()
+        {
+            AddToShoppingCart(CurrentWebshopItem);
+        }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
-            OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
-            if (o == null)
-                Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
-            else
-                o.Amount += webshopItem.Amount;
-            webshopItem.ResetAmount();
-        }
+            if (webshopItem.Amount > 0)
+            {
+                OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
+                if (o == null)
+                    Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
+                else
+                    o.Amount += webshopItem.Amount;
+                webshopItem.ResetAmount();
+            }
+        } 
+        #endregion
     }
 }

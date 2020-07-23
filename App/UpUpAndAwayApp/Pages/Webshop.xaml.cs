@@ -15,12 +15,13 @@ namespace UpUpAndAwayApp.Pages
     public sealed partial class Webshop : Page
     {
 
+        public WebshopViewModel ViewModel;
+
         public Webshop()
         {
             this.InitializeComponent();
             this.ViewModel = new WebshopViewModel();
         }
-        public WebshopViewModel ViewModel;
 
         public void SendToShoppingCart(object sender, RoutedEventArgs e)
         {
@@ -31,7 +32,7 @@ namespace UpUpAndAwayApp.Pages
 
         public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
         {
-            ViewModel.AddToShoppingCart(ViewModel.CurrentWebshopItem);
+            ViewModel.SendCurrentToShoppingCart();
         }
 
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
@@ -48,7 +49,7 @@ namespace UpUpAndAwayApp.Pages
             }
         }
 
-        private void splitview_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        private void SplitviewPaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
         {
             CartButton.Visibility = Visibility.Visible;
         }
