@@ -33,6 +33,9 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
+        public string TotalPrice => "Total: € " + CalculateTotalPrice();
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -54,6 +57,11 @@ namespace UpUpAndAwayApp.ViewModels
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Consumable"));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<Consumable>>(json);
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
+        }
+
+        private double CalculateTotalPrice()
+        {
+            return Cart.Sum(o => o.Amount * o.Consumable.SellingPrice);
         }
 
         public void SendCurrentToShoppingCart()

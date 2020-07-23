@@ -82,7 +82,11 @@
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
-                    <Button Grid.Column="0" Grid.Row="2" Content="Place Order" FontSize="30" HorizontalAlignment="Center"  />
+                    <StackPanel Grid.Column="0" Grid.Row="2" >
+                        <TextBlock Text="{x:Bind Path=ViewModel.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
+                        <Button Content="Place Order" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+                    
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content >
