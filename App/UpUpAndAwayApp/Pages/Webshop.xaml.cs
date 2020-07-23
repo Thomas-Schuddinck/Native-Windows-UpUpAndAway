@@ -36,10 +36,21 @@ namespace UpUpAndAwayApp.Pages
 
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
         {
-            IsSideDrawerClosed = IsSideDrawerOpen;
-            IsSideDrawerOpen = !IsSideDrawerOpen;
-            //splitview.IsPaneOpen = !splitview.IsPaneOpen;
-            //CartButton.Visibility = splitview.IsPaneOpen ? Visibility.Collapsed : Visibility.Visible;
+            if (splitview.IsPaneOpen)
+            {
+                splitview.IsPaneOpen = false;
+                CartButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                splitview.IsPaneOpen = true;
+                CartButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void splitview_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            CartButton.Visibility = Visibility.Visible;
         }
 
         public void SetCurrentWebshopItem(WebshopItem webshopItem)
@@ -60,21 +71,5 @@ namespace UpUpAndAwayApp.Pages
             OpenDetailPanel();
         }
     }
-            if (splitview.IsPaneOpen)
-            {
-                splitview.IsPaneOpen = false;
-                CartButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                splitview.IsPaneOpen = true;
-                CartButton.Visibility = Visibility.Collapsed;
-            }
-        }
 
-        private void splitview_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
-        {
-            CartButton.Visibility = Visibility.Visible;
-        }
-    }
 }
