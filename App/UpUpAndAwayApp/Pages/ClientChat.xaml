@@ -95,7 +95,7 @@
                                             <RowDefinition Height="1*" />
                                         </Grid.RowDefinitions>
                                     <TextBlock Text="{Binding TimeSend.TimeOfDay, Converter={StaticResource DateToStringFormatConverter}}" FontSize="12px" Foreground="LightGray" HorizontalAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Sender.FullName}" Foreground="DarkGray" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Sender}" Foreground="DarkGray" HorizontalAlignment="Left"/>
                                     <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Message}" TextWrapping="Wrap" Margin="75,0" Foreground="Black"/>
                                     </Grid>
                                 </DataTemplate>
