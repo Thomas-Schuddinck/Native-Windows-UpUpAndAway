@@ -21,10 +21,7 @@ namespace API.Data
             context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
-
                 SeedData();
-               
-
             }
 
         }

@@ -150,14 +150,17 @@
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NavigationPagePersonel.xaml.cs">
+      <DependentUpon>NavigationPagePersonel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SerieDetailPage.xaml.cs">
       <DependentUpon>SerieDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MovieDetailPage.xaml.cs">
       <DependentUpon>MovieDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NavigationPage.xaml.cs">
-      <DependentUpon>NavigationPage.xaml</DependentUpon>
+    <Compile Include="Pages\NavigationPagePassenger.xaml.cs">
+      <DependentUpon>NavigationPagePassenger.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\NavigationPagePersonel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SerieDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,7 +227,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\NavigationPage.xaml">
+    <Page Include="Pages\NavigationPagePassenger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

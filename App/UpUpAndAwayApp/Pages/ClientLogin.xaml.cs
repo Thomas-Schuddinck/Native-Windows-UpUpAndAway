@@ -40,7 +40,7 @@ namespace UpUpAndAwayApp
             try
             {
                 ViewModel.LoginPassenger(login).RunSynchronously();
-                this.Frame.Navigate(typeof(NavPage));
+                this.Frame.Navigate(typeof(NavPagePassenger));
             }
             catch(Exception er)
             {
