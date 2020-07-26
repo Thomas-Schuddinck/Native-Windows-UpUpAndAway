@@ -11,6 +11,7 @@ namespace UpUpAndAwayApp.Models.Singleton
     {
         private static readonly LoginSingleton instance = new LoginSingleton();
         public static Passenger passenger;
+        public static Order Cart = new Order();
         private LoginSingleton()
         {
         }
