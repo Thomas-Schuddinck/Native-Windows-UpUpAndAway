@@ -48,7 +48,7 @@
                             </SymbolIcon.RenderTransform>
                         </SymbolIcon>
                     </Button>
-                    <ListView HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart, Mode=OneWay}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
+                    <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart.OrderLines}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:OrderLine">
                                 <Grid HorizontalAlignment="Stretch">
@@ -83,7 +83,7 @@
                         </ListView.ItemsPanel>
                     </ListView>
                     <StackPanel Grid.Column="0" Grid.Row="2" >
-                        <TextBlock Text="{x:Bind Path=ViewModel.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Cart.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
                         <Button Content="Place Order" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </StackPanel>
                     

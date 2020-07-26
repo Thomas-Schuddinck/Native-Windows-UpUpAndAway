@@ -22,8 +22,6 @@ namespace UpUpAndAwayApp.Models.ListItemModels
             }
             set
             {
-                if (value < 0)
-                    return;
                 _amount = value;
                 OnPropertyChanged();
             }

@@ -23,12 +23,17 @@ namespace UpUpAndAwayApp.Pages
             this.ViewModel = new WebshopViewModel();
         }
 
+        public void NotifyNewChanges()
+        {
+            this.Bindings.Update();
+        }
+
         public void SendToShoppingCart(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (WebshopItem)button.DataContext;
             ViewModel.AddToShoppingCart(item);
-            this.Bindings.Update();
+            NotifyNewChanges();
         }
 
         public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
@@ -36,13 +41,13 @@ namespace UpUpAndAwayApp.Pages
             var button = (Button)sender;
             var item = (OrderLine)button.DataContext;
             ViewModel.RemoveItemFromCart(item);
-            this.Bindings.Update();
+            NotifyNewChanges();
         }
 
         public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
         {
             ViewModel.SendCurrentToShoppingCart();
-            this.Bindings.Update();
+            NotifyNewChanges();
         }
 
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
