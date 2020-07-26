@@ -57,7 +57,7 @@ namespace UpUpAndAwayApp.Pages
                 this.ContentFrame.Navigate(_page, vm, transitionInfo);
             }
             else {
-                this.ContentFrame.Navigate(_page, null, transitionInfo);
+                this.ContentFrame.Navigate(_page, this.ContentFrame, transitionInfo);
             }
         }
 

@@ -29,14 +29,14 @@ namespace API.Data
         private void SeedData()
         {
             context.Consumables.AddRange(new[] {
-                    new Consumable(16.5, "Burger", "Een heerlijke burger op grootmoeder's wijze", 0, ""),
-                    new Consumable(14.5, "Spaghetti Bolognaise", "Een echte Italiaanse spaghetti", 0, ""),
-                    new Consumable(3.5, "Cola", "Een frisse Coca Cola", 0, ""),
-                    new Consumable(3.5, "Cola Zero", "Een frisse Coca Cola Zero", 0, ""),
-                    new Consumable(4, "Fanta", "Een frisse Fanta", 0, ""),
-                    new Consumable(5, "Jupiler", "Een verkoelende Jupiler", 0, ""),
-                    new Consumable(3, "Paprika Chips", "Paprika chips van Lays", 0, ""),
-                    new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "")
+                    new Consumable(16.5, "Burger", "Een heerlijke burger op grootmoeder's wijze", 0, "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg"),
+                    new Consumable(14.5, "Spaghetti Bolognaise", "Een echte Italiaanse spaghetti", 0, "https://banner2.cleanpng.com/20180423/qvw/kisspng-bolognese-sauce-pizza-pasta-lasagne-buffalo-wing-spagetti-pasta-5ade9a975ca656.4221295815245380073795.jpg"),
+                    new Consumable(3.5, "Cola", "Een frisse Coca Cola", 0, "https://www.prikentik.be/media/catalog/product/cache/23d9da881b836928ceaa9fe24f71827f/c/o/coca-cola-orginal-pet-50cl.png"),
+                    new Consumable(3.5, "Cola Zero", "Een frisse Coca Cola Zero", 0, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Coca_Cola_Zero_02.jpg/266px-Coca_Cola_Zero_02.jpg"),
+                    new Consumable(4, "Fanta", "Een frisse Fanta", 0, "https://images.quickoffice.nl/002/600x450/Frisdrank-Fanta-Orange-petfles-0-50l-(c)897067.jpg"),
+                    new Consumable(5, "Jupiler", "Een verkoelende Jupiler", 0, "https://cdn.webshopapp.com/shops/19852/files/298224123/brouwerij-ab-inbev-jupiler.jpg"),
+                    new Consumable(3, "Paprika Chips", "Paprika chips van Lays", 0, "https://thysshop.be/9314-thickbox_default/Lays-Chips-Paprika-Stuk-85-g.jpg"),
+                    new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "https://thysshop.be/8786-large_default/Lays-Chips-Naturel-Stuk-40-g.jpg")
                 });
 
             context.SaveChanges();
