@@ -1,4 +1,5 @@
-﻿using UpUpAndAwayApp.Models;
+﻿using System;
+using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
@@ -13,21 +14,73 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class Webshop : Page
     {
+
+        public WebshopViewModel ViewModel;
+
         public Webshop()
         {
             this.InitializeComponent();
             this.ViewModel = new WebshopViewModel();
         }
-        public WebshopViewModel ViewModel;
 
         public void SendToShoppingCart(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (WebshopItem)button.DataContext;
             ViewModel.AddToShoppingCart(item);
+            this.Bindings.Update();
+        }
+
+        public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (OrderLine)button.DataContext;
+            ViewModel.RemoveItemFromCart(item);
+            this.Bindings.Update();
+        }
+
+        public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SendCurrentToShoppingCart();
+            this.Bindings.Update();
+        }
+
+        public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
+        {
+            if (splitview.IsPaneOpen)
+            {
+                splitview.IsPaneOpen = false;
+                CartButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                splitview.IsPaneOpen = true;
+                CartButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SplitviewPaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            CartButton.Visibility = Visibility.Visible;
+        }
+
+        public void SetCurrentWebshopItem(WebshopItem webshopItem)
+        {
+            ViewModel.CurrentWebshopItem = webshopItem;
+        }
+
+        public void OpenDetailPanel()
+        {
+            DetailPane.Visibility = Visibility.Visible;
+        }
+
+
+        public void WebshopItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var webshopItem = (WebshopItem)e.ClickedItem;
+            SetCurrentWebshopItem(webshopItem);
+            OpenDetailPanel();
         }
     }
-
-
 
 }

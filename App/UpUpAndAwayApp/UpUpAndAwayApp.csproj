@@ -123,6 +123,7 @@
     <Compile Include="Data\ApiData.cs" />
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Models\Consumable.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\Episode.cs" />
     <Compile Include="Models\ListItemModels\WebshopItem.cs" />
     <Compile Include="Models\Movie.cs" />
