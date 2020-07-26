@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
+using UpUpAndAwayApp.Models.Singleton;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -14,12 +15,23 @@ namespace UpUpAndAwayApp.ViewModels
 
         #region Fields
         private WebshopItem _currentWebshopItem;
+        private Order _cart;
         #endregion
 
         #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
 
-        public ObservableCollection<OrderLine> Cart { get; private set; }
+        public Order Cart
+        {
+            get { return this._cart; }
+            set
+            {
+                LoginSingleton.Cart = value;
+                _cart = value;
+                _cart.CleanUpOrderLines();
+                RaisePropertyChanged(nameof(Cart));
+            }
+        }
 
         public WebshopItem CurrentWebshopItem
         {
@@ -29,11 +41,9 @@ namespace UpUpAndAwayApp.ViewModels
                 if (_currentWebshopItem == value)
                     return;
                 _currentWebshopItem = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("CurrentWebshopItem"));
+                RaisePropertyChanged("CurrentWebshopItem");
             }
         }
-
-        public string TotalPrice => "Total: € " + CalculateTotalPrice();
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,12 +55,17 @@ namespace UpUpAndAwayApp.ViewModels
         {
             WebshopItems = new ObservableCollection<WebshopItem>();
             //should previous cart => nog kijken voor local storage save
-            Cart = new ObservableCollection<OrderLine>();
+            Cart = LoginSingleton.Cart;
             GetConsumablesFromAPI();
-        } 
+        }
         #endregion
 
         #region Methods
+        protected void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         private async void GetConsumablesFromAPI()
         {
             HttpClient client = new HttpClient();
@@ -59,10 +74,7 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
         }
 
-        private double CalculateTotalPrice()
-        {
-            return Cart.Sum(o => o.Amount * o.Consumable.SellingPrice);
-        }
+        
 
         public void SendCurrentToShoppingCart()
         {
@@ -71,26 +83,24 @@ namespace UpUpAndAwayApp.ViewModels
 
         public void RemoveItemFromCart(OrderLine orderLine)
         {
-            Cart.Remove(orderLine);
+            Cart.OrderLines.Remove(orderLine);
         }
 
         public void ClearCart()
         {
-            Cart = new ObservableCollection<OrderLine>();
+            Cart = new Order();
         }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
-            if (webshopItem.Amount > 0)
-            {
-                OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
-                if (o == null)
-                    Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
-                else
-                    o.Amount += webshopItem.Amount;
-                webshopItem.ResetAmount();
-            }
-        } 
+            OrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
+            if (o == null)
+                Cart.OrderLines.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
+            else
+                o.Amount += webshopItem.Amount;
+            webshopItem.ResetAmount();
+
+        }
         #endregion
     }
 }

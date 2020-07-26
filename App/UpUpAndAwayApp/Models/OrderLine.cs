@@ -7,7 +7,7 @@ namespace UpUpAndAwayApp.Models
     public class OrderLine : INotifyPropertyChanged
     {
         private int _amount;
-
+        private Order _order;
 
         #region Properties
         public int OrderLineId { get; set; }
@@ -19,32 +19,32 @@ namespace UpUpAndAwayApp.Models
             }
             set
             {
-                if (value < 0)
-                    return;
                 _amount = value;
-                OnPropertyChanged();
+                NotifyPropertyChanged(nameof(Amount));
+                NotifyPropertyChanged(nameof(AmountPrice));
+                NotifyPropertyChanged(nameof(TotalPrice));
+                _order.ForceUpdate();
 
             }
         }
         public Consumable Consumable { get; private set; }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        public string AmountPrice => Amount + " X " + "€ " + Consumable.SellingPrice;
-        public string TotalPrice => "€ " + (Amount * Consumable.SellingPrice);
+        public string AmountPrice => _amount + " X " + "€ " + Consumable.SellingPrice;
+        public string TotalPrice => "€ " + (_amount * Consumable.SellingPrice);
 
 
-        public OrderLine(int amount, Consumable consumable)
+        public OrderLine(int amount, Consumable consumable, Order order)
         {
+            _order = order;
             Amount = amount;
             Consumable = consumable;
         }
-
-        protected void OnPropertyChanged([CallerMemberName] string amount = null)
+        private void NotifyPropertyChanged(string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(amount));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
