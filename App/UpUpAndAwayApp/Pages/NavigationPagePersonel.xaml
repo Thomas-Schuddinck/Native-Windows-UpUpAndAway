@@ -9,8 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <NavigationView 
         IsSettingsVisible="False" 
-        IsBackButtonVisible="Collapsed" 
-        x:Name="NavView" SelectionChanged="NavView_SelectionChanged">
+        IsBackButtonVisible="Collapsed">
         <NavigationView.MenuItems>
             <NavigationViewItem Tag="flightinfo" Content="Flight Information">
                 <NavigationViewItem.Icon>
