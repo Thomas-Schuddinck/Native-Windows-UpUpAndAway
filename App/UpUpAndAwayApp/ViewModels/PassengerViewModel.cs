@@ -19,18 +19,25 @@ namespace UpUpAndAwayApp.ViewModels
         {
         }
 
-        public async void LoginPassenger(string id)
+        public async Task LoginPassenger(string id)
         {
             HttpClient client = new HttpClient();
-            var jsonResponsePassenger = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
-            var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponsePassenger);
-            this.Passenger = passenger; 
-            loggedIn.login(Passenger);
-            var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
-            var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
-            loggedIn.joinGroup(party);
-            ChatViewModel model = new ChatViewModel();
-            await model.Connect();
+            try
+            {
+                var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
+                var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponse);
+                this.Passenger = passenger;
+                loggedIn.login(Passenger);
+                var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
+                var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
+                loggedIn.joinGroup(party);
+                ChatViewModel model = new ChatViewModel();
+                await model.Connect();
+            } 
+            catch(HttpRequestException e) 
+            {
+                throw new Exception("connection failed");
+            }
         }
 
         private string GeneratePassengerRequestString(string id)
