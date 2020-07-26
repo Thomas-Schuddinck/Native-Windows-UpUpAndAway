@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.Pages;
 using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -34,6 +35,11 @@ namespace UpUpAndAwayApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate( typeof(LoginClient));
+        }
+
+        private void Personeel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Notification));
         }
     }
 }
