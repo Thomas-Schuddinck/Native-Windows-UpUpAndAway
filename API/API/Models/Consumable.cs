@@ -18,7 +18,7 @@ namespace API.Models
             {
                 return _price;
             }
-            private set
+            set
             {
                 if (value < 0)
                     throw new ArgumentException("the price cannot be negative!");
@@ -31,7 +31,7 @@ namespace API.Models
             {
                 return _name;
             }
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("The name cannot be empty or only containing whitespace!");
@@ -39,15 +39,15 @@ namespace API.Models
 
             }
         }
-        public string Description { get; private set; }
-        public string ProductPicture { get; private set; }
+        public string Description { get; set; }
+        public string ProductPicture { get; set; }
         public int Reduction
         {
             get
             {
                 return _reduction;
             }
-            private set
+            set
             {
                 if (value < 0 || value > 1)
                     throw new ArgumentException("Price reduction cannot be lower than 0 and not be higher than 1!");
@@ -56,7 +56,7 @@ namespace API.Models
             }
         }
 
-        public double SellingPrice => _price * (1 - _reduction); 
+        public double SellingPrice => _price * (1 - _reduction);
         #endregion
 
         public Consumable(double price, string name, string description, int reduction, string productPicture)
@@ -66,6 +66,10 @@ namespace API.Models
             Description = description;
             Reduction = reduction;
             ProductPicture = productPicture;
+        }
+        public Consumable()
+        {
+
         }
     }
 }
