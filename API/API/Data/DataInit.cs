@@ -21,10 +21,7 @@ namespace API.Data
             context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
-
                 SeedData();
-               
-
             }
 
         }
@@ -41,6 +38,20 @@ namespace API.Data
                     new Consumable(3, "Paprika Chips", "Paprika chips van Lays", 0, "https://thysshop.be/9314-thickbox_default/Lays-Chips-Paprika-Stuk-85-g.jpg"),
                     new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "https://thysshop.be/8786-large_default/Lays-Chips-Naturel-Stuk-40-g.jpg")
                 });
+
+            #region passengers
+            Passenger passenger1 = new Passenger("Tony", "Stark");
+            Passenger passenger2 = new Passenger("Steven", "Rogers");
+            Passenger passenger3 = new Passenger("Clint", "Barton");
+
+            context.Passenger.Add(passenger1);
+            context.Passenger.Add(passenger2);
+            context.Passenger.Add(passenger3);
+
+            PassengerParty p1 = new PassengerParty() { Passengers = { passenger1, passenger2 } };
+
+            context.PassengerParties.Add(p1);
+            #endregion
 
             context.SaveChanges();
             //Herschreven zodat het op 2 lijntjes past

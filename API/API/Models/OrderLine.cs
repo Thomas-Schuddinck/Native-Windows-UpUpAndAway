@@ -16,14 +16,14 @@ namespace API.Models
             {
                 return Amount;
             }
-            private set
+            set
             {
                 if (value <= 0)
                     throw new ArgumentException("Amount cannot be zero or less!");
                 _amount = value;
             }
         }
-        public Consumable Consumable { get; private set; }
+        public Consumable Consumable { get; set; }
         public int ConsumableId { get; set; }
 
         public Order Order { get; set; }
@@ -42,11 +42,6 @@ namespace API.Models
         public OrderLine()
         {
 
-        }
-
-        public void SetNewAmount(int value)//#Wut Dubbele code, same als setter van amount
-        {
-            Amount = value;
         }
     }
 }

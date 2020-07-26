@@ -6,10 +6,10 @@ namespace API.Models
     {
         #region Properties
         public int PrivateMessageId { get; set; }
-        public Passenger Sender { get; private set; }
-        public Passenger Receiver { get; private set; }
-        public string Message { get; private set; }
-        public DateTime TimeSend { get; private set; } 
+        public Passenger Sender { get; set; }
+        public Passenger Receiver { get; set; }
+        public string Message { get; set; }
+        public DateTime TimeSend { get; set; }
         #endregion
 
         public PrivateMessage(Passenger sender, Passenger receiver, string message)
@@ -18,6 +18,10 @@ namespace API.Models
             Receiver = receiver;
             Message = message;
             TimeSend = DateTime.Now;
+        }
+        public PrivateMessage()
+        {
+
         }
     }
 }

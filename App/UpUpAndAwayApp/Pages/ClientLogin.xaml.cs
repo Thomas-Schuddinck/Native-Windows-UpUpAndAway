@@ -1,9 +1,11 @@
 ﻿using API.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using UpUpAndAwayApp.Models.Singleton;
 using UpUpAndAwayApp.Pages;
 using UpUpAndAwayApp.ViewModels;
@@ -37,8 +39,19 @@ namespace UpUpAndAwayApp
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            ViewModel.LoginPassenger(login);
-            this.Frame.Navigate(typeof(NavPage));
+            try
+            {
+                 var task = Task.Run(async () => { await ViewModel.LoginPassenger(login); });
+                task.Wait();
+                this.Frame.Navigate(typeof(NavPagePassenger));
+            }
+            catch(Exception er)
+            {
+                var p = new ContentDialog();
+                p.Title = "Connection error";
+                p.CloseButtonText = "close";
+                p.ShowAsync();
+            }
         }
     }
 }
