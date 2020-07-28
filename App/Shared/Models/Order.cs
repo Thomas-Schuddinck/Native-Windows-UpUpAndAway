@@ -15,11 +15,11 @@ namespace Shared.Models
         /// <summary>
         /// List of Consumables and how much of these were ordered.
         /// </summary>
-        public List<OrderLine> OrderLines { get; private set; }
+        public List<OrderLine> OrderLines { get;  set; }
         /// <summary>
         /// Status of this Order. Use to filter Orders.
         /// </summary>
-        public OrderStatus OrderStatus { get; private set; }
+        public OrderStatus OrderStatus { get;  set; }
 
         /// <summary>
         /// Passenger that placed this Order.

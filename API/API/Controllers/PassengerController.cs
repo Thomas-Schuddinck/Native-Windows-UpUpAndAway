@@ -31,5 +31,15 @@ namespace API.Controllers
         {
             return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)));
         }
+
+        //GET api/values/5
+        [HttpGet("party/{passengerId}")]
+        public ActionResult<int> GetParty(int passengerId)
+        {
+            PassengerParty p = passengerService.GetParty(passengerId);
+            if (p == null)
+                return null;
+            return passengerService.GetParty(passengerId).PassengerPartyId;
+        }
     }
 }

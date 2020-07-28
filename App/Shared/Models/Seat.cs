@@ -5,7 +5,7 @@ namespace Shared.Models
     public class Seat
     {
         #region Fields
-        private int _seatNumber; 
+        private int _seatNumber;
         #endregion
 
         #region Properties

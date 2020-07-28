@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UpUpAndAwayApp.Pages
 {
-    public partial class NavPage : Page
+    public partial class NavPagePassenger : Page
     {
         ChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
@@ -22,7 +22,7 @@ namespace UpUpAndAwayApp.Pages
             ("orders", typeof(FlightInformation)),
             ("logout", typeof(MainPage))
         };
-        public NavPage()
+        public NavPagePassenger()
         {
             this.InitializeComponent();
             var item = _pages.FirstOrDefault(p => p.Tag.Equals("flightinfo"));

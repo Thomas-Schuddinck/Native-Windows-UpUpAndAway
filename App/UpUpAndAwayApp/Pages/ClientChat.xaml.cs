@@ -23,8 +23,7 @@ namespace UpUpAndAwayApp.Pages
 
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            Passenger p = LoginSingleton.passenger;
-            await model.SendMessage(p, MessageBox.Text);
+            await model.SendMessage(MessageBox.Text);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -11,6 +11,7 @@ namespace Shared.DisplayModels.Singleton
         {
         }
         public void login(Passenger p) { passenger = p; }
+        public void joinGroup(string id) { passengerGroupId = id; }
         public static LoginSingleton GetInstance() => instance;
     }
 }
