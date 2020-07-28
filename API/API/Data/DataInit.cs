@@ -1,7 +1,4 @@
-﻿using API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Shared.Models;
 using System.Threading.Tasks;
 
 namespace API.Data
@@ -44,9 +41,9 @@ namespace API.Data
             Passenger passenger2 = new Passenger("Steven", "Rogers");
             Passenger passenger3 = new Passenger("Clint", "Barton");
 
-            context.Passenger.Add(passenger1);
-            context.Passenger.Add(passenger2);
-            context.Passenger.Add(passenger3);
+            context.Passengers.Add(passenger1);
+            context.Passengers.Add(passenger2);
+            context.Passengers.Add(passenger3);
 
             PassengerParty p1 = new PassengerParty() { Passengers = { passenger1, passenger2 } };
 

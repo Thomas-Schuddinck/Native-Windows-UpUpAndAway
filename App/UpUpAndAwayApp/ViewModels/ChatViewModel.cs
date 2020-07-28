@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Shared.DisplayModels.Singleton;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -21,7 +22,7 @@ namespace UpUpAndAwayApp.ViewModels
             hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5000/chatHub").Build();
             hubConnection.On<string, string>("ReceiveMessage", (name, message) =>
             {
-                Chat.Add(new PrivateMessage(name, message, DateTime.Now));
+                Chat.Add(new PrivateMessage(LoginSingleton.passenger, message));
             });
         }
 

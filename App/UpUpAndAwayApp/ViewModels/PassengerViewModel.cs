@@ -4,6 +4,7 @@ using Shared.DTOs;
 using Shared.Models;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -22,7 +23,7 @@ namespace UpUpAndAwayApp.ViewModels
             try
             {
                 var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
-                var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponse);
+                var passenger = new Passenger(JsonConvert.DeserializeObject<PassengerDTO>(jsonResponse));
                 this.Passenger = passenger;
                 loggedIn.login(Passenger);
                 var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));

@@ -7,6 +7,9 @@ namespace Shared.DisplayModels.Singleton
         private static readonly LoginSingleton instance = new LoginSingleton();
         public static Passenger passenger;
         public static DisplayOrder Cart = new DisplayOrder();
+
+        public static string passengerGroupId { get; private set; }
+
         private LoginSingleton()
         {
         }

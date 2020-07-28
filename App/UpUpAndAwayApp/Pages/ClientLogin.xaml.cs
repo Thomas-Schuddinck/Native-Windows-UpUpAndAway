@@ -24,7 +24,7 @@ namespace UpUpAndAwayApp
         {
             string login = Login.Text;
             ViewModel.LoginPassenger(login);
-            this.Frame.Navigate(typeof(NavPage));
+            this.Frame.Navigate(typeof(NavPagePassenger));
         }
     }
 }
