@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Models;
+using Shared.Models;
 
 namespace API.Data
 {
@@ -13,7 +9,7 @@ namespace API.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLine { get; set; }
 
-        public DbSet<Passenger> Passenger { get; set; }
+        public DbSet<Passenger> Passengers { get; set; }
         public DbSet<PassengerParty> PassengerParties { get; set; }
 
         public Context(DbContextOptions options) : base(options)

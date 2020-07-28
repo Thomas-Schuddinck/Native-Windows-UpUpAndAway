@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace API.Models.Singleton
+namespace Shared.Models.Singleton
 {
     public class Plane
     {

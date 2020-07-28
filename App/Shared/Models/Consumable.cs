@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Shared.DTOs;
+using System;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class Consumable
     {
@@ -55,9 +56,15 @@ namespace API.Models
 
             }
         }
-
-        public double SellingPrice => _price * (1 - _reduction); 
         #endregion
+
+        #region ReadOnly-Properties
+        public double SellingPrice => _price * (1 - _reduction);
+        public string PriceAdapter => "€ " + SellingPrice;
+        #endregion
+
+        #region Constructors
+        public Consumable() { }
 
         public Consumable(double price, string name, string description, int reduction, string productPicture)
         {
@@ -67,5 +74,16 @@ namespace API.Models
             Reduction = reduction;
             ProductPicture = productPicture;
         }
+
+        public Consumable(ConsumableDTO consumableDTO)
+        {
+            ConsumableId = consumableDTO.ConsumableId;
+            Price = consumableDTO.Price;
+            Name = consumableDTO.Name;
+            Description = consumableDTO.Description;
+            Reduction = consumableDTO.Reduction;
+            ProductPicture = consumableDTO.ProductPicture;
+        } 
+        #endregion
     }
 }

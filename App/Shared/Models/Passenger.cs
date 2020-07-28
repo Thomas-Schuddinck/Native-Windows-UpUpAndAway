@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Shared.DTOs;
+using System;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class Passenger
     {
-
         #region Fields
         private string _firstName;
         private string _lastName;
@@ -39,21 +38,29 @@ namespace API.Models
                 _lastName = value;
             }
         }
-        public string FullName => FirstName + " " + LastName;
-
-
-        ///// <summary>
-        ///// Needed to easily link Order to Passenger
-        ///// </summary>
-        //public ICollection<Order> PlacedOrders { get; set; }
         #endregion
+
+        #region ReadOnly-Properties
+        public string FullName => FirstName + " " + LastName;
+        #endregion
+
+        #region Constructors
+        public Passenger() { }
+
+        public Passenger(PassengerDTO passengerDTO)
+        {
+            PassengerId = passengerDTO.PassengerId;
+            FirstName = passengerDTO.FirstName;
+            LastName = passengerDTO.LastName;
+        }
 
         public Passenger(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
-        }
+        } 
+        #endregion
 
-        
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UpUpAndAwayApp.Models
+namespace Shared.DisplayModels
 {
     public class OpenWeatherMapResponse
     {

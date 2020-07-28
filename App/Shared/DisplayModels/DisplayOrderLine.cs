@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Shared.Models;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace UpUpAndAwayApp.Models
+namespace Shared.DisplayModels
 {
-    public class OrderLine : INotifyPropertyChanged
+    public class DisplayOrderLine : INotifyPropertyChanged
     {
+        #region Fields
         private int _amount;
-        private Order _order;
+        private DisplayOrder _order; 
+        #endregion
 
         #region Properties
         public int OrderLineId { get; set; }
@@ -32,19 +33,25 @@ namespace UpUpAndAwayApp.Models
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
+        #region ReadOnly-Properties
         public string AmountPrice => _amount + " X " + "€ " + Consumable.SellingPrice;
         public string TotalPrice => "€ " + (_amount * Consumable.SellingPrice);
+        #endregion
 
-
-        public OrderLine(int amount, Consumable consumable, Order order)
+        #region Constructors
+        public DisplayOrderLine(int amount, Consumable consumable, DisplayOrder order)
         {
             _order = order;
             Amount = amount;
             Consumable = consumable;
-        }
+        } 
+        #endregion
+
+        #region Methods
         private void NotifyPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class Seat
     {
@@ -30,6 +30,12 @@ namespace API.Models
         public Seat()
         {
 
+        }
+
+        public Seat(int seatNumber)
+        {
+            SeatNumber = seatNumber;
+            Passenger = null;
         }
 
         public Seat(int seatNumber, Passenger passenger)

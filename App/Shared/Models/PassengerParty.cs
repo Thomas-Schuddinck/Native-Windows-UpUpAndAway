@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class PassengerParty
     {

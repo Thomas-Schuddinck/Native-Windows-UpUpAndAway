@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Shared.DisplayModels;
 using System;
 using System.Net.Http;
 using UpUpAndAwayApp.Data;
-using UpUpAndAwayApp.Models;
 
 namespace UpUpAndAwayApp.ViewModels
 {

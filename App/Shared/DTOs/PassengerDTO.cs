@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Shared.Models;
 
 namespace Shared.DTOs
 {
@@ -9,5 +7,16 @@ namespace Shared.DTOs
         public int PassengerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public PassengerDTO()
+        {
+        }
+
+        public PassengerDTO(Passenger passenger)
+        {
+            PassengerId = passenger.PassengerId;
+            FirstName = passenger.FirstName;
+            LastName = passenger.LastName;
+        }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Shared.DTOs;
+using System;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class OrderLine
     {
@@ -42,6 +43,15 @@ namespace API.Models
         public OrderLine()
         {
 
+        }
+
+        public OrderLine(OrderLineDTO orderLineDTO, Order order)
+        {
+            Amount = orderLineDTO.Amount;
+            Consumable = new Consumable(orderLineDTO.ConsumableDTO);
+            ConsumableId = Consumable.ConsumableId;
+            OrderId = order.OrderId;
+            Order = order;
         }
 
         public void SetNewAmount(int value)//#Wut Dubbele code, same als setter van amount

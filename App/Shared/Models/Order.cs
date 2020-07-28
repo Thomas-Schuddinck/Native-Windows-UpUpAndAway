@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Shared.DTOs;
+using Shared.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace API.Models
+namespace Shared.Models
 {
     public class Order
     {
@@ -49,6 +51,15 @@ namespace API.Models
             PassengerId = Passenger.PassengerId;
         }
 
+        public Order(OrderDTO orderDTO)
+        {
+            OrderLines = orderDTO.OrderLines.Select(ol => new OrderLine(ol, this)).ToList();
+            OrderStatus = OrderStatus.Processing;
+            Passenger = new Passenger(orderDTO.Passenger);
+            PassengerId = Passenger.PassengerId;
+        }
+
+
         public bool Finish()
         {
             if (OrderStatus == OrderStatus.Finished)
@@ -56,18 +67,6 @@ namespace API.Models
             OrderStatus = OrderStatus.Finished;
             return true;
         }
-    }
-
-    public enum OrderStatus
-    {
-        /// <summary>
-        /// Not yet finished
-        /// </summary>
-        Processing,
-        /// <summary>
-        /// Finished Order
-        /// </summary>
-        Finished
     }
 
 }

@@ -1,10 +1,8 @@
 ﻿using API.Data.IServices;
-using API.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Data.ServiceInstances
 {
@@ -17,7 +15,7 @@ namespace API.Data.ServiceInstances
         public PassengerService(Context context)
         {
             this.context = context;
-            passengers = context.Passenger;
+            passengers = context.Passengers;
         }
 
         public ICollection<Passenger> GetAll()

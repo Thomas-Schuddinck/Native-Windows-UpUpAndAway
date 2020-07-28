@@ -1,31 +1,36 @@
-﻿using API.Models.Enums;
-using System;
+﻿using Shared.Enums;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
-namespace UpUpAndAwayApp.Models
+namespace Shared.DisplayModels
 {
-    public class Order : INotifyPropertyChanged
+    public class DisplayOrder : INotifyPropertyChanged
     {
-
         #region Properties
         public int OrderId { get; set; }
-        public ObservableCollection<OrderLine> OrderLines { get; set; } 
+        public ObservableCollection<DisplayOrderLine> OrderLines { get; set; } 
         public OrderStatus OrderStatus { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+
+        #region ReadOnly-Properties
         public string TotalPrice => "Total: € " + OrderLines.Sum(o => o.Amount * o.Consumable.SellingPrice);
         #endregion
 
-        public Order()
+        #region Constructors
+        public DisplayOrder()
         {
-            OrderLines = new ObservableCollection<OrderLine>();
+            OrderLines = new ObservableCollection<DisplayOrderLine>();
             OrderLines.CollectionChanged += ItemsChanged;
-            OrderStatus = OrderStatus.Cart;
+            OrderStatus = OrderStatus.Processing;
         }
+        #endregion
 
+        #region Methods
         private void ItemsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             CleanUpOrderLines();
@@ -38,13 +43,10 @@ namespace UpUpAndAwayApp.Models
             NotifyPropertyChanged(nameof(TotalPrice));
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public void CleanUpOrderLines()
         {
-            List<OrderLine> LinesToRemove = OrderLines.Where(ol => ol.Amount <= 0).ToList();
-            foreach(OrderLine orderLine in LinesToRemove)
+            List<DisplayOrderLine> LinesToRemove = OrderLines.Where(ol => ol.Amount <= 0).ToList();
+            foreach (DisplayOrderLine orderLine in LinesToRemove)
             {
                 OrderLines.Remove(orderLine);
             }
@@ -53,7 +55,7 @@ namespace UpUpAndAwayApp.Models
         private void NotifyPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        }
+        } 
+        #endregion
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UpUpAndAwayApp.Models.Enums;
+﻿using Shared.Enums;
 
-namespace UpUpAndAwayApp.Models
+namespace Shared.DisplayModels
 {
     public class Movie : VisualMedia
     {
+        #region Properties
         public string Director { get; set; }
         public string Language { get; set; }
         public string Released { get; set; }
+        #endregion
 
+        #region Constructors
         public Movie(string title, string releaseDate, string runtime, string director, string language, string plot, string genre)
         {
             Title = title;
@@ -23,6 +21,7 @@ namespace UpUpAndAwayApp.Models
             Language = language;
             Plot = plot;
             Genre = genre;
-        }
+        } 
+        #endregion
     }
 }

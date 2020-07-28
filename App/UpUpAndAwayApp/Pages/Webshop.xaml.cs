@@ -1,5 +1,4 @@
-﻿using System;
-using UpUpAndAwayApp.Models;
+﻿using Shared.DisplayModels;
 using UpUpAndAwayApp.Models.ListItemModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
@@ -39,7 +38,7 @@ namespace UpUpAndAwayApp.Pages
         public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            var item = (OrderLine)button.DataContext;
+            var item = (DisplayOrderLine)button.DataContext;
             ViewModel.RemoveItemFromCart(item);
             NotifyNewChanges();
         }
@@ -47,6 +46,12 @@ namespace UpUpAndAwayApp.Pages
         public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
         {
             ViewModel.SendCurrentToShoppingCart();
+            NotifyNewChanges();
+        }
+
+        public void SendOrder(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SendOrder();
             NotifyNewChanges();
         }
 
