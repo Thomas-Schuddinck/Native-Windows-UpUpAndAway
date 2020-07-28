@@ -1,11 +1,9 @@
 ﻿using API.Data.IServices;
-using API.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
 
 namespace API.Data.ServiceInstances
 {

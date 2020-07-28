@@ -1,12 +1,10 @@
-﻿using API.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Shared.DisplayModels.Singleton;
+using Shared.DTOs;
+using Shared.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using UpUpAndAwayApp.Models.Singleton;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -25,7 +23,7 @@ namespace UpUpAndAwayApp.ViewModels
             try
             {
                 var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
-                var passenger = JsonConvert.DeserializeObject<Passenger>(jsonResponse);
+                var passenger = new Passenger(JsonConvert.DeserializeObject<PassengerDTO>(jsonResponse));
                 this.Passenger = passenger;
                 loggedIn.login(Passenger);
                 var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));

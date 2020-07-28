@@ -1,11 +1,9 @@
-﻿using System;
+﻿using API.Data.IServices;
+using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs;
+using Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using API.Controllers.DTO;
-using API.Data.IServices;
-using API.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -25,7 +23,7 @@ namespace API.Controllers
         //[HttpGet]
         public ActionResult<IEnumerable<Order>> Get()
         {
-            return Ok(orderService.GetAll());
+            return Ok(orderService.GetAll().Select(o => new OrderDTO(o)).ToList());
         }
 
         //GET api/values/5
@@ -37,9 +35,9 @@ namespace API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] OrderDTO dto)
+        public ActionResult<int> Post([FromBody] OrderDTO dto)
         {
-
+            return Ok(orderService.PlaceOrder(new Order(dto)));
         }
 
         // PUT api/values/5

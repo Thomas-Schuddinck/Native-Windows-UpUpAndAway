@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
+using Shared.DisplayModels;
+using Shared.DisplayModels.Singleton;
+using Shared.DTOs;
+using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
-using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
-using UpUpAndAwayApp.Models.Singleton;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -15,13 +17,13 @@ namespace UpUpAndAwayApp.ViewModels
 
         #region Fields
         private WebshopItem _currentWebshopItem;
-        private Order _cart;
+        private DisplayOrder _cart;
         #endregion
 
         #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
 
-        public Order Cart
+        public DisplayOrder Cart
         {
             get { return this._cart; }
             set
@@ -70,32 +72,41 @@ namespace UpUpAndAwayApp.ViewModels
         {
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Consumable"));
-            var lst = JsonConvert.DeserializeObject<ObservableCollection<Consumable>>(json);
-            lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
+            var lst = JsonConvert.DeserializeObject<ObservableCollection<ConsumableDTO>>(json);
+            lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(new Consumable(i), this)));
         }
 
-        
+        public async void SendOrder()
+        {
+            var test = LoginSingleton.GetInstance();
+            var order = JsonConvert.SerializeObject(new OrderDTO(Cart, LoginSingleton.passenger));
+
+            HttpClient client = new HttpClient();
+            var res = await client.PostAsync("http://localhost:63187/api/movies/", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
+            ClearCart();
+        }
+
 
         public void SendCurrentToShoppingCart()
         {
             AddToShoppingCart(CurrentWebshopItem);
         }
 
-        public void RemoveItemFromCart(OrderLine orderLine)
+        public void RemoveItemFromCart(DisplayOrderLine orderLine)
         {
             Cart.OrderLines.Remove(orderLine);
         }
 
         public void ClearCart()
         {
-            Cart = new Order();
+            Cart = new DisplayOrder();
         }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
-            OrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
+            DisplayOrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
             if (o == null)
-                Cart.OrderLines.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
+                Cart.OrderLines.Add(new DisplayOrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
             else
                 o.Amount += webshopItem.Amount;
             webshopItem.ResetAmount();

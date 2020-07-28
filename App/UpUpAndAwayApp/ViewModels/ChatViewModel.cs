@@ -1,11 +1,11 @@
-﻿using API.Models;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
-using Microsoft.AspNetCore.SignalR.Client;
-using System.Runtime.CompilerServices;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using UpUpAndAwayApp.Models.Singleton;
+using Shared.DisplayModels.Singleton;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -22,7 +22,7 @@ namespace UpUpAndAwayApp.ViewModels
             hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5000/chatHub").Build();
             hubConnection.On<string, string>("ReceiveMessage", (name, message) =>
             {
-                Chat.Add(new PrivateMessage(name, message, DateTime.Now));
+                Chat.Add(new PrivateMessage(LoginSingleton.passenger, message));
             });
         }
 
