@@ -15,7 +15,7 @@ namespace API.Data
         public async Task InitializeData()
         {
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
                 SeedData();
@@ -36,22 +36,32 @@ namespace API.Data
                     new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "https://thysshop.be/8786-large_default/Lays-Chips-Naturel-Stuk-40-g.jpg")
                 });
 
-            #region passengers
-            Passenger passenger1 = new Passenger("Tony", "Stark");
-            Passenger passenger2 = new Passenger("Steven", "Rogers");
-            Passenger passenger3 = new Passenger("Clint", "Barton");
-
-            context.Passengers.Add(passenger1);
-            context.Passengers.Add(passenger2);
-            context.Passengers.Add(passenger3);
-
-            PassengerParty p1 = new PassengerParty() { Passengers = { passenger1, passenger2 } };
-
-            context.PassengerParties.Add(p1);
-            #endregion
-
             context.SaveChanges();
             //Herschreven zodat het op 2 lijntjes past
+        }
+
+        private void SeedPassengers()
+        {
+
+            #region passengers
+            var passenger1 = new Passenger("Tony", "Stark");
+            var passenger2 = new Passenger("Steve", "Rogers");
+            var passenger3 = new Passenger("Clint", "Barton");
+            var passenger4 = new Passenger("ByeBye", "WindowsPhoneSupport");
+            var passenger5 = new Passenger("SoMuchFor", "NativeApps");
+            var passenger6 = new Passenger("Android", "FTW");
+
+            context.Passengers.AddRange(new[] { passenger1, passenger2, passenger3, passenger4, passenger5, passenger6 });
+
+            context.PassengerParties.AddRange(
+                new[]{
+                new PassengerParty() {Passengers = { passenger1, passenger2, passenger6 }},
+                new PassengerParty() {Passengers = {passenger3, passenger4, passenger5}}
+                }
+                );
+
+            context.SaveChanges();
+            #endregion
         }
     }
 }
