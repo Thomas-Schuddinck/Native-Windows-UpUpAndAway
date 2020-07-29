@@ -24,8 +24,8 @@ namespace Shared.Models
                 _amount = value;
             }
         }
-        public Consumable Consumable { get; private set; }
-        public int ConsumableId { get; set; }
+        public Consumable Consumable { get; set; }
+        public int ConsumableId => Consumable.ConsumableId;
 
         public Order Order { get; set; }
         public int OrderId { get; set; }
@@ -35,7 +35,6 @@ namespace Shared.Models
         {
             Amount = amount;
             Consumable = consumable;
-            ConsumableId = Consumable.ConsumableId;
             Order = order;
             OrderId = order.OrderId;
         }
@@ -49,7 +48,6 @@ namespace Shared.Models
         {
             Amount = orderLineDTO.Amount;
             Consumable = new Consumable(orderLineDTO.ConsumableDTO);
-            ConsumableId = Consumable.ConsumableId;
             OrderId = order.OrderId;
             Order = order;
         }
