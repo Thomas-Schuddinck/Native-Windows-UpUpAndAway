@@ -83,7 +83,6 @@ namespace UpUpAndAwayApp.ViewModels
 
             HttpClient client = new HttpClient();
             var res = await client.PostAsync("http://localhost:5000/api/Order", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
-            ClearCart();
         }
 
 

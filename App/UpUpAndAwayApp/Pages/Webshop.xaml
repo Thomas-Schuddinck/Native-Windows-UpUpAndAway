@@ -42,13 +42,30 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50" Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
-                        <SymbolIcon Symbol="Back" Margin="20 20 -40 -40" >
-                            <SymbolIcon.RenderTransform>
-                                <CompositeTransform ScaleX="-2" ScaleY="-2" />
-                            </SymbolIcon.RenderTransform>
-                        </SymbolIcon>
-                    </Button>
+                    
+                    <Grid RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Width="50" Height="50" Click="ChangeSplitviewStatus" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" >
+                            <SymbolIcon Symbol="Back" Margin="20 20 -40 -40" >
+                                <SymbolIcon.RenderTransform>
+                                    <CompositeTransform ScaleX="-2" ScaleY="-2" />
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                        </Button>
+                        <Button x:Name="ClearButton" Width="50" Height="50" Click="ClearCart" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">
+                            <SymbolIcon Symbol="Clear" Margin="20 20 -40 -40" >
+                                <SymbolIcon.RenderTransform>
+                                    <CompositeTransform ScaleX="-2" ScaleY="-2" />
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                        </Button>
+                    </Grid>
                     <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart.OrderLines}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:DisplayOrderLine">
