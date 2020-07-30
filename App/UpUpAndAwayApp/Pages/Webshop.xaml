@@ -14,6 +14,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <local1:BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <local1:ReductionToVisibilityConverter x:Key="RedToVis" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -119,7 +120,7 @@
                     <StackPanel x:Name="DetailPane" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="0 0 20 0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="30" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -129,7 +130,16 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform" Height="300" Width="300" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
                             <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 0 0" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="32"/>
-                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" FontSize="32"/>
+
+                            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                                <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" FontSize="32" Padding="0 0 10 0"/>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Visibility="{x:Bind ViewModel.CurrentWebshopItem.Consumable.Reduction, Converter={StaticResource RedToVis}, Mode=OneWay}">
+                                    <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.NormalPriceAdapter, Mode=OneWay, FallbackValue='price'}" HorizontalAlignment="Right" Foreground="Red" FontSize="32" TextDecorations="Strikethrough" Padding="0 0 10 0" />
+                                    <Border Background="Red">
+                                        <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ReductionAdapter, Mode=OneWay, FallbackValue='reduction'}" HorizontalAlignment="Right" FontSize="32" Foreground="White" Padding="10 0 10 0"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
                             <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
                                 <TextBox Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Amount, Mode=TwoWay}" MaxHeight="50" Foreground="White" HorizontalAlignment="Left" Margin="0 0 10 0"/>
                                 <Button Click="SendCurrentToShoppingCart" Content="Add"   Height="50" HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
@@ -140,23 +150,27 @@
                     <GridView HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="1" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <GridView.ItemTemplate>
                             <DataTemplate x:Name="itemding" x:DataType="Models:WebshopItem">
-                                <Grid Height="200" Width="200" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
+                                <Grid Height="300" Width="300" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
                                     <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform"/>
 
-                                    <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}" Height="80" VerticalAlignment="Bottom"  Padding="5">
+                                    <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}" Height="120" VerticalAlignment="Bottom"  Padding="5">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition />
-                                            <RowDefinition />
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition  Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="4*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left" Foreground="White"  Grid.Column="0" Grid.Row="0"/>
-                                        <TextBlock Text="{x:Bind Path=Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0"/>
-
+                                        <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left" Foreground="White" FontSize="20" Grid.Column="0" Grid.Row="0" />
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Column="1" Grid.Row="0">
+                                            <TextBlock Text="{x:Bind Path=Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" Foreground="White" Grid.Column="1" Grid.Row="0" FontSize="18"/>
+                                            <Border Background="Red" Visibility="{x:Bind Consumable.Reduction, Converter={StaticResource RedToVis}, Mode=OneWay}" Margin="0 7 0 0">
+                                                <TextBlock Text="{x:Bind Path=Consumable.NormalPriceAdapter, Mode=OneWay, FallbackValue='normal'}" HorizontalAlignment="Right" FontSize="18" Foreground="White" TextDecorations="Strikethrough"  Padding="3 3 3 3"/>
+                                            </Border>
+                                        </StackPanel>
                                         <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay}" Margin="10 0 0 0" Foreground="White" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
-                                        <Button Click="SendToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
+                                        <Button Click="SendToShoppingCart" Content="Add"  Grid.Column="1" Grid.Row="1" FontSize="18" HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

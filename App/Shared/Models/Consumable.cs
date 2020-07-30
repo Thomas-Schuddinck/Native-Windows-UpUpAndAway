@@ -8,7 +8,7 @@ namespace Shared.Models
         #region Fields
         private double _price;
         private string _name;
-        private int _reduction = 0;
+        private double _reduction = 0;
         #endregion
 
         #region Properties
@@ -42,7 +42,7 @@ namespace Shared.Models
         }
         public string Description { get; private set; }
         public string ProductPicture { get; private set; }
-        public int Reduction
+        public double Reduction
         {
             get
             {
@@ -61,12 +61,14 @@ namespace Shared.Models
         #region ReadOnly-Properties
         public double SellingPrice => _price * (1 - _reduction);
         public string PriceAdapter => "€ " + SellingPrice;
+        public string NormalPriceAdapter => "€ " + _price;
+        public string ReductionAdapter => "- " + (Reduction * 100) + "%";
         #endregion
 
         #region Constructors
         public Consumable() { }
 
-        public Consumable(double price, string name, string description, int reduction, string productPicture)
+        public Consumable(double price, string name, string description, double reduction, string productPicture)
         {
             Price = price;
             Name = name;
