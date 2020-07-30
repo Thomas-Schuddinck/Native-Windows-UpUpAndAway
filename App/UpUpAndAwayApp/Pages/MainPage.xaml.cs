@@ -27,8 +27,6 @@ namespace UpUpAndAwayApp
         public MainPage()
         {
             this.InitializeComponent();
-
-            this.ViewModel = new FlightInfoViewModel();
         }
         public FlightInfoViewModel ViewModel;
 

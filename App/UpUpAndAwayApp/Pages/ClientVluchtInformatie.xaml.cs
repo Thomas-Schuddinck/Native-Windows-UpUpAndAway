@@ -11,14 +11,12 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class FlightInformation : Page
     {
-        private FlightInfoSingleton flightInfoSingleton;
-        private FlightInfoViewModel ViewModel { get; set; }
+        public FlightInfoViewModel ViewModel { get; set; }
 
         public FlightInformation()
         {
             this.InitializeComponent();
-            this.flightInfoSingleton = FlightInfoSingleton.GetInstance();
-            ViewModel = new FlightInfoViewModel();
+            this.ViewModel = new FlightInfoViewModel();
         }
     }
 }

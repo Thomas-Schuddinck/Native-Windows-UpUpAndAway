@@ -9,7 +9,7 @@ namespace Shared.DTOs
         public string Name { get; set; }
         public string Description { get; set; }
         public string ProductPicture { get; set; }
-        public int Reduction { get; set; }
+        public double Reduction { get; set; }
 
         public ConsumableDTO() { }
 

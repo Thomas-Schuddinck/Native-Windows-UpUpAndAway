@@ -43,7 +43,7 @@ namespace UpUpAndAwayApp.ViewModels
                 if (_currentWebshopItem == value)
                     return;
                 _currentWebshopItem = value;
-                RaisePropertyChanged("CurrentWebshopItem");
+                RaisePropertyChanged(nameof(CurrentWebshopItem));
             }
         }
 
@@ -82,8 +82,7 @@ namespace UpUpAndAwayApp.ViewModels
             var order = JsonConvert.SerializeObject(new OrderDTO(Cart, LoginSingleton.passenger));
 
             HttpClient client = new HttpClient();
-            var res = await client.PostAsync("http://localhost:63187/api/movies/", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
-            ClearCart();
+            var res = await client.PostAsync("http://localhost:5000/api/Order", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
         }
 
 

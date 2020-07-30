@@ -28,7 +28,7 @@ namespace Shared.Models
         /// <summary>
         /// ID of the Passenger. Needed to properly link Passenger and Order.
         /// </summary>
-        public int PassengerId { get; set; }
+        public int PassengerId => Passenger.PassengerId;
         #endregion
 
         /// <summary>
@@ -36,6 +36,7 @@ namespace Shared.Models
         /// </summary>
         public Order()
         {
+            OrderLines = new List<OrderLine>();
         }
 
         /// <summary>
@@ -48,7 +49,6 @@ namespace Shared.Models
             OrderLines = orderLines;
             OrderStatus = OrderStatus.Processing;
             Passenger = passenger;
-            PassengerId = Passenger.PassengerId;
         }
 
         public Order(OrderDTO orderDTO)
@@ -56,7 +56,6 @@ namespace Shared.Models
             OrderLines = orderDTO.OrderLines.Select(ol => new OrderLine(ol, this)).ToList();
             OrderStatus = OrderStatus.Processing;
             Passenger = new Passenger(orderDTO.Passenger);
-            PassengerId = Passenger.PassengerId;
         }
 
 

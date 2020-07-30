@@ -34,6 +34,11 @@ namespace UpUpAndAwayApp.Pages
             ViewModel.AddToShoppingCart(item);
             NotifyNewChanges();
         }
+        public void ClearCart(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ClearCart();
+            NotifyNewChanges();
+        }
 
         public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
         {
@@ -52,6 +57,7 @@ namespace UpUpAndAwayApp.Pages
         public void SendOrder(object sender, RoutedEventArgs e)
         {
             ViewModel.SendOrder();
+            ClearCart(sender, e);
             NotifyNewChanges();
         }
 
@@ -61,17 +67,20 @@ namespace UpUpAndAwayApp.Pages
             {
                 splitview.IsPaneOpen = false;
                 CartButton.Visibility = Visibility.Visible;
+                ClearButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 splitview.IsPaneOpen = true;
                 CartButton.Visibility = Visibility.Collapsed;
+                ClearButton.Visibility = Visibility.Visible;
             }
         }
 
         private void SplitviewPaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
         {
             CartButton.Visibility = Visibility.Visible;
+            ClearButton.Visibility = Visibility.Collapsed;
         }
 
         public void SetCurrentWebshopItem(WebshopItem webshopItem)

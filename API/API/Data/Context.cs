@@ -20,6 +20,7 @@ namespace API.Data
         {
             mb.Entity<Consumable>();
             mb.Entity<Order>().HasMany(s => s.OrderLines).WithOne(o => o.Order);
+            mb.Entity<Order>().HasOne(s => s.Passenger).WithMany();
             mb.Entity<OrderLine>().HasOne(s => s.Consumable).WithMany();
             mb.Entity<Passenger>();//.HasMany(s => s.PlacedOrders).WithOne();
             mb.Entity<PassengerParty>().HasMany(s => s.Passengers).WithOne();
