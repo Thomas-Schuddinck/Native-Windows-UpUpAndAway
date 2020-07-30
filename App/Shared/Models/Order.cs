@@ -36,6 +36,7 @@ namespace Shared.Models
         /// </summary>
         public Order()
         {
+            OrderLines = new List<OrderLine>();
         }
 
         /// <summary>

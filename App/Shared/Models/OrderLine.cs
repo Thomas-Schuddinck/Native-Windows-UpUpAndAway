@@ -15,7 +15,7 @@ namespace Shared.Models
         {
             get
             {
-                return Amount;
+                return _amount;
             }
             private set
             {
