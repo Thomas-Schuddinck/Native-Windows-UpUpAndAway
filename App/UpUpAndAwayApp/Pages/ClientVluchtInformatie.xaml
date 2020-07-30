@@ -143,19 +143,19 @@
                 <Grid x:Name="FlightCode" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Flight Code:&#x09;" Foreground="Black"></TextBlock>
-                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.flightcode}" Foreground="Black"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.flightcode}" Foreground="Black"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="FlightOrigin" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Departure:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.origin}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.origin}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="FlightDestination" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Destination:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{x:Bind Path=flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid x:Name="Weather" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch">
@@ -168,16 +168,16 @@
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0">
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.NameAdapter}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.DateAdapter}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.NameAdapter, Mode=OneWay}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.DateAdapter, Mode=OneWay}" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.GeneralWeatherAdapter}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.GeneralWeatherAdapter, Mode=OneWay}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Left"></TextBlock>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.TempAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.HumidityAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.WindAdapter}" Foreground="Black" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.TempAdapter, Mode=OneWay}" Foreground="Black" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.HumidityAdapter, Mode=OneWay}" Foreground="Black" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{x:Bind Path=ViewModel.Weather.WindAdapter, Mode=OneWay}" Foreground="Black" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </Grid>
             </Grid>

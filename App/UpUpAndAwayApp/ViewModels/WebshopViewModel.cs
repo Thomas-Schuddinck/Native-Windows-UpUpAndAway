@@ -43,7 +43,7 @@ namespace UpUpAndAwayApp.ViewModels
                 if (_currentWebshopItem == value)
                     return;
                 _currentWebshopItem = value;
-                RaisePropertyChanged("CurrentWebshopItem");
+                RaisePropertyChanged(nameof(CurrentWebshopItem));
             }
         }
 
