@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UpUpAndAwayApp.Models;
+﻿using Shared.DisplayModels;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -15,7 +10,5 @@ namespace UpUpAndAwayApp.ViewModels
         {
             CurrentMovie = movie;
         }
-        
-
     }
 }

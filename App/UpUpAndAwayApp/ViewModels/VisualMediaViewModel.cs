@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Shared.DisplayModels;
+using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using UpUpAndAwayApp.Data;
-using UpUpAndAwayApp.Models;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 
 namespace UpUpAndAwayApp.ViewModels
 {

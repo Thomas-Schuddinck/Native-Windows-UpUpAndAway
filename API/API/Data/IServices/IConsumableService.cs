@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Shared.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Models;
 
 namespace API.Data.IServices
 {
@@ -13,7 +10,6 @@ namespace API.Data.IServices
         /// </summary>
         /// <returns>List of Consumables</returns>
         ICollection<Consumable> GetAll();
-
 
     }
 }

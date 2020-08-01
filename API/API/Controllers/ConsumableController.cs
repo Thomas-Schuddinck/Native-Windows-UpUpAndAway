@@ -1,10 +1,9 @@
-﻿using System;
+﻿using API.Data.IServices;
+using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs;
+using Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using API.Data.IServices;
-using API.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -24,7 +23,7 @@ namespace API.Controllers
         //[HttpGet]
         public ActionResult<IEnumerable<Consumable>> Get()
         {
-            return Ok(consumableService.GetAll());
+            return Ok(consumableService.GetAll().Select(c => new ConsumableDTO(c)).ToList());
         }
     }
 }

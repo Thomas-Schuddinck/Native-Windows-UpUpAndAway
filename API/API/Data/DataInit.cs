@@ -1,7 +1,4 @@
-﻿using API.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Shared.Models;
 using System.Threading.Tasks;
 
 namespace API.Data
@@ -22,6 +19,7 @@ namespace API.Data
             if (context.Database.EnsureCreated())
             {
                 SeedData();
+                SeedPassengers();
             }
 
         }
@@ -33,28 +31,38 @@ namespace API.Data
                     new Consumable(14.5, "Spaghetti Bolognaise", "Een echte Italiaanse spaghetti", 0, "https://banner2.cleanpng.com/20180423/qvw/kisspng-bolognese-sauce-pizza-pasta-lasagne-buffalo-wing-spagetti-pasta-5ade9a975ca656.4221295815245380073795.jpg"),
                     new Consumable(3.5, "Cola", "Een frisse Coca Cola", 0, "https://www.prikentik.be/media/catalog/product/cache/23d9da881b836928ceaa9fe24f71827f/c/o/coca-cola-orginal-pet-50cl.png"),
                     new Consumable(3.5, "Cola Zero", "Een frisse Coca Cola Zero", 0, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Coca_Cola_Zero_02.jpg/266px-Coca_Cola_Zero_02.jpg"),
-                    new Consumable(4, "Fanta", "Een frisse Fanta", 0, "https://images.quickoffice.nl/002/600x450/Frisdrank-Fanta-Orange-petfles-0-50l-(c)897067.jpg"),
+                    new Consumable(4, "Fanta", "Een frisse Fanta", 0.25, "https://images.quickoffice.nl/002/600x450/Frisdrank-Fanta-Orange-petfles-0-50l-(c)897067.jpg"),
                     new Consumable(5, "Jupiler", "Een verkoelende Jupiler", 0, "https://cdn.webshopapp.com/shops/19852/files/298224123/brouwerij-ab-inbev-jupiler.jpg"),
                     new Consumable(3, "Paprika Chips", "Paprika chips van Lays", 0, "https://thysshop.be/9314-thickbox_default/Lays-Chips-Paprika-Stuk-85-g.jpg"),
                     new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "https://thysshop.be/8786-large_default/Lays-Chips-Naturel-Stuk-40-g.jpg")
                 });
 
-            #region passengers
-            Passenger passenger1 = new Passenger("Tony", "Stark");
-            Passenger passenger2 = new Passenger("Steven", "Rogers");
-            Passenger passenger3 = new Passenger("Clint", "Barton");
-
-            context.Passenger.Add(passenger1);
-            context.Passenger.Add(passenger2);
-            context.Passenger.Add(passenger3);
-
-            PassengerParty p1 = new PassengerParty() { Passengers = { passenger1, passenger2 } };
-
-            context.PassengerParties.Add(p1);
-            #endregion
-
             context.SaveChanges();
             //Herschreven zodat het op 2 lijntjes past
+        }
+
+        private void SeedPassengers()
+        {
+
+            #region passengers
+            var passenger1 = new Passenger("Tony", "Stark");
+            var passenger2 = new Passenger("Steve", "Rogers");
+            var passenger3 = new Passenger("Clint", "Barton");
+            var passenger4 = new Passenger("ByeBye", "WindowsPhoneSupport");
+            var passenger5 = new Passenger("SoMuchFor", "NativeApps");
+            var passenger6 = new Passenger("Android", "FTW");
+
+            context.Passengers.AddRange(new[] { passenger1, passenger2, passenger3, passenger4, passenger5, passenger6 });
+
+            context.PassengerParties.AddRange(
+                new[]{
+                new PassengerParty() {Passengers = { passenger1, passenger2, passenger6 }},
+                new PassengerParty() {Passengers = {passenger3, passenger4, passenger5}}
+                }
+                );
+
+            context.SaveChanges();
+            #endregion
         }
     }
 }

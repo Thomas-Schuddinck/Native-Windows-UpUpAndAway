@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Shared.Models;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using UpUpAndAwayApp.ViewModels;
 
 namespace UpUpAndAwayApp.Models.ListItemModels
@@ -22,8 +18,6 @@ namespace UpUpAndAwayApp.Models.ListItemModels
             }
             set
             {
-                if (value < 0)
-                    return;
                 _amount = value;
                 OnPropertyChanged();
             }

@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
+using Shared.DisplayModels;
+using Shared.DisplayModels.Singleton;
+using Shared.DTOs;
+using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
-using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
 
 namespace UpUpAndAwayApp.ViewModels
@@ -14,12 +17,23 @@ namespace UpUpAndAwayApp.ViewModels
 
         #region Fields
         private WebshopItem _currentWebshopItem;
+        private DisplayOrder _cart;
         #endregion
 
         #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
 
-        public ObservableCollection<OrderLine> Cart { get; private set; }
+        public DisplayOrder Cart
+        {
+            get { return this._cart; }
+            set
+            {
+                LoginSingleton.Cart = value;
+                _cart = value;
+                _cart.CleanUpOrderLines();
+                RaisePropertyChanged(nameof(Cart));
+            }
+        }
 
         public WebshopItem CurrentWebshopItem
         {
@@ -29,11 +43,9 @@ namespace UpUpAndAwayApp.ViewModels
                 if (_currentWebshopItem == value)
                     return;
                 _currentWebshopItem = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("CurrentWebshopItem"));
+                RaisePropertyChanged(nameof(CurrentWebshopItem));
             }
         }
-
-        public string TotalPrice => "Total: € " + CalculateTotalPrice();
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,52 +57,60 @@ namespace UpUpAndAwayApp.ViewModels
         {
             WebshopItems = new ObservableCollection<WebshopItem>();
             //should previous cart => nog kijken voor local storage save
-            Cart = new ObservableCollection<OrderLine>();
+            Cart = LoginSingleton.Cart;
             GetConsumablesFromAPI();
-        } 
+        }
         #endregion
 
         #region Methods
+        protected void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         private async void GetConsumablesFromAPI()
         {
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Consumable"));
-            var lst = JsonConvert.DeserializeObject<ObservableCollection<Consumable>>(json);
-            lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
+            var lst = JsonConvert.DeserializeObject<ObservableCollection<ConsumableDTO>>(json);
+            lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(new Consumable(i), this)));
         }
 
-        private double CalculateTotalPrice()
+        public async void SendOrder()
         {
-            return Cart.Sum(o => o.Amount * o.Consumable.SellingPrice);
+            var test = LoginSingleton.GetInstance();
+            var order = JsonConvert.SerializeObject(new OrderDTO(Cart, LoginSingleton.passenger));
+
+            HttpClient client = new HttpClient();
+            var res = await client.PostAsync("http://localhost:5000/api/Order", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
         }
+
 
         public void SendCurrentToShoppingCart()
         {
             AddToShoppingCart(CurrentWebshopItem);
         }
 
-        public void RemoveItemFromCart(OrderLine orderLine)
+        public void RemoveItemFromCart(DisplayOrderLine orderLine)
         {
-            Cart.Remove(orderLine);
+            Cart.OrderLines.Remove(orderLine);
         }
 
         public void ClearCart()
         {
-            Cart = new ObservableCollection<OrderLine>();
+            Cart = new DisplayOrder();
         }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
-            if (webshopItem.Amount > 0)
-            {
-                OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
-                if (o == null)
-                    Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
-                else
-                    o.Amount += webshopItem.Amount;
-                webshopItem.ResetAmount();
-            }
-        } 
+            DisplayOrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
+            if (o == null)
+                Cart.OrderLines.Add(new DisplayOrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
+            else
+                o.Amount += webshopItem.Amount;
+            webshopItem.ResetAmount();
+
+        }
         #endregion
     }
 }

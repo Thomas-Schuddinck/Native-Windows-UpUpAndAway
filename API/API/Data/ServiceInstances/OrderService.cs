@@ -1,11 +1,9 @@
 ﻿using API.Data.IServices;
-using API.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
 
 namespace API.Data.ServiceInstances
 {
@@ -14,11 +12,15 @@ namespace API.Data.ServiceInstances
 
         private readonly Context context;
         private readonly DbSet<Order> orders;
+        private readonly DbSet<Consumable> consumables;
+        private readonly DbSet<Passenger> passengers;
 
         public OrderService(Context context)
         {
             this.context = context;
             orders = context.Orders;
+            consumables = context.Consumables;
+            passengers = context.Passengers;
         }
 
         public bool FinishOrder(int id)
@@ -30,7 +32,10 @@ namespace API.Data.ServiceInstances
 
         public ICollection<Order> GetAll()
         {
-            return orders.AsNoTracking().ToList();
+            return orders
+                .Include(o => o.OrderLines).ThenInclude(ol => ol.Consumable)
+                .Include(o => o.Passenger)
+                .AsNoTracking().ToList();
         }
 
         public ICollection<Order> GetByUser(int passengerId)
@@ -40,9 +45,38 @@ namespace API.Data.ServiceInstances
 
         public int PlaceOrder(Order order)
         {
+
+            SetupNewOrder(order);
             orders.Add(order);
             context.SaveChanges();
             return order.OrderId;
         }
+
+        public void SetupNewOrder(Order order)
+        {
+            AddConsumablesToOrderLines(order);
+            SetPassenger(order);
+        }
+
+        public void AddConsumablesToOrderLines(Order order)
+        {
+            order.OrderLines.ForEach(ol => ol.Consumable = FindConsumable(ol.ConsumableId));
+        }
+
+        public void SetPassenger(Order order)
+        {
+            order.Passenger = FindPassenger(order.PassengerId);
+        }
+
+        public Consumable FindConsumable(int id)
+        {
+            return consumables.FirstOrDefault(c => c.ConsumableId == id);
+        }
+
+        public Passenger FindPassenger(int id)
+        {
+            return passengers.FirstOrDefault(p => p.PassengerId == id);
+        }
+
     }
 }

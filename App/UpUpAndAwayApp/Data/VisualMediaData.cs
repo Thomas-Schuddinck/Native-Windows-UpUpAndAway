@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UpUpAndAwayApp.Data
+﻿namespace UpUpAndAwayApp.Data
 {
     public static class VisualMediaData
     {

@@ -1,5 +1,4 @@
-﻿using System;
-using UpUpAndAwayApp.Models;
+﻿using Shared.DisplayModels;
 using UpUpAndAwayApp.Models.ListItemModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
@@ -23,26 +22,43 @@ namespace UpUpAndAwayApp.Pages
             this.ViewModel = new WebshopViewModel();
         }
 
+        public void NotifyNewChanges()
+        {
+            this.Bindings.Update();
+        }
+
         public void SendToShoppingCart(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (WebshopItem)button.DataContext;
             ViewModel.AddToShoppingCart(item);
-            this.Bindings.Update();
+            NotifyNewChanges();
+        }
+        public void ClearCart(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ClearCart();
+            NotifyNewChanges();
         }
 
         public void RemoveFromShoppingCart(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            var item = (OrderLine)button.DataContext;
+            var item = (DisplayOrderLine)button.DataContext;
             ViewModel.RemoveItemFromCart(item);
-            this.Bindings.Update();
+            NotifyNewChanges();
         }
 
         public void SendCurrentToShoppingCart(object sender, RoutedEventArgs e)
         {
             ViewModel.SendCurrentToShoppingCart();
-            this.Bindings.Update();
+            NotifyNewChanges();
+        }
+
+        public void SendOrder(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SendOrder();
+            ClearCart(sender, e);
+            NotifyNewChanges();
         }
 
         public void ChangeSplitviewStatus(object sender, RoutedEventArgs e)
@@ -51,17 +67,20 @@ namespace UpUpAndAwayApp.Pages
             {
                 splitview.IsPaneOpen = false;
                 CartButton.Visibility = Visibility.Visible;
+                ClearButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 splitview.IsPaneOpen = true;
                 CartButton.Visibility = Visibility.Collapsed;
+                ClearButton.Visibility = Visibility.Visible;
             }
         }
 
         private void SplitviewPaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
         {
             CartButton.Visibility = Visibility.Visible;
+            ClearButton.Visibility = Visibility.Collapsed;
         }
 
         public void SetCurrentWebshopItem(WebshopItem webshopItem)
