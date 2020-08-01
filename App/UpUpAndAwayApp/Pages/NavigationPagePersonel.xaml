@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UpUpAndAwayApp.Pages.NavPage"
+    x:Class="UpUpAndAwayApp.Pages.NavigationPagePersonel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UpUpAndAwayApp.Pages"
@@ -9,8 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <NavigationView 
         IsSettingsVisible="False" 
-        IsBackButtonVisible="Collapsed" 
-        x:Name="NavView" SelectionChanged="NavView_SelectionChanged">
+        IsBackButtonVisible="Collapsed">
         <NavigationView.MenuItems>
             <NavigationViewItem Tag="flightinfo" Content="Flight Information">
                 <NavigationViewItem.Icon>

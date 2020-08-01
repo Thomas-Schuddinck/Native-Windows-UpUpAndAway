@@ -32,9 +32,14 @@ namespace UpUpAndAwayApp
         }
         public FlightInfoViewModel ViewModel;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void PassengerLogin(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate( typeof(LoginClient));
+            this.Frame.Navigate(typeof(LoginClient));
+        }
+
+        private void StaffLogin(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(NavigationPagePersonel));
         }
 
         private void Personeel_Click(object sender, RoutedEventArgs e)

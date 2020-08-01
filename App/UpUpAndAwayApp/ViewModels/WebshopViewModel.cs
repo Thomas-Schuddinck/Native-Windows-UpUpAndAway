@@ -1,32 +1,56 @@
-﻿using API.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using UpUpAndAwayApp.Models;
 using UpUpAndAwayApp.Models.ListItemModels;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace UpUpAndAwayApp.ViewModels
 {
-    public class WebshopViewModel
+    public class WebshopViewModel : INotifyPropertyChanged
     {
+
+        #region Fields
+        private WebshopItem _currentWebshopItem;
+        #endregion
+
+        #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
 
         public ObservableCollection<OrderLine> Cart { get; private set; }
 
+        public WebshopItem CurrentWebshopItem
+        {
+            get { return this._currentWebshopItem; }
+            set
+            {
+                if (_currentWebshopItem == value)
+                    return;
+                _currentWebshopItem = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CurrentWebshopItem"));
+            }
+        }
+
+        public string TotalPrice => "Total: € " + CalculateTotalPrice();
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+
+        #region Constructors
         public WebshopViewModel()
         {
             WebshopItems = new ObservableCollection<WebshopItem>();
+            //should previous cart => nog kijken voor local storage save
             Cart = new ObservableCollection<OrderLine>();
             GetConsumablesFromAPI();
-        }
+        } 
+        #endregion
 
+        #region Methods
         private async void GetConsumablesFromAPI()
         {
             HttpClient client = new HttpClient();
@@ -35,15 +59,38 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(i, this)));
         }
 
+        private double CalculateTotalPrice()
+        {
+            return Cart.Sum(o => o.Amount * o.Consumable.SellingPrice);
+        }
+
+        public void SendCurrentToShoppingCart()
+        {
+            AddToShoppingCart(CurrentWebshopItem);
+        }
+
+        public void RemoveItemFromCart(OrderLine orderLine)
+        {
+            Cart.Remove(orderLine);
+        }
+
+        public void ClearCart()
+        {
+            Cart = new ObservableCollection<OrderLine>();
+        }
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
-            OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
-            if (o == null)
-                Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
-            else
-                o.Amount += webshopItem.Amount;
-            webshopItem.ResetAmount();
-        }
+            if (webshopItem.Amount > 0)
+            {
+                OrderLine o = Cart.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
+                if (o == null)
+                    Cart.Add(new OrderLine(webshopItem.Amount, webshopItem.Consumable));
+                else
+                    o.Amount += webshopItem.Amount;
+                webshopItem.ResetAmount();
+            }
+        } 
+        #endregion
     }
 }
