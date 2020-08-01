@@ -6,6 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using UpUpAndAwayApp.Models.Singleton;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.AspNetCore.Http;
+using Windows.UI.Notifications;
+using Microsoft.AspNetCore.Http.Connections.Client;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -19,10 +23,40 @@ namespace UpUpAndAwayApp.ViewModels
         public ChatViewModel()
         {
             Chat = new ObservableCollection<PrivateMessage>();
-            hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5000/chatHub").Build();
+            var id = LoginSingleton.passenger.PassengerId;
+            hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5000/chatHub?name=" + id).WithAutomaticReconnect().Build();
+
             hubConnection.On<string, string>("ReceiveMessage", (name, message) =>
             {
                 Chat.Add(new PrivateMessage(name, message, DateTime.Now));
+            });
+            hubConnection.On< string>("ReceiveWarning", ( message) =>
+            {
+                ToastVisual visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                    {
+                        new AdaptiveText()
+                        {
+                            Text = "Warning!"
+                        },
+
+                        new AdaptiveText()
+                        {
+                            Text = message
+                        }
+                    }
+                    }
+                };
+
+                ToastContent toastContent = new ToastContent()
+                {
+                    Visual = visual
+                };
+                var toast = new ToastNotification(toastContent.GetXml());
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
             });
         }
 

@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UpUpAndAwayApp.ViewModels;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,63 +27,41 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class Notification : Page
     {
+        PersonnelChatViewModel model;
         public Notification()
         {
             this.InitializeComponent();
-            ToastVisual visual = new ToastVisual()
-            {
-                BindingGeneric = new ToastBindingGeneric()
-                {
-                    Children =
-                    {
-                        new AdaptiveText()
-                        {
-                            Text = "Warning!"
-                        },
+        }
 
-                        new AdaptiveText()
-                        {
-                            Text = MessageBox.Text
-                        }
-                    }
-                }
-            };
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.model = (PersonnelChatViewModel)e.Parameter;
+            var task = Task.Run(async () => {
+                await model.GetPassengers();
+            });
+            task.Wait();
         }
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            ToastVisual visual = new ToastVisual()
+            if(Passengerlist.Visibility == Visibility.Collapsed)
             {
-                BindingGeneric = new ToastBindingGeneric()
-                {
-                    Children =
-                    {
-                        new AdaptiveText()
-                        {
-                            Text = "Warning!"
-                        },
-
-                        new AdaptiveText()
-                        {
-                            Text = MessageBox.Text
-                        }
-                    }
-                }
-            };
-
-            ToastContent toastContent = new ToastContent()
+                model.SendWarning(MessageBox.Text);
+            }
+            else
             {
-                Visual = visual,
+                model.SendWarningToPassenger(MessageBox.Text, Passengerlist.SelectedItem.ToString());
+            }
+        }
 
-                // Arguments when the user taps body of toast
-                Launch = new QueryString()
-                {
-                    { "action", "viewConversation" }
-
-                }.ToString()
-            };
-            var toast = new ToastNotification(toastContent.GetXml());
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            var task = Task.Run(async () => {
+                await model.GetPassengers();
+            });
+            task.Wait();
+            this.Bindings.Update();
+            Passengerlist.Visibility = Sendtype.IsOn ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }
