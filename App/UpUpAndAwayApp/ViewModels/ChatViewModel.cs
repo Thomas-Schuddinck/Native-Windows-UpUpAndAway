@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using UpUpAndAwayApp.Models.Singleton;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.AspNetCore.Http;
 using Windows.UI.Notifications;
