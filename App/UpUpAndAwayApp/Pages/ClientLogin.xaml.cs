@@ -1,4 +1,6 @@
-﻿using UpUpAndAwayApp.Pages;
+﻿using System;
+using System.Threading.Tasks;
+using UpUpAndAwayApp.Pages;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,8 +25,19 @@ namespace UpUpAndAwayApp
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            ViewModel.LoginPassenger(login);
-            this.Frame.Navigate(typeof(NavPagePassenger));
+            try
+            {
+                Task task = ViewModel.LoginPassenger(login);
+                task.Wait();
+                this.Frame.Navigate(typeof(NavPagePassenger));
+            }
+            catch (Exception er)
+            {
+                var p = new ContentDialog();
+                p.Title = "Connection error";
+                p.CloseButtonText = "close";
+                p.ShowAsync();
+            }
         }
     }
 }
