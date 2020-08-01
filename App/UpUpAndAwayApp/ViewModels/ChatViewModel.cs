@@ -31,7 +31,6 @@ namespace UpUpAndAwayApp.ViewModels
                 var fullname = name.Split(' ', 2);
                 Passenger p = new Passenger(fullname[0],fullname[1]);
                 Chat.Add(new PrivateMessage(p, message));
-                //Chat.Add(new PrivateMessage(LoginSingleton.passenger, message));
             });
             hubConnection.On< string>("ReceiveWarning", ( message) =>
             {
