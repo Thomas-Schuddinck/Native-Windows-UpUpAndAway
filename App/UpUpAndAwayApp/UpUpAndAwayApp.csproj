@@ -125,6 +125,9 @@
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\ListItemModels\WebshopItem.cs" />
+    <Compile Include="Pages\ChangeConsumableReductionPage.xaml.cs">
+      <DependentUpon>ChangeConsumableReductionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\ChangeConsumableReductionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ClientChat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
