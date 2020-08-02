@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data.IServices;
-using API.Models;
-using Microsoft.AspNetCore.Http;
+﻿using API.Data.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs;
+using Shared.Models;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -32,9 +29,17 @@ namespace API.Controllers
         [HttpGet("{passengerId}")]
         public ActionResult<Passenger> GetByUser(int passengerId)
         {
-            if (passengerService.GetPassenger(passengerId) == null)
-                return new Passenger("test","test");
-            return Ok(passengerService.GetPassenger(passengerId));
+            return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)));
+        }
+
+        //GET api/values/5
+        [HttpGet("party/{passengerId}")]
+        public ActionResult<int> GetParty(int passengerId)
+        {
+            PassengerParty p = passengerService.GetParty(passengerId);
+            if (p == null)
+                return null;
+            return passengerService.GetParty(passengerId).PassengerPartyId;
         }
     }
 }

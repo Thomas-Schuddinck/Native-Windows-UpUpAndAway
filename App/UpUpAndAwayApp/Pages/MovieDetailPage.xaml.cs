@@ -1,4 +1,4 @@
-﻿using UpUpAndAwayApp.Models;
+﻿using Shared.DisplayModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

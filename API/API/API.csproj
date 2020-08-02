@@ -16,4 +16,8 @@
     <PackageReference Include="NSwag.AspNetCore" Version="13.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\App\Shared\Shared.csproj" />
+  </ItemGroup>
+
 </Project>

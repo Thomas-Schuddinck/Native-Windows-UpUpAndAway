@@ -1,21 +1,9 @@
-﻿using API.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UpUpAndAwayApp.Models.Singleton;
+﻿using System;
+using System.Threading.Tasks;
 using UpUpAndAwayApp.Pages;
 using UpUpAndAwayApp.ViewModels;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,8 +25,19 @@ namespace UpUpAndAwayApp
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            ViewModel.LoginPassenger(login);
-            this.Frame.Navigate(typeof(NavPage));
+            try
+            {
+                Task task = ViewModel.LoginPassenger(login);
+                task.Wait();
+                this.Frame.Navigate(typeof(NavPagePassenger));
+            }
+            catch (Exception er)
+            {
+                var p = new ContentDialog();
+                p.Title = "Connection error";
+                p.CloseButtonText = "close";
+                p.ShowAsync();
+            }
         }
     }
 }
