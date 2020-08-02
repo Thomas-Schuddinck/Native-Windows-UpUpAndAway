@@ -1,4 +1,5 @@
-﻿using Shared.Models;
+﻿using Shared.DTOs;
+using Shared.Models;
 using System.ComponentModel;
 
 namespace Shared.DisplayModels
@@ -44,7 +45,14 @@ namespace Shared.DisplayModels
             _order = order;
             Amount = amount;
             Consumable = consumable;
-        } 
+        }
+
+        public DisplayOrderLine(OrderLineDTO orderLineDTO, DisplayOrder order)
+        {
+            _order = order;
+            Amount = orderLineDTO.Amount;
+            Consumable = new Consumable(orderLineDTO.ConsumableDTO);
+        }
         #endregion
 
         #region Methods

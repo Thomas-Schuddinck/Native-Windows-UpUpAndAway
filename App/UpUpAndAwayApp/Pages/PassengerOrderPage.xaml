@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="UpUpAndAwayApp.Pages.PassengerOrderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UpUpAndAwayApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Models="using:Shared.DisplayModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot >
+            <PivotItem x:Name="Open" Header="Open Orders" FontSize="20">
+                <controls:DataGrid x:Name="dataGridOpen" Height="600" Margin="12"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{x:Bind ViewModel.OpenOrders}">
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn 
+                            Header="Placed" 
+                            Width="*"
+                            Binding="{Binding DateTimePlacedConverter}" 
+                            FontSize="20" />
+                        <controls:DataGridTextColumn 
+                            Header="Number of Items" 
+                            Width="*"
+                            Binding="{Binding NumberOfItems}" 
+                            FontSize="20" />
+                        <controls:DataGridTextColumn 
+                            Header="Total" 
+                            Width="*"
+                            Binding="{Binding TotalPrice}" 
+                            FontSize="20" />
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </PivotItem>
+            <PivotItem x:Name="Closed" Header="Finished Orders" FontSize="20">
+                <controls:DataGrid x:Name="dataGridClosed" Height="600" Margin="12"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{x:Bind ViewModel.ClosedOrders}">
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn 
+                            Header="Placed" 
+                            Width="*"
+                            Binding="{Binding DateTimePlacedConverter}" 
+                            FontSize="20" />
+                        <controls:DataGridTextColumn 
+                            Header="Number of Items" 
+                            Width="*"
+                            Binding="{Binding NumberOfItems}" 
+                            FontSize="20" />
+                        <controls:DataGridTextColumn 
+                            Header="Total" 
+                            Width="*"
+                            Binding="{Binding TotalPrice}" 
+                            FontSize="20" />
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+</Page>
