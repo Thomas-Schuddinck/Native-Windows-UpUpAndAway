@@ -26,13 +26,36 @@ namespace UpUpAndAwayApp.Pages
         {
             var button = (Button)sender;
             var item = (DisplayOrder)button.DataContext;
-            ViewModel.CurrentOrder = item;
+            ViewModel.CurrentOpenOrder = item;
             OpenDetailPanel();
         }
 
         public void OpenDetailPanel()
         {
             OrderDetails.Visibility = Visibility.Visible;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OrderDetails.Visibility = Visibility.Collapsed;
+        }
+
+        public void OrderListItemClosedClicked(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (DisplayOrder)button.DataContext;
+            ViewModel.CurrentClosedOrder = item;
+            OpenDetailPanelClosed();
+        }
+
+        public void OpenDetailPanelClosed()
+        {
+            OrderDetailsClosed.Visibility = Visibility.Visible;
+        }
+
+        private void CloseButtonClosed_Click(object sender, RoutedEventArgs e)
+        {
+            OrderDetailsClosed.Visibility = Visibility.Collapsed;
         }
     }
 }

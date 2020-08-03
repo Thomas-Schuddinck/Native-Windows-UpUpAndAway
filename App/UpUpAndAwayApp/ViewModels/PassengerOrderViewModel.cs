@@ -15,20 +15,32 @@ namespace UpUpAndAwayApp.ViewModels
 {
     public class PassengerOrderViewModel : INotifyPropertyChanged
     {
-        private DisplayOrder _currentOrder;
+        private DisplayOrder _currentOpenOrder;
+        private DisplayOrder _currentClosedOrder;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<DisplayOrder> OpenOrders { get; private set; }
         public ObservableCollection<DisplayOrder> ClosedOrders { get; private set; }
-        public DisplayOrder CurrentOrder
+        public DisplayOrder CurrentOpenOrder
         {
-            get { return this._currentOrder; }
+            get { return this._currentOpenOrder; }
             set
             {
-                if (_currentOrder == value)
+                if (_currentOpenOrder == value)
                     return;
-                _currentOrder = value;
-                RaisePropertyChanged(nameof(CurrentOrder));
+                _currentOpenOrder = value;
+                RaisePropertyChanged(nameof(CurrentOpenOrder));
+            }
+        }
+        public DisplayOrder CurrentClosedOrder
+        {
+            get { return this._currentClosedOrder; }
+            set
+            {
+                if (_currentClosedOrder == value)
+                    return;
+                _currentClosedOrder = value;
+                RaisePropertyChanged(nameof(CurrentClosedOrder));
             }
         }
 
