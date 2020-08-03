@@ -1,8 +1,9 @@
 ﻿using Shared.DisplayModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml;
+using UpUpAndAwayApp.Utils;
+using System.Windows.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,21 +22,17 @@ namespace UpUpAndAwayApp.Pages
         public PassengerOrderViewModel ViewModel;
         public Frame ContentFrame { get; private set; }
 
-        private void OrderListItemClicked(object sender, ItemClickEventArgs e)
+        public void OrderListItemClicked(object sender, RoutedEventArgs e)
         {
-            var clickedMovie = (Movie)e.ClickedItem;
-            Navigate_To_OrderDetail(clickedMovie);
+            var button = (Button)sender;
+            var item = (DisplayOrder)button.DataContext;
+            ViewModel.CurrentOrder = item;
+            OpenDetailPanel();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        public void OpenDetailPanel()
         {
-            ContentFrame = e.Parameter as Frame;
-        }
-
-        private void Navigate_To_OrderDetail(Movie movie)
-        {
-            
-            this.ContentFrame.Navigate(typeof(MovieDetailPage), movie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight } );
+            OrderDetails.Visibility = Visibility.Visible;
         }
     }
 }
