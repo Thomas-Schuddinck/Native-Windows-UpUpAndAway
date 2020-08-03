@@ -18,7 +18,7 @@ namespace UpUpAndAwayApp.ViewModels
     public class ReductionViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private WebshopItem _currentWebshopItem;
+        //private ReductionItem _currentWebshopItem;
      
         #endregion
 
@@ -26,17 +26,17 @@ namespace UpUpAndAwayApp.ViewModels
         public ObservableCollection<ReductionItem> ReductionItems { get; private set; }
 
 
-        public WebshopItem CurrentWebshopItem
-        {
-            get { return this._currentWebshopItem; }
-            set
-            {
-                if (_currentWebshopItem == value)
-                    return;
-                _currentWebshopItem = value;
-                RaisePropertyChanged(nameof(CurrentWebshopItem));
-            }
-        }
+        //public WebshopItem CurrentWebshopItem
+        //{
+        //    get { return this._currentWebshopItem; }
+        //    set
+        //    {
+        //        if (_currentWebshopItem == value)
+        //            return;
+        //        _currentWebshopItem = value;
+        //        RaisePropertyChanged(nameof(CurrentWebshopItem));
+        //    }
+        //}
 
 
         public event PropertyChangedEventHandler PropertyChanged;

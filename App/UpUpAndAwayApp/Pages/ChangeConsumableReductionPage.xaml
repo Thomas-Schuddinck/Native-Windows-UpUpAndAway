@@ -67,9 +67,9 @@
                             </SymbolIcon>
                         </Button>
                     </Grid>
-                    <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart.OrderLines}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
+                    <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.ReductionItems}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:DisplayOrderLine">
+                            <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:DisplayReductionLine">
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -83,8 +83,8 @@
                                     </Grid.ColumnDefinitions>
                                     <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay}" Stretch="Fill" Width="100" Height="100"  Grid.Column="0" Grid.Row="0" Margin="10 10 10 10 "/>
                                     <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='product titel'}"  Foreground="Black" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay, FallbackValue='1'}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='prijs'}" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10 0 10 "/>
+                                    <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay, FallbackValue='0'}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
+                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='Prijs'}" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10 0 10 "/>
                                     <Button Margin="10 0 0 0" Width="50" Height="50" Grid.Column="4" Grid.Row="0" Click="RemoveFromShoppingCart"  HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <SymbolIcon Symbol="Delete" Margin="-20 -20 0 0" >
                                             <SymbolIcon.RenderTransform>
@@ -101,10 +101,10 @@
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
-                    <StackPanel Grid.Column="0" Grid.Row="2" >
+                    <!--<StackPanel Grid.Column="0" Grid.Row="2" >
                         <TextBlock Text="{x:Bind Path=ViewModel.Cart.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
                         <Button Content="Place Order" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendOrder" />
-                    </StackPanel>
+                    </StackPanel>-->
 
                 </Grid>
             </SplitView.Pane>

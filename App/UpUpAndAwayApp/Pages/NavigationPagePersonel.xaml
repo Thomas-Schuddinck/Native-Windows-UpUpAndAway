@@ -11,14 +11,14 @@
         IsSettingsVisible="False" 
         IsBackButtonVisible="Collapsed" SelectionChanged="NavView_SelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem Tag="reductions" Content="Reduction Management">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76E;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
             <NavigationViewItem Tag="seats" Content="Seat Management">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Contact"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Tag="reductions" Content="Reduction Management">
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76E;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Tag="logout" Content="Logout">

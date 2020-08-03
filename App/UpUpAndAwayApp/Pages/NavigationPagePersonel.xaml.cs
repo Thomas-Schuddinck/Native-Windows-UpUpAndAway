@@ -27,14 +27,14 @@ namespace UpUpAndAwayApp.Pages
         PersonnelChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("reductions", typeof(ChangeConsumableReductionPage)),
             ("seats", typeof(SeatManagement)),
+            ("reductions", typeof(ChangeConsumableReductionPage)),
             ("logout", typeof(MainPage))
         };
         public NavigationPagePersonel()
         {
             this.InitializeComponent();
-            var item = _pages.FirstOrDefault(p => p.Tag.Equals("flightinfo"));
+            var item = _pages.FirstOrDefault(p => p.Tag.Equals("seats"));
             Type _page = item.Page;
             this.ContentFrame.Navigate(_page, null);
         }
