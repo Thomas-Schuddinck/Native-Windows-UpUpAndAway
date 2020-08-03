@@ -18,7 +18,7 @@ namespace Shared.DTOs
             OrderLines = new List<OrderLineDTO>();
         }
 
-        public OrderDTO(DisplayReduction cart, Passenger passenger)
+        public OrderDTO(DisplayOrder cart, Passenger passenger)
         {
             OrderLines = cart.OrderLines.Select(ol => new OrderLineDTO(ol)).ToList();
             Passenger = new PassengerDTO(passenger);

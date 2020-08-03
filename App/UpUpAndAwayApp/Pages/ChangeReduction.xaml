@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="UpUpAndAwayApp.Pages.ChangeReduction"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UpUpAndAwayApp.Pages"
+    xmlns:models="using:UpUpAndAwayApp.Models.ListItemModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{x:Bind VM.Items}" HorizontalAlignment="Center">
+            <ListView.ItemTemplate>
+
+                <DataTemplate  x:DataType="models:ReductionItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='Productnaam'}" Grid.Column="0" HorizontalAlignment="Left"/>
+                        <TextBox Text="{x:Bind Path=Reduction, Mode=TwoWay, FallbackValue='0'}" Grid.Column="1" HorizontalAlignment="Right" />
+                    </Grid>
+                </DataTemplate>
+                
+            </ListView.ItemTemplate>
+            
+        </ListView>
+        <Button Content="Save" Click="SaveChanges" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Page>

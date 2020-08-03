@@ -98,7 +98,7 @@ namespace UpUpAndAwayApp.ViewModels
 
         public void ClearCart()
         {
-            Cart = new DisplayReduction();
+            Cart = new DisplayOrder();
         }
 
         public void AddToShoppingCart(WebshopItem webshopItem)

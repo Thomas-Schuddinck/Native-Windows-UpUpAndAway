@@ -28,7 +28,7 @@ namespace UpUpAndAwayApp.Pages
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("seats", typeof(SeatManagement)),
-            ("reductions", typeof(ChangeConsumableReductionPage)),
+            ("reductions", typeof(ChangeReduction)),
             ("logout", typeof(MainPage))
         };
         public NavigationPagePersonel()
@@ -54,24 +54,24 @@ namespace UpUpAndAwayApp.Pages
                 //vm.Disconnect();
                 this.Frame.Navigate(_page, null, transitionInfo);
             }
-            else if (item.Tag.Equals("chat"))
-            {
+            //else if (item.Tag.Equals("chat"))
+            //{
 
-                this.vm = new PersonnelChatViewModel();
-                try
-                {
-                    var task = Task.Run(async () => { await vm.Connect(); });
-                    task.Wait();
-                    this.ContentFrame.Navigate(_page, vm, transitionInfo);
-                }
-                catch (Exception er)
-                {
-                    var p = new ContentDialog();
-                    p.Title = "Connection error";
-                    p.CloseButtonText = "close";
-                    p.ShowAsync();
-                }
-            }
+            //    this.vm = new PersonnelChatViewModel();
+            //    try
+            //    {
+            //        var task = Task.Run(async () => { await vm.Connect(); });
+            //        task.Wait();
+            //        this.ContentFrame.Navigate(_page, vm, transitionInfo);
+            //    }
+            //    catch (Exception er)
+            //    {
+            //        var p = new ContentDialog();
+            //        p.Title = "Connection error";
+            //        p.CloseButtonText = "close";
+            //        p.ShowAsync();
+            //    }
+            //}
             else
             {
                 this.ContentFrame.Navigate(_page, this.ContentFrame, transitionInfo);

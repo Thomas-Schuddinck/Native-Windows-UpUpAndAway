@@ -10,12 +10,12 @@ using UpUpAndAwayApp.ViewModels;
 
 namespace UpUpAndAwayApp.Models.ListItemModels
 {
-    public class ReductionItem
+    public class ReductionItem : INotifyPropertyChanged
     {
-        public int reduction;
+        private double reduction;
         public Consumable Consumable { get; set; }
 
-        public int Reduction
+        public double Reduction
         {
             get => reduction;
             set
@@ -25,21 +25,18 @@ namespace UpUpAndAwayApp.Models.ListItemModels
             }
         }
 
-        public ReductionViewModel WebshopViewModel { get; set; }
+        public ReductionViewModel ViewModel { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ReductionItem(Consumable consumable, ReductionViewModel webshopViewModel)
+        public ReductionItem(Consumable consumable, ReductionViewModel vm)
         {
             Consumable = consumable;
-            WebshopViewModel = webshopViewModel;
-            ResetReduction();
+            ViewModel = vm;
+            Reduction = consumable.Reduction;
         }
 
-        public void ResetReduction()
-        {
-            Reduction = 0;
-        }
+
 
         protected void OnPropertyChanged([CallerMemberName] string amount = null)
         {
