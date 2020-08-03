@@ -18,10 +18,34 @@ namespace UpUpAndAwayApp.ViewModels
     {
         private DisplayOrder _currentOpenOrder;
         private DisplayOrder _currentClosedOrder;
+        private ObservableCollection<DisplayOrder> _openOrders;
+        private ObservableCollection<DisplayOrder> _closedOrders;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<DisplayOrder> OpenOrders { get; private set; }
-        public ObservableCollection<DisplayOrder> ClosedOrders { get; private set; }
+        public ObservableCollection<DisplayOrder> OpenOrders
+        {
+            get
+            {
+                return _openOrders;
+            }
+            private set
+            {
+                _openOrders = value;
+                RaisePropertyChanged(nameof(OpenOrders));
+            }
+        }
+        public ObservableCollection<DisplayOrder> ClosedOrders
+        {
+            get
+            {
+                return _closedOrders;
+            }
+            private set
+            {
+                _closedOrders = value;
+                RaisePropertyChanged(nameof(ClosedOrders));
+            }
+        }
         public DisplayOrder CurrentOpenOrder
         {
             get { return this._currentOpenOrder; }
@@ -66,10 +90,11 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => AddOrder(i));
         }
 
-        private async void CloseOrder(int orderId)
+        public async void CloseOrder(int id)
         {
             HttpClient client = new HttpClient();
-            await client.PutAsync("http://localhost:5000/api/Order", new StringContent(orderId.ToString(), System.Text.Encoding.UTF8, "application/json"));
+            var s = await client.PutAsync("http://localhost:5000/api/Order", new StringContent(JsonConvert.SerializeObject(id), System.Text.Encoding.UTF8, "application/json"));
+            RefreshOrders();
         }
 
         private void AddOrder(OrderDTO order)

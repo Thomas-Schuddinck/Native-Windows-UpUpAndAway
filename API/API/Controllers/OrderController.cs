@@ -41,8 +41,8 @@ namespace API.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public ActionResult<bool> CloseOrder(int id)
+        [HttpPut]
+        public ActionResult<bool> CloseOrder([FromBody] int id)
         {
             return Ok(orderService.FinishOrder(id));
         }

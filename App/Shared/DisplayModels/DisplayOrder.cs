@@ -38,6 +38,7 @@ namespace Shared.DisplayModels
 
         public DisplayOrder(OrderDTO orderDTO)
         {
+            OrderId = orderDTO.OrderID;
             OrderLines = new ObservableCollection<DisplayOrderLine>();
             orderDTO.OrderLines.ForEach(ol => OrderLines.Add(new DisplayOrderLine(ol, this)));
             OrderLines.CollectionChanged += ItemsChanged;
