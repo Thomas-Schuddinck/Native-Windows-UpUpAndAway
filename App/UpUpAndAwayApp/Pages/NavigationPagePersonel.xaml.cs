@@ -27,12 +27,8 @@ namespace UpUpAndAwayApp.Pages
         PersonnelChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("flightinfo", typeof(FlightInformation)),
-            ("movies/series", typeof(FlightInformation)),
-            ("food/drinks", typeof(FlightInformation)),
-            ("weather", typeof(FlightInformation)),
-            ("chat", typeof(Notification)),
-            ("orders", typeof(FlightInformation)),
+            ("reductions", typeof(ChangeConsumableReductionPage)),
+            ("seats", typeof(SeatManagement)),
             ("logout", typeof(MainPage))
         };
         public NavigationPagePersonel()

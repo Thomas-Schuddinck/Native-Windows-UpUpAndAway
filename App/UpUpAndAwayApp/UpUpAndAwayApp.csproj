@@ -147,6 +147,9 @@
     <Compile Include="Pages\NavigationPagePersonel.xaml.cs">
       <DependentUpon>NavigationPagePersonel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SeatManagement.xaml.cs">
+      <DependentUpon>SeatManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SerieDetailPage.xaml.cs">
       <DependentUpon>SerieDetailPage.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SeatManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
