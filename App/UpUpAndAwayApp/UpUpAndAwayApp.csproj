@@ -137,6 +137,9 @@
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NavigationPagePersonel.xaml.cs">
       <DependentUpon>NavigationPagePersonel.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,7 @@
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\FlightInfoViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelChatViewModel.cs" />
     <Compile Include="ViewModels\SerieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
@@ -217,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SerieDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -250,6 +258,9 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+          <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>6.1.0</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
@@ -257,6 +268,9 @@
     </PackageReference>
     <PackageReference Include="NSwag.AspNetCore">
       <Version>13.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="QueryString.NET">
+      <Version>1.0.0</Version>
     </PackageReference>
     <PackageReference Include="Unirest-API">
       <Version>1.0.7.6</Version>

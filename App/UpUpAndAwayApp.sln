@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpUpAndAwayApp", "UpUpAndAwayApp\UpUpAndAwayApp.csproj", "{6AE8930F-3FAD-4857-BF94-30B32BC41F0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C5603082-1A3C-4BEB-A64D-D51C9FB1BFB6} = {C5603082-1A3C-4BEB-A64D-D51C9FB1BFB6}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "..\API\API\API.csproj", "{C5603082-1A3C-4BEB-A64D-D51C9FB1BFB6}"
 EndProject

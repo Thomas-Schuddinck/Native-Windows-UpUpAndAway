@@ -28,7 +28,7 @@ namespace API.Data.ServiceInstances
 
         public Passenger GetPassenger(int id)
         {
-            return passengers.AsNoTracking().Where(s => s.PassengerId == id).FirstOrDefault();
+            return passengers.AsNoTracking().FirstOrDefault(s => s.PassengerId == id);
         }
 
         public PassengerParty GetParty(int id)

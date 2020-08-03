@@ -22,7 +22,7 @@ namespace UpUpAndAwayApp.ViewModels
             HttpClient client = new HttpClient();
             try
             {
-                var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id)));
+                var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id))).ConfigureAwait(false);
                 var passenger = new Passenger(JsonConvert.DeserializeObject<PassengerDTO>(jsonResponse));
                 this.Passenger = passenger;
                 loggedIn.login(Passenger);

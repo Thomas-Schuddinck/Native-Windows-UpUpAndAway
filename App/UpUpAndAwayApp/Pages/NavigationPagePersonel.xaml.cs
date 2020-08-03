@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using UpUpAndAwayApp.ViewModels;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -13,13 +19,18 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class NavigationPagePersonel : Page
     {
+        PersonnelChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("orders", typeof(PersonelOrderPage)),
             ("promotions", typeof(VisualMediaPage)),
             ("messaging", typeof(Webshop)),
+            ("chat", typeof(Notification)),
+
+
             ("logout", typeof(MainPage))
         };
+        
         public NavigationPagePersonel()
         {
             this.InitializeComponent();
@@ -41,16 +52,32 @@ namespace UpUpAndAwayApp.Pages
             _page = item.Page;
             if (item.Tag.Equals("logout"))
             {
+
+                //vm.Disconnect();
                 this.Frame.Navigate(_page, null, transitionInfo);
+            }
+            else if (item.Tag.Equals("chat"))
+            {
+                this.vm = new PersonnelChatViewModel();
+                try
+                {
+                    var task = Task.Run(async () => { await vm.Connect(); });
+                    task.Wait();
+                    this.ContentFrame.Navigate(_page, vm, transitionInfo);
+                }
+                catch (Exception er)
+                {
+                    var p = new ContentDialog();
+                    p.Title = "Connection error";
+                    p.CloseButtonText = "close";
+                    p.ShowAsync();
+                }
             }
             else
             {
                 this.ContentFrame.Navigate(_page, this.ContentFrame, transitionInfo);
             }
-        }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
         }
     }
 }

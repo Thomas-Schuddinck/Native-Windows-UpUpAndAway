@@ -13,5 +13,7 @@ namespace Shared.Models
         {
             Passengers = new List<Passenger>();
         }
+
+
     }
 }

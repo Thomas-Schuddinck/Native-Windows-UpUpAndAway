@@ -39,5 +39,10 @@ namespace UpUpAndAwayApp
         {
             this.Frame.Navigate(typeof(NavigationPagePersonel));
         }
+
+        private void Personeel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Notification));
+        }
     }
 }
