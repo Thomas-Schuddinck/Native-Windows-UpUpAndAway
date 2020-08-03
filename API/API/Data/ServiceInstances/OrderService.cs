@@ -26,8 +26,9 @@ namespace API.Data.ServiceInstances
         public bool FinishOrder(int id)
         {
             var order = orders.SingleOrDefault(s => s.OrderId == id) ?? throw new ArgumentException();
-
-            return order.Finish();
+            var ret = order.Finish();
+            context.SaveChanges();
+            return ret;
         }
 
         public ICollection<Order> GetAll()
@@ -40,7 +41,11 @@ namespace API.Data.ServiceInstances
 
         public ICollection<Order> GetByUser(int passengerId)
         {
-            return orders.AsNoTracking().Where(s => s.PassengerId == passengerId).ToList();
+            return orders
+                .Where(o => o.Passenger.PassengerId == passengerId)
+                .Include(o => o.OrderLines).ThenInclude(ol => ol.Consumable)
+                .Include(o => o.Passenger)
+                .AsNoTracking().ToList();
         }
 
         public int PlaceOrder(Order order)

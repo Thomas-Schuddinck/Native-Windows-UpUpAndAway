@@ -17,9 +17,9 @@ namespace UpUpAndAwayApp.Pages
         public PassengerOrderPage()
         {
             this.InitializeComponent();
-            this.ViewModel = new PassengerOrderViewModel();
+            this.ViewModel = new OrderViewModel();
         }
-        public PassengerOrderViewModel ViewModel;
+        public OrderViewModel ViewModel;
         public Frame ContentFrame { get; private set; }
 
         public void OrderListItemClicked(object sender, RoutedEventArgs e)

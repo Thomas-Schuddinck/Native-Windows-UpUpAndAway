@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Shared.DisplayModels;
+using Shared.DisplayModels.Singleton;
 using Shared.DTOs;
 using Shared.Enums;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace UpUpAndAwayApp.ViewModels
 {
-    public class PassengerOrderViewModel : INotifyPropertyChanged
+    public class OrderViewModel : INotifyPropertyChanged
     {
         private DisplayOrder _currentOpenOrder;
         private DisplayOrder _currentClosedOrder;
@@ -44,7 +45,7 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        public PassengerOrderViewModel()
+        public OrderViewModel()
         {
             RefreshOrders();
         }
@@ -59,9 +60,16 @@ namespace UpUpAndAwayApp.ViewModels
         private async void GetOrdersFromAPI()
         {
             HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Order"));
+            String uri = LoginSingleton.passenger == null ? "http://localhost:5000/api/Order" : String.Format("http://localhost:5000/api/Order/{0}", LoginSingleton.passenger.PassengerId);
+            var json = await client.GetStringAsync(new Uri(uri));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<OrderDTO>>(json);
             lst.ToList().ForEach(i => AddOrder(i));
+        }
+
+        private async void CloseOrder(int orderId)
+        {
+            HttpClient client = new HttpClient();
+            await client.PutAsync("http://localhost:5000/api/Order", new StringContent(orderId.ToString(), System.Text.Encoding.UTF8, "application/json"));
         }
 
         private void AddOrder(OrderDTO order)
