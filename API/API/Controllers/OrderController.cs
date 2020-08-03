@@ -28,9 +28,9 @@ namespace API.Controllers
 
         //GET api/values/5
         [HttpGet("{passengerId}")]
-        public ActionResult<Order> GetByUser(int passengerId)
+        public ActionResult<IEnumerable<Order>> GetByUser(int passengerId)
         {
-            return Ok(orderService.GetByUser(passengerId));
+            return Ok(orderService.GetByUser(passengerId).Select(o => new OrderDTO(o)).ToList());
         }
 
         // POST api/values
@@ -41,9 +41,10 @@ namespace API.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public ActionResult<bool> CloseOrder([FromBody] int id)
         {
+            return Ok(orderService.FinishOrder(id));
         }
 
         // DELETE api/values/5

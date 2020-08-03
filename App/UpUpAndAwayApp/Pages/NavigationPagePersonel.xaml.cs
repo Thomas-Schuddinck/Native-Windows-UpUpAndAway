@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
@@ -9,10 +8,6 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -27,21 +22,23 @@ namespace UpUpAndAwayApp.Pages
         PersonnelChatViewModel vm;
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("flightinfo", typeof(FlightInformation)),
-            ("movies/series", typeof(FlightInformation)),
-            ("food/drinks", typeof(FlightInformation)),
-            ("weather", typeof(FlightInformation)),
+            ("orders", typeof(PersonelOrderPage)),
+            ("promotions", typeof(VisualMediaPage)),
+            ("messaging", typeof(Webshop)),
             ("chat", typeof(Notification)),
-            ("orders", typeof(FlightInformation)),
+
+
             ("logout", typeof(MainPage))
         };
+        
         public NavigationPagePersonel()
         {
             this.InitializeComponent();
-            var item = _pages.FirstOrDefault(p => p.Tag.Equals("flightinfo"));
+            var item = _pages.FirstOrDefault(p => p.Tag.Equals("orders"));
             Type _page = item.Page;
             this.ContentFrame.Navigate(_page, null);
         }
+
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var navItemTag = args.SelectedItemContainer.Tag.ToString();
@@ -55,12 +52,12 @@ namespace UpUpAndAwayApp.Pages
             _page = item.Page;
             if (item.Tag.Equals("logout"))
             {
+
                 //vm.Disconnect();
                 this.Frame.Navigate(_page, null, transitionInfo);
             }
             else if (item.Tag.Equals("chat"))
             {
-
                 this.vm = new PersonnelChatViewModel();
                 try
                 {
@@ -80,6 +77,7 @@ namespace UpUpAndAwayApp.Pages
             {
                 this.ContentFrame.Navigate(_page, this.ContentFrame, transitionInfo);
             }
+
         }
     }
 }

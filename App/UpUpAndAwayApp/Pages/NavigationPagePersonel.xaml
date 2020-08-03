@@ -9,36 +9,22 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <NavigationView 
         IsSettingsVisible="False" 
-        IsBackButtonVisible="Collapsed" SelectionChanged="NavView_SelectionChanged">
+        IsBackButtonVisible="Collapsed"        
+        x:Name="NavView" SelectionChanged="NavView_SelectionChanged">
         <NavigationView.MenuItems>
-            <NavigationViewItem Tag="flightinfo" Content="Flight Information">
+            <NavigationViewItem Tag="orders" Content="Orders">
                 <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="Home"/>
+                    <SymbolIcon Symbol="AllApps"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Tag="movies/series" Content="Movies/Series">
+            <NavigationViewItem Tag="promotions" Content="Promotions">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Video"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Tag="food/drinks" Content="Food/Drinks">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76E;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="weather" Content="Weather">
-                <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE753;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="chat" Content="Chat">
+            <NavigationViewItem Tag="messaging" Content="Message Board">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Comment"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Tag="orders" Content="Orders">
-                <NavigationViewItem.Icon>
-                    <SymbolIcon Symbol="AllApps"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Tag="logout" Content="Logout">

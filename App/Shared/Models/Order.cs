@@ -1,5 +1,6 @@
 ﻿using Shared.DTOs;
 using Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,10 @@ namespace Shared.Models
         /// Status of this Order. Use to filter Orders.
         /// </summary>
         public OrderStatus OrderStatus { get;  set; }
-
+        /// <summary>
+        /// Time when order was created
+        /// </summary>
+        public DateTime DateTimePlaced { get; set; }
         /// <summary>
         /// Passenger that placed this Order.
         /// </summary>
@@ -37,6 +41,7 @@ namespace Shared.Models
         public Order()
         {
             OrderLines = new List<OrderLine>();
+            DateTimePlaced = DateTime.Now;
         }
 
         /// <summary>
@@ -49,6 +54,7 @@ namespace Shared.Models
             OrderLines = orderLines;
             OrderStatus = OrderStatus.Processing;
             Passenger = passenger;
+            DateTimePlaced = DateTime.Now;
         }
 
         public Order(OrderDTO orderDTO)
@@ -56,6 +62,7 @@ namespace Shared.Models
             OrderLines = orderDTO.OrderLines.Select(ol => new OrderLine(ol, this)).ToList();
             OrderStatus = OrderStatus.Processing;
             Passenger = new Passenger(orderDTO.Passenger);
+            DateTimePlaced = DateTime.Now;
         }
 
 

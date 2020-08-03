@@ -143,6 +143,9 @@
     <Compile Include="Pages\NavigationPagePersonel.xaml.cs">
       <DependentUpon>NavigationPagePersonel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PersonelOrderPage.xaml.cs">
+      <DependentUpon>PersonelOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SerieDetailPage.xaml.cs">
       <DependentUpon>SerieDetailPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,9 @@
     <Compile Include="Pages\NavigationPagePassenger.xaml.cs">
       <DependentUpon>NavigationPagePassenger.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PassengerOrderPage.xaml.cs">
+      <DependentUpon>PassengerOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
     </Compile>
@@ -159,7 +165,9 @@
       <DependentUpon>Webshop.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\FlightInfoViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PersonnelChatViewModel.cs" />
     <Compile Include="ViewModels\SerieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
@@ -172,7 +180,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Design\projectGuides.guides" />
     <None Include="UpUpAndAwayApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +217,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PersonelOrderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Notification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PassengerOrderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\VisualMediaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +256,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+          <Version>6.1.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>6.1.0</Version>
@@ -266,6 +284,9 @@
       <Project>{031bb08b-140c-422a-acc5-aca2720013a1}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Design\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
