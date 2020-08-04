@@ -36,7 +36,7 @@ namespace UpUpAndAwayApp.Pages
 
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
-            VM.SendChanges();
+            VM.SendChangesAsync();
         }
     }
 }

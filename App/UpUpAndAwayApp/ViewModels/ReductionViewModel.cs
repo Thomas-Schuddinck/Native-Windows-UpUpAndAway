@@ -25,7 +25,7 @@ namespace UpUpAndAwayApp.ViewModels
         {
             Items = new ObservableCollection<ReductionItem>();
             GetConsumablesFromAPI();
-            
+
         }
 
         private async Task GetConsumablesFromAPI()
@@ -36,9 +36,21 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => Items.Add(new ReductionItem(new Consumable(i), this)));
         }
 
-        public void SendChanges()
+        public async Task SendChangesAsync()
         {
             Debug.WriteLine("Sent");
+            var data = JsonConvert.SerializeObject(
+                new ReductionChangeDTO
+                {
+                    Timestamp = DateTime.Now,
+                    Items = Items.Select(s => new ReductionChangeItemDTO {
+                        ConsumableId = s.Consumable.ConsumableId, 
+                        Reduction = s.Reduction })
+                    .ToList()
+                });
+
+            HttpClient client = new HttpClient();
+            var res = await client.PutAsync("http://localhost:5000/api/Consumable", new StringContent(data, System.Text.Encoding.UTF8, "application/json"));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
