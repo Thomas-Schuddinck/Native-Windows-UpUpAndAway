@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,6 +19,7 @@ namespace UpUpAndAwayApp.ViewModels
 
         //public ObservableCollection<Passenger> Passengers { get; set; }
         public ObservableCollection<Seat> Seats { get; set; }//Static collection of all Seats
+        public ObservableCollection<Seat> NonEmptySeats { get; set; }
         public ObservableCollection<Seat> DisplaySeats { get; set; }//FilteredList of seats to show
 
         private Seat selectedSeat;
@@ -30,13 +32,8 @@ namespace UpUpAndAwayApp.ViewModels
                 selectedSeat = value;
                 FillDisplay(value);
                 RaisePropertyChanged(nameof(SelectedSeat));
-                RaisePropertyChanged(nameof(showSecond));
+                RaisePropertyChanged(nameof(ShowSecond));
             }
-        }
-
-        private void FillDisplay(Seat seat)
-        {
-            DisplaySeats = new ObservableCollection<Seat>(Seats.Where(s => s.SeatId != seat.SeatId).ToList());
         }
 
         private Seat swapTo;
@@ -52,20 +49,29 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        public bool showSecond => SelectedSeat != null;
-        public bool CanSave => SwapTo != null && showSecond;
+        public bool ShowSecond => SelectedSeat != null;
+        public bool CanSave => SwapTo != null && ShowSecond;
 
         public SeatManagementViewModel()
         {
             Seats = new ObservableCollection<Seat>();
-            Seats.Add(new Seat { SeatId = 69 });
+            NonEmptySeats = new ObservableCollection<Seat>();
             DisplaySeats = new ObservableCollection<Seat>();
 
             GetSeatsFromAPI();
         }
 
+        private void FillDisplay(Seat seat)
+        {
+            DisplaySeats.Clear();
+            foreach (var temp in Seats.Where(s => s.SeatId != seat.SeatId).OrderBy(s=> s.SeatId))
+                DisplaySeats.Add(temp);
+
+        }
+
         public async void SaveChanges()
         {
+            Debug.WriteLine($"First seat: {SelectedSeat.SeatId}, second seat: {SwapTo.SeatId}");
 
         }
 
@@ -75,6 +81,7 @@ namespace UpUpAndAwayApp.ViewModels
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Seat"));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<Seat>>(json);
             lst.ToList().ForEach(i => Seats.Add(i));
+            Seats.Where(s => s.Passenger != null).OrderBy(s=> s.SeatId).ToList().ForEach(t => NonEmptySeats.Add(t));
         }
 
         //private async void GetPassengersFromAPI()

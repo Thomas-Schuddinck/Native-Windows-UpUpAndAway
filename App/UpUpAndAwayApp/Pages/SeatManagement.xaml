@@ -31,7 +31,7 @@
             <!-- Save button -->
         </Grid.RowDefinitions>
 
-        <ComboBox Width="500" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" ItemsSource="{Binding VM.Seats, Mode=OneWay}" DisplayMemberPath="Source" SelectedValue="{x:Bind VM.SelectedSeat}">
+        <ComboBox Width="500" Grid.Row="0"  HorizontalAlignment="Center" ItemsSource="{x:Bind Path=VM.NonEmptySeats, Mode=OneWay}" SelectionChanged="ChangeFirst">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="models:Seat">
                     <TextBlock Text="{x:Bind Path=SeatId, Mode=OneWay}"/>
@@ -40,22 +40,23 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <!-- Label voor full name & info -->
 
-        <!--<ComboBox Margin="100" HorizontalAlignment="Center" Grid.Row="1" ItemsSource="{Binding VM.DisplaySeats, Mode=OneWay}" SelectedValue="{x:Bind VM.SwapTo}" Visibility="{x:Bind VM.showSecond, Converter={StaticResource BoolToVis}, Mode=OneWay}">
+
+        <ComboBox Width="500" HorizontalAlignment="Center" Grid.Row="1" ItemsSource="{x:Bind Path=VM.DisplaySeats, Mode=OneWay}" Visibility="{x:Bind VM.ShowSecond, Mode=OneWay}"  SelectionChanged="ChangeSecond">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="models:Seat">
                     <TextBlock Text="{x:Bind Path=SeatId, Mode=OneWay}"/>
-                    --><!-- Add full name of passenger if present --><!--
+                     
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
 
 
-        <Button Grid.Row="2" Content="Save" Click="SaveChanges" Visibility="{x:Bind VM.CanSave, Converter={StaticResource BoolToVis}, Mode=OneWay}" />-->
+        <Button Width="500" Grid.Row="2" HorizontalAlignment="Center" Content="Save" Click="SaveChanges" Visibility="{x:Bind VM.CanSave, Converter={StaticResource BoolToVis}, Mode=OneWay}" />
 
 
 
 
     </Grid>
 </Page>
+<!---->

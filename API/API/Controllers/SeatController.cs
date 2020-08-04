@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs;
 using Shared.Models;
 
 namespace API.Controllers
@@ -25,6 +26,14 @@ namespace API.Controllers
         public ActionResult<ICollection<Seat>> GetAll()
         {
             return new OkObjectResult(service.GetAll());
+        }
+
+        [HttpPut]
+        public ActionResult<ICollection<Seat>> SwapSeats([FromBody] SeatSwapDTO dto)
+        {
+            if (service.SwapSeats(dto.First, dto.Second))
+                return Ok(service.GetAll());
+            return NotFound();
         }
 
     }
