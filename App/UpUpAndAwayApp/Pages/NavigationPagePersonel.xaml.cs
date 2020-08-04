@@ -28,6 +28,8 @@ namespace UpUpAndAwayApp.Pages
             ("chat", typeof(Notification)),
 
 
+            ("seats", typeof(SeatManagement)),
+            ("reductions", typeof(ChangeReduction)),
             ("logout", typeof(MainPage))
         };
         

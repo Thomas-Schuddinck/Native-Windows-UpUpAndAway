@@ -124,7 +124,11 @@
     <Compile Include="Data\ApiData.cs" />
     <Compile Include="Data\VisualMediaData.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Models\ListItemModels\ReductionItem.cs" />
     <Compile Include="Models\ListItemModels\WebshopItem.cs" />
+    <Compile Include="Pages\ChangeReduction.xaml.cs">
+      <DependentUpon>ChangeReduction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
@@ -142,6 +146,9 @@
     </Compile>
     <Compile Include="Pages\NavigationPagePersonel.xaml.cs">
       <DependentUpon>NavigationPagePersonel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SeatManagement.xaml.cs">
+      <DependentUpon>SeatManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PersonelOrderPage.xaml.cs">
       <DependentUpon>PersonelOrderPage.xaml</DependentUpon>
@@ -169,6 +176,7 @@
     <Compile Include="ViewModels\FlightInfoViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\PersonnelChatViewModel.cs" />
+    <Compile Include="ViewModels\ReductionViewModel.cs" />
     <Compile Include="ViewModels\SerieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
@@ -197,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\ChangeReduction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ClientChat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +234,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SeatManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
