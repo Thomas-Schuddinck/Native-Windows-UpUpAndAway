@@ -30,10 +30,9 @@ namespace UpUpAndAwayApp.Pages
             this.InitializeComponent();
         }
 
-        private void SelectPassenger(object sender, SelectionChangedEventArgs e)
+        private void SaveChanges(object sender, RoutedEventArgs e)
         {
-            var pass = e.AddedItems[0];
-            VM.ChosenPassenger = (Shared.Models.Passenger) pass;
+
         }
     }
 }

@@ -16,24 +16,57 @@ namespace UpUpAndAwayApp.ViewModels
     public class SeatManagementViewModel : INotifyPropertyChanged
     {
 
-        public ObservableCollection<Passenger> Passengers { get; set; }
-        public ObservableCollection<Seat> Seats { get; set; }
+        //public ObservableCollection<Passenger> Passengers { get; set; }
+        public ObservableCollection<Seat> Seats { get; set; }//Static collection of all Seats
+        public ObservableCollection<Seat> DisplaySeats { get; set; }//FilteredList of seats to show
 
-        public Passenger ChosenPassenger { get; set; }
+        private Seat selectedSeat;
 
-        public PassengerSeat ChosenSeat { get; set; }
+        public Seat SelectedSeat
+        {
+            get => selectedSeat;
+            set
+            {
+                selectedSeat = value;
+                FillDisplay(value);
+                RaisePropertyChanged(nameof(SelectedSeat));
+                RaisePropertyChanged(nameof(showSecond));
+            }
+        }
 
-        public string SelectedPassenger => ChosenPassenger == null ? "" : $"{ChosenPassenger.FullName} : Seat {Seats.Single(s => s.Passenger.PassengerId == ChosenPassenger.PassengerId).SeatId}";
+        private void FillDisplay(Seat seat)
+        {
+            DisplaySeats = new ObservableCollection<Seat>(Seats.Where(s => s.SeatId != seat.SeatId).ToList());
+        }
 
-        public string SwappedTo => ChosenSeat == null ? "" : $"Seat {ChosenSeat.Seat.SeatId} {(ChosenSeat.Passenger == null ? "is empty" : $"belongs to {ChosenSeat.Passenger.FullName}")}.";
+        private Seat swapTo;
+
+        public Seat SwapTo
+        {
+            get => swapTo;
+            set
+            {
+                swapTo = value;
+                RaisePropertyChanged(nameof(SwapTo));
+                RaisePropertyChanged(nameof(CanSave));
+            }
+        }
+
+        public bool showSecond => SelectedSeat != null;
+        public bool CanSave => SwapTo != null && showSecond;
 
         public SeatManagementViewModel()
         {
-            Passengers = new ObservableCollection<Passenger>();
             Seats = new ObservableCollection<Seat>();
+            Seats.Add(new Seat { SeatId = 69 });
+            DisplaySeats = new ObservableCollection<Seat>();
 
-            GetPassengersFromAPI();
             GetSeatsFromAPI();
+        }
+
+        public async void SaveChanges()
+        {
+
         }
 
         private async void GetSeatsFromAPI()
@@ -44,14 +77,19 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => Seats.Add(i));
         }
 
-        private async void GetPassengersFromAPI()
-        {
-            HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Passenger"));
-            var lst = JsonConvert.DeserializeObject<ObservableCollection<Passenger>>(json);
-            lst.ToList().ForEach(i => Passengers.Add(i));
-        }
+        //private async void GetPassengersFromAPI()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Passenger"));
+        //    var lst = JsonConvert.DeserializeObject<ObservableCollection<Passenger>>(json);
+        //    lst.ToList().ForEach(i => Passengers.Add(i));
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }
