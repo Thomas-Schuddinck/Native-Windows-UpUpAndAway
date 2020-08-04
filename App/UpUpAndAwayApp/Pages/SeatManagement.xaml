@@ -31,7 +31,7 @@
             <!-- Save button -->
         </Grid.RowDefinitions>
 
-        <ComboBox Width="500" Grid.Row="0"  HorizontalAlignment="Center" ItemsSource="{x:Bind Path=VM.NonEmptySeats, Mode=OneWay}" SelectionChanged="ChangeFirst">
+        <ComboBox x:Name="CmbFirst"  Width="500" Grid.Row="0"  HorizontalAlignment="Center" ItemsSource="{x:Bind Path=VM.NonEmptySeats, Mode=OneWay}" SelectionChanged="ChangeFirst">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="models:Seat">
                     <TextBlock Text="{x:Bind Path=SeatId, Mode=OneWay}"/>

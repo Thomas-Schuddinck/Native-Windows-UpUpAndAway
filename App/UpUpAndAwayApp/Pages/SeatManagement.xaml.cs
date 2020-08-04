@@ -35,20 +35,20 @@ namespace UpUpAndAwayApp.Pages
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
             VM.SaveChanges();
+            CmbFirst.Items.Clear();//TODO find something better
         }
 
         private void ChangeFirst(object sender, SelectionChangedEventArgs e)
         {
             var item = e.AddedItems[0];
             VM.SelectedSeat = (Shared.Models.Seat)item;
-            this.Bindings.Update();
+
         }
 
         private void ChangeSecond(object sender, SelectionChangedEventArgs e)
         {
             var item = e.AddedItems[0];
             VM.SwapTo = (Shared.Models.Seat)item;
-            this.Bindings.Update();
         }
     }
 }

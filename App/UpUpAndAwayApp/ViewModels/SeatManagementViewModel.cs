@@ -64,15 +64,27 @@ namespace UpUpAndAwayApp.ViewModels
         private void FillDisplay(Seat seat)
         {
             DisplaySeats.Clear();
-            foreach (var temp in Seats.Where(s => s.SeatId != seat.SeatId).OrderBy(s=> s.SeatId))
+            foreach (var temp in Seats.Where(s => s.SeatId != seat.SeatId).OrderBy(s => s.SeatId))
                 DisplaySeats.Add(temp);
 
         }
 
         public async void SaveChanges()
         {
-            Debug.WriteLine($"First seat: {SelectedSeat.SeatId}, second seat: {SwapTo.SeatId}");
+            var first = SelectedSeat.SeatId;
+            var second = SwapTo.SeatId;
+            var dto = new SeatSwapDTO { First = first, Second = second };
 
+            var data = JsonConvert.SerializeObject(dto);
+
+            HttpClient client = new HttpClient();
+            var res = await client.PutAsync("http://localhost:5000/api/Seat", new StringContent(data, System.Text.Encoding.UTF8, "application/json"));
+            var json = await res.Content.ReadAsStringAsync();
+            var lst = JsonConvert.DeserializeObject<ObservableCollection<Seat>>(json);
+            Seats = new ObservableCollection<Seat>();
+            RaisePropertyChanged(nameof(Seats));
+            lst.ToList().ForEach(i => Seats.Add(i));
+            SetNonEmptySeats();
         }
 
         private async void GetSeatsFromAPI()
@@ -80,8 +92,15 @@ namespace UpUpAndAwayApp.ViewModels
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Seat"));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<Seat>>(json);
+            Seats.Clear();
             lst.ToList().ForEach(i => Seats.Add(i));
-            Seats.Where(s => s.Passenger != null).OrderBy(s=> s.SeatId).ToList().ForEach(t => NonEmptySeats.Add(t));
+            SetNonEmptySeats();
+
+        }
+
+        private void SetNonEmptySeats()
+        {
+            Seats.Where(s => s.Passenger != null).OrderBy(s => s.SeatId).ToList().ForEach(t => NonEmptySeats.Add(t));
         }
 
         //private async void GetPassengersFromAPI()
