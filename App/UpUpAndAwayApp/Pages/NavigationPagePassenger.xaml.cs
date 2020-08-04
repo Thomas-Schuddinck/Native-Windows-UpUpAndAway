@@ -17,7 +17,7 @@ namespace UpUpAndAwayApp.Pages
             ("flightinfo", typeof(FlightInformation)),
             ("movies/series", typeof(VisualMediaPage)),
             ("food/drinks", typeof(Webshop)),
-            ("weather", typeof(FlightInformation)),
+            ("weather", typeof(ClientMusic)),
             ("chat", typeof(ClientChat)),
             ("orders", typeof(FlightInformation)),
             ("logout", typeof(MainPage))

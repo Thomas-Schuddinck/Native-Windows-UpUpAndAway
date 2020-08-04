@@ -128,6 +128,9 @@
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ClientMusic.xaml.cs">
+      <DependentUpon>ClientMusic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientVluchtInformatie.xaml.cs">
       <DependentUpon>ClientVluchtInformatie.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,9 @@
     <Compile Include="Pages\NavigationPagePassenger.xaml.cs">
       <DependentUpon>NavigationPagePassenger.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SongDetailPage.xaml.cs">
+      <DependentUpon>SongDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
     </Compile>
@@ -165,6 +171,8 @@
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
+    <Compile Include="ViewModels\SongDetailViewModel.cs" />
+    <Compile Include="ViewModels\SongViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
     <Compile Include="ViewModels\WebshopViewModel.cs" />
   </ItemGroup>
@@ -191,6 +199,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Pages\ClientChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\NavigationPagePassenger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SongDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

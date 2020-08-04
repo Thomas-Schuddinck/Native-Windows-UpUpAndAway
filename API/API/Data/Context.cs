@@ -11,6 +11,7 @@ namespace API.Data
 
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<PassengerParty> PassengerParties { get; set; }
+        public DbSet<Song> Songs { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {
@@ -19,6 +20,7 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<Consumable>();
+            mb.Entity<Song>();
             mb.Entity<Order>().HasMany(s => s.OrderLines).WithOne(o => o.Order);
             mb.Entity<Order>().HasOne(s => s.Passenger).WithMany();
             mb.Entity<OrderLine>().HasOne(s => s.Consumable).WithMany();
