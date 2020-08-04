@@ -5,10 +5,34 @@
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Shared.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!-- Combobox for passengers -->
 
+            <RowDefinition Height="50"/>
+            <!-- Label -->
+
+            <RowDefinition Height="50"/>
+            <!-- New seats -->
+
+            <RowDefinition Height="50"/>
+            <!-- Label -->
+
+            <RowDefinition Height="50"/>
+            <!-- Save button -->
+        </Grid.RowDefinitions>
+
+        <ComboBox ItemsSource="{Binding VM.Passengers}" SelectedValue="{x:Bind VM.ChosenPassenger}" >
+            <ComboBox.ItemTemplate >
+                <DataTemplate x:DataType="models:Passenger">
+                    <TextBlock Text="{x:Bind Path=FullName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

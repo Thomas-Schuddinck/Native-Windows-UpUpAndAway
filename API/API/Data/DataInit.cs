@@ -15,7 +15,7 @@ namespace API.Data
         public async Task InitializeData()
         {
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
                 SeedData();
@@ -61,6 +61,8 @@ namespace API.Data
             var seat7 = new Seat();
             var seat8 = new Seat();
 
+            context.Seats.AddRange(new[] { seat1, seat2, seat3, seat4, seat5, seat6 });
+
             context.Passengers.AddRange(new[] { passenger1, passenger2, passenger3, passenger4, passenger5, passenger6 });
 
             context.PassengerParties.AddRange(
@@ -70,9 +72,17 @@ namespace API.Data
                 }
                 );
 
-            context.Seats.AddRange(new[] { seat1, seat2, seat3, seat4, seat5, seat6, seat7, seat8 });
+           
 
             context.SaveChanges();
+
+
+            //Need different call to force proper alignment of ID's (passenger 1 in seat 1)
+
+
+            context.Seats.AddRange(new[] { seat7, seat8 });
+            context.SaveChanges();
+
             #endregion
         }
     }

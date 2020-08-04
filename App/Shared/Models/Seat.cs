@@ -9,7 +9,7 @@ namespace Shared.Models
         #endregion
 
         #region Properties
-        public int SeatNumber
+        public int SeatId
         {
             get
             {
@@ -34,13 +34,13 @@ namespace Shared.Models
 
         public Seat(int seatNumber)
         {
-            SeatNumber = seatNumber;
+            SeatId = seatNumber;
             Passenger = null;
         }
 
         public Seat(int seatNumber, Passenger passenger)
         {
-            SeatNumber = seatNumber;
+            SeatId = seatNumber;
             Passenger = passenger;
         }
 

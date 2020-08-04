@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,17 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class SeatManagement : Page
     {
+        public SeatManagementViewModel VM { get; set; }
         public SeatManagement()
         {
+            VM = new SeatManagementViewModel();
             this.InitializeComponent();
+        }
+
+        private void SelectPassenger(object sender, SelectionChangedEventArgs e)
+        {
+            var pass = e.AddedItems[0];
+            VM.ChosenPassenger = (Shared.Models.Passenger) pass;
         }
     }
 }

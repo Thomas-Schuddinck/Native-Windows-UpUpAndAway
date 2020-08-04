@@ -21,7 +21,7 @@ namespace API.Data.ServiceInstances
         }
         public ICollection<Seat> GetAll()
         {
-            throw new NotImplementedException();
+            return seats.Include(s=> s.Passenger).AsNoTracking().ToList();
         }
     }
 }
