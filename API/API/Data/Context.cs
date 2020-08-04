@@ -12,6 +12,8 @@ namespace API.Data
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<PassengerParty> PassengerParties { get; set; }
 
+        public DbSet<Seat> Seats { get; set; }
+
         public Context(DbContextOptions options) : base(options)
         {
         }
@@ -24,6 +26,7 @@ namespace API.Data
             mb.Entity<OrderLine>().HasOne(s => s.Consumable).WithMany();
             mb.Entity<Passenger>();//.HasMany(s => s.PlacedOrders).WithOne();
             mb.Entity<PassengerParty>().HasMany(s => s.Passengers).WithOne();
+            mb.Entity<Seat>().HasOne(s => s.Passenger);
 
             //TODO Test
         }

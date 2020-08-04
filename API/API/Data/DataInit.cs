@@ -15,7 +15,7 @@ namespace API.Data
         public async Task InitializeData()
         {
 
-           // context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
                 SeedData();
@@ -52,6 +52,15 @@ namespace API.Data
             var passenger5 = new Passenger("SoMuchFor", "NativeApps");
             var passenger6 = new Passenger("Android", "FTW");
 
+            var seat1 = new Seat { Passenger = passenger1 };
+            var seat2 = new Seat { Passenger = passenger2 };
+            var seat3 = new Seat { Passenger = passenger3 };
+            var seat4 = new Seat { Passenger = passenger4 };
+            var seat5 = new Seat { Passenger = passenger5 };
+            var seat6 = new Seat { Passenger = passenger6 };
+            var seat7 = new Seat();
+            var seat8 = new Seat();
+
             context.Passengers.AddRange(new[] { passenger1, passenger2, passenger3, passenger4, passenger5, passenger6 });
 
             context.PassengerParties.AddRange(
@@ -60,6 +69,8 @@ namespace API.Data
                 new PassengerParty() {Passengers = {passenger3, passenger4, passenger5}}
                 }
                 );
+
+            context.Seats.AddRange(new[] { seat1, seat2, seat3, seat4, seat5, seat6, seat7, seat8 });
 
             context.SaveChanges();
             #endregion
