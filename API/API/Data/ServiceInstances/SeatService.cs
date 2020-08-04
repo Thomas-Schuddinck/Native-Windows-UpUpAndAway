@@ -27,8 +27,8 @@ namespace API.Data.ServiceInstances
         public bool SwapSeats(int seat1, int seat2)
         {
             //Get seats from DB and check for null
-            var s1 = seats.SingleOrDefault(s => s.SeatId == seat1);
-            var s2 = seats.SingleOrDefault(s => s.SeatId == seat2);
+            var s1 = seats.Include(s => s.Passenger).SingleOrDefault(s => s.SeatId == seat1);
+            var s2 = seats.Include(s => s.Passenger).SingleOrDefault(s => s.SeatId == seat2);
             if (s1 == null || s2 == null)
                 return false;
 
