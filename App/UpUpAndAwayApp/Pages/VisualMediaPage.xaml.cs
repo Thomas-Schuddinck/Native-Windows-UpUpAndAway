@@ -1,6 +1,14 @@
-﻿using Shared.DisplayModels;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
+using Shared.DisplayModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -13,6 +21,9 @@ namespace UpUpAndAwayApp.Pages
     /// </summary>
     public sealed partial class VisualMediaPage : Page
     {
+
+        private string currentType;
+
         public VisualMediaPage()
         {
             this.InitializeComponent();
@@ -40,8 +51,8 @@ namespace UpUpAndAwayApp.Pages
 
         private void Navigate_To_MovieDetail(Movie movie)
         {
-            
-            this.ContentFrame.Navigate(typeof(MovieDetailPage), movie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight } );
+
+            this.ContentFrame.Navigate(typeof(MovieDetailPage), movie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void Navigate_To_SerieDetail(Serie serie)
@@ -49,5 +60,42 @@ namespace UpUpAndAwayApp.Pages
 
             this.ContentFrame.Navigate(typeof(SerieDetailPage), serie, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
+
+        private void ApplyFilter(object sender, RoutedEventArgs e)
+        {
+            var genreraw = this.GenreFilterBox.SelectedValue ?? "All";
+            string genre = genreraw.ToString();
+
+            var title = this.SearchBar.Text;
+
+
+            switch (currentType.ToUpper())//Oneliner?
+            {
+                case "MOVIES":
+                    this.MoviesView.ItemsSource = new ObservableCollection<Movie>(ViewModel.Movies.Where(s => genre == "All" || s.Genre.ToUpper().Contains(genre.ToUpper()))).Where(s => title == "" || s.Title.ToUpper().Contains(title.ToUpper()));
+                    break;
+                case "SERIES":
+                    this.SeriesView.ItemsSource = new ObservableCollection<Serie>(ViewModel.Series.Where(s => genre == "All" || s.Genre.ToUpper().Contains(genre.ToUpper()))).Where(s => title == "" || s.Title.ToUpper().Contains(title.ToUpper()));
+                    break;
+            }
+        }
+
+
+        private void ChangePivotView(object sender, SelectionChangedEventArgs e)
+        {
+            switch (Pivot.SelectedIndex)
+            {
+                case 0:
+                    currentType = "Movies";
+                    break;
+                case 1:
+                    currentType = "Series";
+                    break;
+                default:
+                    currentType = "wot";
+                    break;
+            }
+        }
+
     }
 }

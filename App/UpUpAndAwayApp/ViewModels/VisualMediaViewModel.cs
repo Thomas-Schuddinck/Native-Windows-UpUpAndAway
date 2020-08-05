@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Shared.DisplayModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using UpUpAndAwayApp.Data;
@@ -9,11 +10,54 @@ namespace UpUpAndAwayApp.ViewModels
 {
     public class VisualMediaViewModel
     {
-        
+
         public ObservableCollection<Movie> Movies { get; private set; }
         public ObservableCollection<Movie> HighlightedMovies { get; private set; }
         public ObservableCollection<Serie> Series { get; private set; }
         public ObservableCollection<Serie> HighlightedSeries { get; private set; }
+
+        public ICollection<string> Genres => new[] {
+            "All",
+            "Action",
+            "Adventure",
+            "Animated",
+            "Biography",
+            "Comedy",
+            "Crime",
+            "Dance",
+            "Disaster",
+            "Documentary",
+            "Drama",
+            "Erotic",
+            "Family",
+            "Fantasy",
+            "Found Footage",
+            "Historical",
+            "Horror",
+            "Independent",
+            "Legal",
+            "Live Action",
+            "Martial Arts",
+            "Musical",
+            "Mystery",
+            "Noir",
+            "Performance",
+            "Political",
+            "Romance",
+            "Satire",
+            "Science Fiction",
+            "Short",
+            "Silent",
+            "Slasher",
+            "Sports",
+            "Spy",
+            "Superhero",
+            "Supernatural",
+            "Suspense",
+            "Teen",
+            "Thriller",
+            "War",
+            "Western" };
 
         public VisualMediaViewModel()
         {
@@ -22,11 +66,11 @@ namespace UpUpAndAwayApp.ViewModels
             GetMoviesFromAPI();
             GetSeriesFromAPI();
         }
-        
+
         private async void GetMoviesFromAPI()
         {
             HttpClient client = new HttpClient();
-            foreach(string id in VisualMediaData.movieTitels)
+            foreach (string id in VisualMediaData.movieTitels)
             {
                 var jsonResponse = await client.GetStringAsync(new Uri(GenerateMovieRequestString(id)));
                 var movie = JsonConvert.DeserializeObject<Movie>(jsonResponse);
