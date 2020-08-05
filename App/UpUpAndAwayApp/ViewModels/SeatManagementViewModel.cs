@@ -81,9 +81,13 @@ namespace UpUpAndAwayApp.ViewModels
             var res = await client.PutAsync("http://localhost:5000/api/Seat", new StringContent(data, System.Text.Encoding.UTF8, "application/json"));
             var json = await res.Content.ReadAsStringAsync();
             var lst = JsonConvert.DeserializeObject<ObservableCollection<Seat>>(json);
-            Seats = new ObservableCollection<Seat>();
-            RaisePropertyChanged(nameof(Seats));
-            lst.ToList().ForEach(i => Seats.Add(i));
+
+            SelectedSeat = null;
+            SwapTo = null;
+            Seats.Clear();
+            lst.OrderBy(s => s.SeatId).ToList().ForEach(s => Seats.Add(s));
+            
+            //Recalculate the new non-empty seats
             SetNonEmptySeats();
         }
 
@@ -95,11 +99,11 @@ namespace UpUpAndAwayApp.ViewModels
             Seats.Clear();
             lst.ToList().ForEach(i => Seats.Add(i));
             SetNonEmptySeats();
-
         }
 
         private void SetNonEmptySeats()
         {
+            NonEmptySeats.Clear();
             Seats.Where(s => s.Passenger != null).OrderBy(s => s.SeatId).ToList().ForEach(t => NonEmptySeats.Add(t));
         }
 
