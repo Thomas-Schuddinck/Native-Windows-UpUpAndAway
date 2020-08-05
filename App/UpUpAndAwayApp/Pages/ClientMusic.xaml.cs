@@ -50,11 +50,11 @@ namespace UpUpAndAwayApp.Pages
             var list = ViewModel.Songs;
             if (Titlefilter.Text != "")
             {
-                list = new ObservableCollection<Song>(list.Where(s => s.Title.Contains(Titlefilter.Text)));
+                list = new ObservableCollection<Song>(list.Where(s => s.Title.ToLower().Contains(Titlefilter.Text.ToLower())));
             }
             if (Artistfilter.Text != "")
             {
-                list = new ObservableCollection<Song>(list.Where(s => s.Artist.Contains(Artistfilter.Text)));
+                list = new ObservableCollection<Song>(list.Where(s => s.Artist.ToLower().Contains(Artistfilter.Text.ToLower())));
             }
             SongList.ItemsSource = list;
         }
