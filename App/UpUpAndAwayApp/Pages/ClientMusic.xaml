@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="UpUpAndAwayApp.Pages.ClientMusic"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UpUpAndAwayApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Models="using:Shared.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <SplitView x:Name="PageView" PanePlacement="Right" IsPaneOpen="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+            <Grid  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Text="Songs" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+                <TextBox x:Name="Titlefilter" KeyUp="Filter_Click" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Title"></TextBox>
+                <TextBox x:Name="Artistfilter" KeyUp="Filter_Click"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" PlaceholderText="Title"></TextBox>
+            </Grid>
+            <ListView x:Name="SongList" HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Songs, Mode=OneWay}" Grid.Row="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None" IsItemClickEnabled="True">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:Song">
+                    <Grid Height="170" Width="300" AutomationProperties.Name="{x:Bind Path=Title, Mode=OneWay, FallbackValue='song titel'}" Margin="10 0 10 30">
+                        <Image Source="{x:Bind Path=SongBanner}" Stretch="UniformToFill"/>
+                        <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{ThemeResource SystemBaseLowColor}" Padding="5">
+                            <TextBlock Text="{x:Bind Path=Title, Mode=OneWay, FallbackValue='song titel'}"  Foreground="White"/>
+                            <TextBlock Text="{x:Bind Path=Artist, Mode=OneWay, FallbackValue='song artist'}" Style="{ThemeResource CaptionTextBlockStyle}"  Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+        <SplitView.Pane>
+            <Frame x:Name="ContentFrame"></Frame>
+        </SplitView.Pane>
+    </SplitView>
+</Page>

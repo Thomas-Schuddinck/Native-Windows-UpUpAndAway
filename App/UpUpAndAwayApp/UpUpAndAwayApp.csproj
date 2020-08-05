@@ -133,6 +133,9 @@
     <Compile Include="Pages\ClientChat.xaml.cs">
       <DependentUpon>ClientChat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ClientMusic.xaml.cs">
+      <DependentUpon>ClientMusic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientVluchtInformatie.xaml.cs">
       <DependentUpon>ClientVluchtInformatie.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
     <Compile Include="Pages\PassengerOrderPage.xaml.cs">
       <DependentUpon>PassengerOrderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SongDetailPage.xaml.cs">
+      <DependentUpon>SongDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\VisualMediaPage.xaml.cs">
       <DependentUpon>VisualMediaPage.xaml</DependentUpon>
     </Compile>
@@ -183,6 +189,8 @@
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\PassengerViewModel.cs" />
+    <Compile Include="ViewModels\SongDetailViewModel.cs" />
+    <Compile Include="ViewModels\SongViewModel.cs" />
     <Compile Include="ViewModels\VisualMediaViewModel.cs" />
     <Compile Include="ViewModels\WebshopViewModel.cs" />
   </ItemGroup>
@@ -190,6 +198,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Design\projectGuides.guides" />
     <None Include="UpUpAndAwayApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ClientChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +271,10 @@
     <Page Include="Pages\PassengerOrderPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SongDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\VisualMediaPage.xaml">
       <SubType>Designer</SubType>

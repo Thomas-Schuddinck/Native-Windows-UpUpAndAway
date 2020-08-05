@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
@@ -7,10 +8,12 @@ using API.Data.IServices;
 using API.Data.ServiceInstances;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -35,6 +38,7 @@ namespace API
             services.AddScoped<IConsumableService, ConsumableService>();
             services.AddScoped<IPassengerService, PassengerService>();
             services.AddScoped<ISeatService, SeatService>();
+            services.AddScoped<ISongService, SongService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
@@ -72,6 +76,12 @@ namespace API
             app.UseSwaggerUi3();
             app.UseMvc();
             app.UseRouting();
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Data/Resources")),
+                RequestPath = new PathString("/Data/Resources")
+            });
 
             app.UseEndpoints(endpoints =>
             {

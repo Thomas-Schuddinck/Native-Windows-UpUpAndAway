@@ -35,6 +35,26 @@ namespace API.Data
                     new Consumable(3, "Paprika Chips", "Paprika chips van Lays", 0, "https://thysshop.be/9314-thickbox_default/Lays-Chips-Paprika-Stuk-85-g.jpg"),
                     new Consumable(3, "Gezouten Chips", "Gezouten chips van Lays", 0, "https://thysshop.be/8786-large_default/Lays-Chips-Naturel-Stuk-40-g.jpg")
                 });
+            context.Songs.AddRange(new[] {
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                    new Song("We are number one", "LazyTown", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/WeAreNumberOne.mp3", "http://localhost:5000/Data/Resources/Img/WeAreNumberOne.jpg"),
+                    new Song("Sandstorm", "Darude", "Date", "genre", "http://localhost:5000/Data/Resources/Mp3/DarudeSandstorm.mp3", "http://localhost:5000/Data/Resources/Img/DarudeSandstorm.jpg"),
+                }); ;
 
             context.SaveChanges();
             //Herschreven zodat het op 2 lijntjes past
