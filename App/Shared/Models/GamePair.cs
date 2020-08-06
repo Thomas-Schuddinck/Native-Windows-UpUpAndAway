@@ -12,6 +12,7 @@ namespace Shared.Models
         public Game Game2 { get; set; }
         public Passenger Winner { get; set; }
         public GameType GameType { get; set; }
+        public WaitingStatus WaitingStatus { get; set; }
         public bool IsDraw { get; set; }
         [NotMapped]
         public IWinnerCalculator WinnerCalculator { get; set; }
@@ -29,9 +30,10 @@ namespace Shared.Models
             GameType = gameType;
             WinnerCalculator = winnerCalculator;
             DetermineGameFactory();
-            var games = GameFactory.CreateGamePair(passenger1, passenger2);
+            var games = GameFactory.CreateGamePair(passenger1, passenger2, this);
             Game1 = games[0];
             Game2 = games[1];
+            ResetWaitingStatus();
         }
 
         public void DetermineWinner()
@@ -42,6 +44,25 @@ namespace Shared.Models
                 if (Winner == null)
                     IsDraw = true;
             }  
+        }
+        public void UpdateWaitingStatus()
+        {
+            WaitingStatus++;
+            if(WaitingStatus == WaitingStatus.BothPlayersReady)
+            {
+                UpdateBothGameStatus();
+            }
+        }
+
+        private void ResetWaitingStatus()
+        {
+            WaitingStatus = WaitingStatus.NoPlayersReady;
+        }
+
+        public void UpdateBothGameStatus()
+        {
+            Game1.UpdateStatus();
+            Game2.UpdateStatus();
         }
         public void DetermineGameFactory()
         {

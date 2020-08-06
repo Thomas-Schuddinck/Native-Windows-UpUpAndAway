@@ -11,7 +11,7 @@ namespace Shared.Models
         {
         }
 
-        public HangmanGame(Passenger player) : base(player)
+        public HangmanGame(Passenger player, GamePair gamePair) : base(player, gamePair)
         {
             Guesses = new List<Guess>();
             Word = "";

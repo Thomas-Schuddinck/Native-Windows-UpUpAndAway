@@ -9,23 +9,30 @@ namespace Shared.Models
         public Passenger Player { get; private set; }
         public GameStatus GameStatus { get; private set; }
         public PlayerStatus PlayerStatus { get; set; }
+        public GamePair GamePair { get; private set; }
 
         protected Game()
         {
         }
 
-        protected Game(Passenger player)
+        protected Game(Passenger player, GamePair gamePair)
         {
             Player = player;
             GameStatus = GameStatus.Created;
             PlayerStatus = PlayerStatus.Unfinished;
+            GamePair = gamePair;
         }
 
-        protected void UpdateStatus()
+        public void UpdateStatus()
         {
             if(GameStatus != GameStatus.Finished)
+            {
                 GameStatus += 1;
-            throw new InvalidOperationException("Game is already finished");
+                if (GameStatus == GameStatus.Finished)
+                    GamePair.UpdateWaitingStatus();
+            }                
+            else
+                throw new InvalidOperationException("Game is already finished");
         }
 
     }

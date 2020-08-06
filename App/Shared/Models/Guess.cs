@@ -4,18 +4,18 @@ using System.Text;
 
 namespace Shared.Models
 {
-    public class Guess
+    public abstract class Guess
     {
         public int GuessId { get; set; }
-        public char Letter { get; private set; }
+        public bool IsGoodGuess { get; private set; }
 
-        public Guess()
+        protected Guess()
         {
         }
 
-        public Guess(char letter)
+        protected Guess(bool isGoodGuess)
         {
-            Letter = letter;
+            IsGoodGuess = isGoodGuess;
         }
     }
 }
