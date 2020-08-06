@@ -16,6 +16,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="300"/>
             <RowDefinition Height="700"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <AppBar HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <Grid>
@@ -44,7 +45,7 @@
                 <TextBlock x:Name="genreText" Text="{x:Bind Path=ViewModel.CurrentMovie.Genre, Mode=OneWay, FallbackValue='movie genre'}" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" FontStyle="Oblique" />
             </StackPanel>
             <TextBlock x:Name="releaseText" Text="{x:Bind Path=ViewModel.CurrentMovie.Released, Mode=OneWay, FallbackValue='movie release date'}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Right" FontSize="20" Grid.Row="0" Grid.Column="2" />
-            <Button x:Name="playButton" Content="Watch Movie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F"/>
+            <Button x:Name="playButton" Content="Watch Movie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F" Click="Play"/>
             <TextBlock x:Name="plotText" HorizontalAlignment="Center" Text="{x:Bind Path=ViewModel.CurrentMovie.Plot, Mode=OneWay, FallbackValue='movie plot'}" TextWrapping="Wrap" Padding="5" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" FontSize="14"  Margin="20, 0, 0, 0" />
         </Grid>
 

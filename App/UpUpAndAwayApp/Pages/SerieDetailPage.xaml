@@ -50,7 +50,7 @@
                 </Border>
             </StackPanel>
             
-            <Button x:Name="playButton" Content="Watch Serie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F"/>
+            <Button x:Name="playButton" Click="Play" Content="Watch Serie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F"/>
             <TextBlock x:Name="plotText" HorizontalAlignment="Center" Text="{x:Bind Path=ViewModel.CurrentSerie.Plot, Mode=OneWay, FallbackValue='serie plot'}" TextWrapping="Wrap" Padding="5" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" FontSize="14"  Margin="20, 0, 0, 0" />
         </Grid>
 

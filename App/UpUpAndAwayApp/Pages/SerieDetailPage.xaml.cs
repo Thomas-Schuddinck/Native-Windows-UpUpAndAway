@@ -1,7 +1,9 @@
-﻿using Shared.DisplayModels;
+﻿using Windows.UI.Xaml;
+using Shared.DisplayModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using UpUpAndAwayApp.Utils;
 
 namespace UpUpAndAwayApp.Pages
 {
@@ -30,5 +32,10 @@ namespace UpUpAndAwayApp.Pages
         }
         */
 
+
+        private void Play(object sender, RoutedEventArgs e)
+        {
+            MediaPlayerTool.PlayDefaultMediaFile();
+        }
     }
 }
