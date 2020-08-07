@@ -6,10 +6,10 @@ namespace Shared.Models
     public abstract class Game
     {
         public int GameId { get; set; }
-        public Passenger Player { get; private set; }
-        public GameStatus GameStatus { get; private set; }
+        public Passenger Player { get;set; }
+        public GameStatus GameStatus { get; set; }
         public PlayerStatus PlayerStatus { get; set; }
-        public GamePair GamePair { get; private set; }
+        public GamePair GamePair { get; set; }
 
         protected Game()
         {

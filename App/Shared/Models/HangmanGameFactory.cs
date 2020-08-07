@@ -8,7 +8,7 @@ namespace Shared.Models
     {
         public override List<Game> CreateGamePair(Passenger passenger1, Passenger passenger2, GamePair gamePair)
         {
-            return new List<Game>() { new HangmanGame(passenger1, gamePair), new HangmanGame(passenger2, gamePair) };
+            return new List<Game>() { new HangmanGame(passenger1, null), new HangmanGame(passenger2, null) };
         }
     }
 }

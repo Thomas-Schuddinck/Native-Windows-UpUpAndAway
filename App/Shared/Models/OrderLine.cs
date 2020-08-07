@@ -17,7 +17,7 @@ namespace Shared.Models
             {
                 return _amount;
             }
-             set
+            set
             {
                 if (value <= 0)
                     throw new ArgumentException("Amount cannot be zero or less!");

@@ -55,6 +55,8 @@ namespace API.Data.ServiceInstances
             GamePair gamePair = new GamePair(newGameDTO.GameType, FindPassenger(newGameDTO.PlayerId1), FindPassenger(newGameDTO.PlayerId2));
             gamePairs.Add(gamePair);
             context.SaveChanges();
+            gamePair.SetGamePairForGames();
+            context.SaveChanges();
             return gamePair.GamePairId;
         }
 

@@ -8,8 +8,10 @@ namespace Shared.Models
     public class GamePair
     {
         public int GamePairId { get; set; }
-        public Game Game1 { get; set; }
-        public Game Game2 { get; set; }
+        public Game FirstGame { get; set; }
+        public Game SecondGame { get; set; }
+        public int FirstGameId { get; set; }
+        public int SecondGameId { get; set; }
         public Passenger Winner { get; set; }
         public GameType GameType { get; set; }
         public WaitingStatus WaitingStatus { get; set; }
@@ -19,7 +21,7 @@ namespace Shared.Models
         [NotMapped]
         public GameFactory GameFactory { get; set; }
         [NotMapped]
-        public bool GamesFinished => Game1.GameStatus == Enums.GameStatus.Finished && Game2.GameStatus == Enums.GameStatus.Finished;
+        public bool GamesFinished =>  (FirstGame.GameStatus == Enums.GameStatus.Finished && SecondGame.GameStatus == Enums.GameStatus.Finished);
 
         public GamePair()
         {
@@ -28,19 +30,27 @@ namespace Shared.Models
         public GamePair(GameType gameType, Passenger passenger1, Passenger passenger2)
         {
             GameType = gameType;
-            DetermineWinnerCalculator();
             DetermineGameFactory();
+            DetermineWinnerCalculator();
             var games = GameFactory.CreateGamePair(passenger1, passenger2, this);
-            Game1 = games[0];
-            Game2 = games[1];
+            FirstGame = games[0];
+            FirstGameId = FirstGame.GameId;
+            SecondGame = games[1];
+            SecondGameId = SecondGame.GameId;
             ResetWaitingStatus();
+        }
+
+        public void SetGamePairForGames()
+        {
+            FirstGame.GamePair = this;
+            SecondGame.GamePair = this;
         }
 
         public void DetermineWinner()
         {
             if (GamesFinished)
             {
-                Winner = WinnerCalculator.DetermineWinner(Game1, Game2);
+                Winner = WinnerCalculator.DetermineWinner(FirstGame, SecondGame);
                 if (Winner == null)
                     IsDraw = true;
             }  
@@ -61,8 +71,8 @@ namespace Shared.Models
 
         public void UpdateBothGameStatus()
         {
-            Game1.UpdateStatus();
-            Game2.UpdateStatus();
+            FirstGame.UpdateStatus();
+            SecondGame.UpdateStatus();
         }
         public void DetermineGameFactory()
         {

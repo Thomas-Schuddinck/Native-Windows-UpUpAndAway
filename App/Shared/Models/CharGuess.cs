@@ -6,7 +6,7 @@ namespace Shared.Models
 {
     public class CharGuess : Guess
     {
-        public char Letter { get; private set; }
+        public char Letter { get; set; }
 
         public CharGuess()
         {
