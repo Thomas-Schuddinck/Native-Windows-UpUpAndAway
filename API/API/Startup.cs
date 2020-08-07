@@ -34,6 +34,7 @@ namespace API
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IConsumableService, ConsumableService>();
             services.AddScoped<IPassengerService, PassengerService>();
+            services.AddScoped<IGameService, GameService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
