@@ -28,6 +28,7 @@ namespace Shared.DisplayModels
         public PlayerStatus PlayerStatus { get; private set; }
         public GamePairDTO GamePairDTO { get; private set; }
         public Passenger Opponent { get; private set; }
+        public GameType gameType { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

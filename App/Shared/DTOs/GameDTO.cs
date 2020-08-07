@@ -14,6 +14,7 @@ namespace Shared.DTOs
         public GameStatus GameStatus { get; private set; }
         public PlayerStatus PlayerStatus { get; set; }
         public GamePairDTO GamePair { get; private set; }
+        public GameType GameType { get; private set; }
 
         protected GameDTO(Game game)
         {
@@ -22,7 +23,8 @@ namespace Shared.DTOs
             GameStatus = game.GameStatus;
             PlayerStatus = game.PlayerStatus;
             GamePair = new GamePairDTO(game.GamePair);
-            Opponent = new PassengerDTO(game.GamePair.Game1.GameId == GameId ? game.GamePair.Game2.Player : game.GamePair.Game1.Player); 
+            Opponent = new PassengerDTO(game.GamePair.Game1.GameId == GameId ? game.GamePair.Game2.Player : game.GamePair.Game1.Player);
+            GameType = game.GamePair.GameType;
         }
     }
 }

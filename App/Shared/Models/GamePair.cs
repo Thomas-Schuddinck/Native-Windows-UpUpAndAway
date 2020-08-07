@@ -25,10 +25,10 @@ namespace Shared.Models
         {
         }
 
-        public GamePair(GameType gameType, IWinnerCalculator winnerCalculator, Passenger passenger1, Passenger passenger2)
+        public GamePair(GameType gameType, Passenger passenger1, Passenger passenger2)
         {
             GameType = gameType;
-            WinnerCalculator = winnerCalculator;
+            DetermineWinnerCalculator();
             DetermineGameFactory();
             var games = GameFactory.CreateGamePair(passenger1, passenger2, this);
             Game1 = games[0];
@@ -68,6 +68,11 @@ namespace Shared.Models
         {
             if (GameType == GameType.HangMan)
                 GameFactory = new HangmanGameFactory();
+        }
+        public void DetermineWinnerCalculator()
+        {
+            if (GameType == GameType.HangMan)
+                WinnerCalculator = new HangmanWinnerCalculator();
         }
     }
 }
