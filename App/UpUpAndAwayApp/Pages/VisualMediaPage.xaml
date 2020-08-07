@@ -11,15 +11,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
 
-            <ComboBox x:Name="GenreFilterBox" SelectionChanged="ApplyFilter" ItemsSource="{x:Bind ViewModel.Genres}"/>
+            <ComboBox Width="150" HorizontalContentAlignment="Center" Margin="50,0,0,0" x:Name="GenreFilterBox" SelectionChanged="ApplyFilter" ItemsSource="{x:Bind ViewModel.Genres}"/>
 
-            <TextBox x:Name="SearchBar" KeyUp="ApplyFilter" PlaceholderText="Search By Name"/>
+            <TextBox Margin="50,0,0,0" x:Name="SearchBar" KeyUp="ApplyFilter" PlaceholderText="Search By Name"/>
 
 
         </StackPanel>
