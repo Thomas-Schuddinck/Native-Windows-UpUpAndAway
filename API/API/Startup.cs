@@ -37,6 +37,7 @@ namespace API
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IConsumableService, ConsumableService>();
             services.AddScoped<IPassengerService, PassengerService>();
+            services.AddScoped<IGameService, GameService>();
             services.AddScoped<ISeatService, SeatService>();
             services.AddScoped<ISongService, SongService>();
 
