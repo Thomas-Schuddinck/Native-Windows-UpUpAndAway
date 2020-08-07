@@ -23,11 +23,10 @@ namespace UpUpAndAwayApp.Pages
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("orders", typeof(PersonelOrderPage)),
-            ("promotions", typeof(VisualMediaPage)),
+            ("promotions", typeof(ChangeReduction)),
             ("messaging", typeof(Webshop)),
             ("chat", typeof(Notification)),
-
-
+            ("seats", typeof(SeatManagement)),
             ("logout", typeof(MainPage))
         };
         

@@ -1,4 +1,6 @@
-﻿using Shared.Enums;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Shared.Enums;
 
 namespace Shared.DisplayModels
 {
@@ -13,6 +15,8 @@ namespace Shared.DisplayModels
 
         #region ReadOnly-Properties
         public string NumSeasons => TotalSeasons + " seizoenen"; 
+
+        public ObservableCollection<string> DisplaySeasonsList => new ObservableCollection<string>(Enumerable.Range(0, TotalSeasons).Select(s=> $"Season {s + 1}"));
         #endregion
 
         #region Constructors

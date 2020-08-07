@@ -1,7 +1,9 @@
-﻿using Shared.DisplayModels;
+﻿using Windows.UI.Xaml;
+using Shared.DisplayModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using UpUpAndAwayApp.Utils;
 
 namespace UpUpAndAwayApp.Pages
 {
@@ -22,6 +24,8 @@ namespace UpUpAndAwayApp.Pages
         {
             var serie = e.Parameter as Serie;
             this.ViewModel = new SerieDetailViewModel(serie);
+            this.SeasonsBox.SelectedIndex = 0;
+            this.EpisodeBox.SelectedIndex = 0;
         }
         /*
         private void GoBackToOverview()
@@ -30,5 +34,16 @@ namespace UpUpAndAwayApp.Pages
         }
         */
 
+
+        private void Play(object sender, RoutedEventArgs e)
+        {
+            MediaPlayerTool.PlayDefaultMediaFile();
+        }
+
+        private void SelectSeason(object sender, SelectionChangedEventArgs e)
+        {
+            var season = this.SeasonsBox.SelectedIndex + 1;
+            ViewModel.SelectedSeason = season;
+        }
     }
 }

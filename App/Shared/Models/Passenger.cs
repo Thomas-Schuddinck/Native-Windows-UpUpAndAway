@@ -18,7 +18,7 @@ namespace Shared.Models
             {
                 return _firstName;
             }
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("First name of the passenger cannot be empty or containing only whitespace!");
@@ -31,7 +31,7 @@ namespace Shared.Models
             {
                 return _lastName;
             }
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Last name of the passenger cannot be empty or containing only whitespace!");
