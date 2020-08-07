@@ -1,8 +1,11 @@
-﻿using Shared.DisplayModels;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Shared.DisplayModels;
 using UpUpAndAwayApp.Models.ListItemModels;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -99,6 +102,26 @@ namespace UpUpAndAwayApp.Pages
             var webshopItem = (WebshopItem)e.ClickedItem;
             SetCurrentWebshopItem(webshopItem);
             OpenDetailPanel();
+        }
+
+        private void ApplyFilter(object sender, RoutedEventArgs e)
+        {
+
+            var min = this.PriceFilter.RangeMin;
+            var max = this.PriceFilter.RangeMax;
+
+            this.FilterMinValue.Text = $"Min: {min}";
+            this.FilterMaxValue.Text = $"Max: {max}";
+
+            var name = this.NameFilter.Text;
+
+            this.ShopGrid.ItemsSource = new ObservableCollection<WebshopItem>(this.ViewModel.WebshopItems.Where(s => s.Consumable.SellingPrice >= min && s.Consumable.SellingPrice <= max).Where(s => name == "" || s.Consumable.Name.ToUpper().Contains(name.ToUpper())));
+
+        }
+
+        private void PriceFilter_OnValueChanged(object sender, RangeChangedEventArgs e)
+        {
+            ApplyFilter(null, null);
         }
     }
 

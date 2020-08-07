@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using API.Data.IServices;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs;
+using Shared.Models;
+
+namespace API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SeatController : ControllerBase
+    {
+
+        private readonly ISeatService service;
+
+        public SeatController(ISeatService ser)
+        {
+            service = ser;
+        }
+
+        [HttpGet]
+        public ActionResult<ICollection<Seat>> GetAll()
+        {
+            return new OkObjectResult(service.GetAll());
+        }
+
+        [HttpPut]
+        public ActionResult<ICollection<Seat>> SwapSeats([FromBody] SeatSwapDTO dto)
+        {
+            if (service.SwapSeats(dto.First, dto.Second))
+                return Ok(service.GetAll());
+            return NotFound();
+        }
+
+    }
+}

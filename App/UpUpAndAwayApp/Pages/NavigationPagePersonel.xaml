@@ -22,6 +22,11 @@
                     <SymbolIcon Symbol="Video"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
+            <NavigationViewItem Tag="seats" Content="Seat Management">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="People"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
             <NavigationViewItem Tag="messaging" Content="Message Board">
                 <NavigationViewItem.Icon>
                     <SymbolIcon Symbol="Comment"/>

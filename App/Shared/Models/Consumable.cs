@@ -40,8 +40,8 @@ namespace Shared.Models
 
             }
         }
-        public string Description { get; private set; }
-        public string ProductPicture { get; private set; }
+        public string Description { get;  set; }
+        public string ProductPicture { get;  set; }
         public double Reduction
         {
             get
@@ -85,7 +85,7 @@ namespace Shared.Models
             Description = consumableDTO.Description;
             Reduction = consumableDTO.Reduction;
             ProductPicture = consumableDTO.ProductPicture;
-        } 
+        }
         #endregion
     }
 }

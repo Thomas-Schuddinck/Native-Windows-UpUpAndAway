@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 using Shared.Models;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace API.Controllers
@@ -18,12 +19,21 @@ namespace API.Controllers
         {
             consumableService = oserv;
         }
-        
+
         // GET api/values
         //[HttpGet]
         public ActionResult<IEnumerable<Consumable>> Get()
         {
             return Ok(consumableService.GetAll().Select(c => new ConsumableDTO(c)).ToList());
+        }
+
+        [HttpPut]
+        public ActionResult UpdateReductions([FromBody] ReductionChangeDTO dto)
+        {
+            Debug.WriteLine($"Timestamp is {dto.Timestamp}");
+            if (consumableService.UpdateReductions(dto.Items))
+                return Ok();
+            return BadRequest();
         }
     }
 }

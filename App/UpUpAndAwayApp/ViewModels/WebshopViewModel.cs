@@ -6,6 +6,7 @@ using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using UpUpAndAwayApp.Models.ListItemModels;
@@ -22,6 +23,12 @@ namespace UpUpAndAwayApp.ViewModels
 
         #region Properties
         public ObservableCollection<WebshopItem> WebshopItems { get; private set; }
+
+        public double MinPrice =>
+            WebshopItems.Count == 0 ? 0 : WebshopItems.Select(s => s.Consumable.SellingPrice).Min();
+        public double MaxPrice => 
+            WebshopItems.Count == 0 ? 100 : WebshopItems.Select(s => s.Consumable.SellingPrice).Max();
+
 
         public DisplayOrder Cart
         {
@@ -73,6 +80,10 @@ namespace UpUpAndAwayApp.ViewModels
             var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/Consumable"));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<ConsumableDTO>>(json);
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(new Consumable(i), this)));
+            RaisePropertyChanged(nameof(MinPrice));
+            RaisePropertyChanged(nameof(MaxPrice));
+            Debug.WriteLine(MinPrice);
+            Debug.WriteLine(MaxPrice);
         }
 
         public async void SendOrder()
