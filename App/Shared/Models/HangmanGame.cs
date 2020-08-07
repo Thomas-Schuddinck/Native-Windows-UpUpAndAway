@@ -5,7 +5,7 @@ namespace Shared.Models
     public class HangmanGame : Game
     {
         public List<Guess> Guesses { get; set; }
-        public string Word { get; private set; }
+        public string Word { get; set; }
 
         public HangmanGame()
         {

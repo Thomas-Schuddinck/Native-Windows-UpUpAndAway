@@ -7,7 +7,7 @@ namespace Shared.Models
     public abstract class Guess
     {
         public int GuessId { get; set; }
-        public bool IsGoodGuess { get; private set; }
+        public bool IsGoodGuess { get; set; }
 
         protected Guess()
         {

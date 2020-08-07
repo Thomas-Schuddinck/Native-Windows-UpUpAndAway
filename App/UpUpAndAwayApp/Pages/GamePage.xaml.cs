@@ -30,5 +30,10 @@ namespace UpUpAndAwayApp.Pages
             this.ViewModel = new GameViewModel();
         }
         public GameViewModel ViewModel;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

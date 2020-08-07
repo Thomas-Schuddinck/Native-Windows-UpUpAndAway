@@ -19,7 +19,7 @@ namespace Shared.Models
             {
                 return _price;
             }
-            private set
+            set
             {
                 if (value < 0)
                     throw new ArgumentException("the price cannot be negative!");
@@ -32,7 +32,7 @@ namespace Shared.Models
             {
                 return _name;
             }
-            private set
+            set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("The name cannot be empty or only containing whitespace!");
@@ -48,7 +48,7 @@ namespace Shared.Models
             {
                 return _reduction;
             }
-            private set
+            set
             {
                 if (value < 0 || value > 1)
                     throw new ArgumentException("Price reduction cannot be lower than 0 and not be higher than 1!");

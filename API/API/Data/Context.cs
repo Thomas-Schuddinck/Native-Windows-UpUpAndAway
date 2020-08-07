@@ -13,6 +13,7 @@ namespace API.Data
         public DbSet<PassengerParty> PassengerParties { get; set; }
 
         public DbSet<Game> Games { get; set; }
+        public DbSet<Guess> Guesses { get; set; }
         public DbSet<GamePair> GamePairs { get; set; }
 
         public Context(DbContextOptions options) : base(options)
@@ -21,6 +22,8 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+
+
             mb.Entity<Consumable>();
             mb.Entity<Order>().HasMany(s => s.OrderLines).WithOne(o => o.Order);
             mb.Entity<Order>().HasOne(s => s.Passenger).WithMany();
@@ -28,9 +31,13 @@ namespace API.Data
             mb.Entity<Passenger>();//.HasMany(s => s.PlacedOrders).WithOne();
             mb.Entity<PassengerParty>().HasMany(s => s.Passengers).WithOne();
 
-            mb.Entity<GamePair>().HasOne(gp => gp.Game1).WithOne();
-            mb.Entity<GamePair>().HasOne(gp => gp.Game2).WithOne();
-            mb.Entity<Game>().HasOne(g => g.Player).WithMany();
+            mb.Entity<GamePair>().HasOne(gp => gp.FirstGame).WithOne().HasForeignKey<GamePair>(g => g.FirstGameId).OnDelete(DeleteBehavior.Restrict);
+            mb.Entity<GamePair>().HasOne(gp => gp.SecondGame).WithOne().HasForeignKey<GamePair>(g => g.SecondGameId).OnDelete(DeleteBehavior.Restrict);
+            mb.Entity<HangmanGame>().HasOne(g => g.Player).WithMany();
+            mb.Entity<WordGuess>();
+            mb.Entity<CharGuess>();
+
+
 
             //TODO Test
         }
