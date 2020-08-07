@@ -14,7 +14,7 @@ namespace API.Data
 
         public async Task InitializeData()
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             if (context.Database.EnsureCreated())
             {
                 SeedData();
