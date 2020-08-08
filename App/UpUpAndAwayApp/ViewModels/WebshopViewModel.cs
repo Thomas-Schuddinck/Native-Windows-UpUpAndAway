@@ -82,8 +82,6 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(new Consumable(i), this)));
             RaisePropertyChanged(nameof(MinPrice));
             RaisePropertyChanged(nameof(MaxPrice));
-            Debug.WriteLine(MinPrice);
-            Debug.WriteLine(MaxPrice);
         }
 
         public async void SendOrder()

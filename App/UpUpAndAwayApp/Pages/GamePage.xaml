@@ -30,6 +30,23 @@
                         </Grid.ColumnDefinitions>
                         <!-- form for new game -->
                     </Grid>
+                    <Grid Grid.Row="0" Grid.Column="0" Padding="10 10 10 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="0" Grid.Column="0" Margin="0 0 0 10" >
+                            <TextBlock Text="Create New Game" Margin="10 0 10 10" />
+                        </Border>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                            <ComboBox x:Name="GameType" ItemsSource="{x:Bind ViewModel.GameTypes }"  Margin="10 0 10 0"/>
+                            <ComboBox x:Name="PartyMember" ItemsSource="{x:Bind ViewModel.PartyMembers }" DisplayMemberPath="FullName" Margin="10 0 10 0"/>
+                            <Button Content="Create" />
+                        </StackPanel>
+                    </Grid>
                     <controls:DataGrid x:Name="dataGridCreated" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
                     ItemsSource="{x:Bind ViewModel.CreatedGames}">

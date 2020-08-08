@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 using Shared.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -40,6 +41,15 @@ namespace API.Controllers
             if (p == null)
                 return null;
             return passengerService.GetParty(passengerId).PassengerPartyId;
+        }
+        //GET api/values/5
+        [HttpGet("partymembers/{passengerId}")]
+        public ActionResult<IEnumerable<Passenger>> GetPartyMembers(int passengerId)
+        {
+            PassengerParty p = passengerService.GetParty(passengerId);
+            if (p == null)
+                return null;
+            return Ok(passengerService.GetPartyMembers(p.PassengerPartyId, passengerId).Select(p => new PassengerDTO(p)).ToList());
         }
     }
 }
