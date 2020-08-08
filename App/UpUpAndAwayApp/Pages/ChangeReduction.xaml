@@ -9,12 +9,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{x:Bind VM.Items}" HorizontalAlignment="Center">
+        <ListView Grid.Row="0"  ItemsSource="{x:Bind VM.Items}" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Width="300">
             <ListView.ItemTemplate>
                 <DataTemplate  x:DataType="models:ReductionItem">
                     <Grid>
@@ -32,7 +32,6 @@
                         
                     </Grid>
                 </DataTemplate>
-                
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

@@ -30,14 +30,21 @@ namespace UpUpAndAwayApp.ViewModels
             set
             {
                 selectedSeat = value;
-                FillDisplay(value);
+                FillDisplay();
                 RaisePropertyChanged(nameof(SelectedSeat));
                 RaisePropertyChanged(nameof(ShowSecond));
+                RaisePropertyChanged(nameof(SelectedSeatInformation));
             }
         }
 
-        private Seat swapTo;
+        public bool ShowSecond => SelectedSeat != null;
 
+
+
+        public string SelectedSeatInformation => SelectedSeat == null ? "" : $"Selected Seat {SelectedSeat.SeatId} with Passenger {SelectedSeat.Passenger.FullName}";
+
+
+        private Seat swapTo;
         public Seat SwapTo
         {
             get => swapTo;
@@ -46,11 +53,13 @@ namespace UpUpAndAwayApp.ViewModels
                 swapTo = value;
                 RaisePropertyChanged(nameof(SwapTo));
                 RaisePropertyChanged(nameof(CanSave));
+                RaisePropertyChanged(nameof(SwapToInformation));
             }
         }
 
-        public bool ShowSecond => SelectedSeat != null;
         public bool CanSave => SwapTo != null && ShowSecond;
+
+        public string SwapToInformation => SwapTo == null ? "" : $"Swap to Seat {SwapTo.SeatId}. " + (SwapTo.Passenger == null ? "This Seat is still empty." : $"This Seat belongs to Passenger {SwapTo.Passenger.FullName}");
 
         public SeatManagementViewModel()
         {
@@ -61,11 +70,14 @@ namespace UpUpAndAwayApp.ViewModels
             GetSeatsFromAPI();
         }
 
-        private void FillDisplay(Seat seat)
+        private void FillDisplay()
         {
             DisplaySeats.Clear();
-            foreach (var temp in Seats.Where(s => s.SeatId != seat.SeatId).OrderBy(s => s.SeatId))
-                DisplaySeats.Add(temp);
+            if (SelectedSeat == null)
+                Seats.ToList().ForEach(s => DisplaySeats.Add(s));
+            else
+                foreach (var temp in Seats.Where(s => s.SeatId != SelectedSeat.SeatId).OrderBy(s => s.SeatId))
+                    DisplaySeats.Add(temp);
 
         }
 
@@ -86,7 +98,7 @@ namespace UpUpAndAwayApp.ViewModels
             SwapTo = null;
             Seats.Clear();
             lst.OrderBy(s => s.SeatId).ToList().ForEach(s => Seats.Add(s));
-            
+
             //Recalculate the new non-empty seats
             SetNonEmptySeats();
         }
