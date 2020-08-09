@@ -33,7 +33,9 @@ namespace API.Data.ServiceInstances
         {
             return games
                 .Where(g => g.Player.PassengerId == passengerId)
-                .Include(g => g.GamePair)
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.Player)
                 .AsNoTracking().ToList();
         }
 

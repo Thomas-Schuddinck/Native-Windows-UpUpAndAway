@@ -19,6 +19,12 @@ namespace API.Controllers
             GameService = gameService;
         }
 
+        [HttpGet("{passengerId}")]
+        public ActionResult<IEnumerable<GameDTO>> GetByUser(int passengerId)
+        {
+            return Ok(GameService.GetByUser(passengerId).Select(g => g.CreateDTO()).ToList());
+        }
+
         [HttpPost]
         public ActionResult<int> Post([FromBody] NewGameDTO dto)
         {

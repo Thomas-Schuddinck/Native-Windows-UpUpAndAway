@@ -13,6 +13,11 @@ namespace Shared.DTOs
         public WaitingStatus WaitingStatus { get; set; }
         public bool IsDraw { get; set; }
         public bool IsFinished { get; set; }
+        
+        public GamePairDTO()
+        {
+
+        }
 
         public GamePairDTO(GamePair gamePair)
         {

@@ -1,4 +1,5 @@
-﻿using Shared.Enums;
+﻿using Shared.DTOs;
+using Shared.Enums;
 using System;
 
 namespace Shared.Models
@@ -34,6 +35,8 @@ namespace Shared.Models
             else
                 throw new InvalidOperationException("Game is already finished");
         }
+
+        public abstract GameDTO CreateDTO();
 
     }
 }

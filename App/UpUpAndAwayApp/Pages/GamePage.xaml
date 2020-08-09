@@ -44,7 +44,7 @@
                         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                             <ComboBox x:Name="GameType" ItemsSource="{x:Bind ViewModel.GameTypes }"  Margin="10 0 10 0"/>
                             <ComboBox x:Name="PartyMember" ItemsSource="{x:Bind ViewModel.PartyMembers }" DisplayMemberPath="FullName" Margin="10 0 10 0"/>
-                            <Button Content="Create" />
+                            <Button Content="Create" Click="CreateNewGame"/>
                         </StackPanel>
                     </Grid>
                     <controls:DataGrid x:Name="dataGridCreated" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
@@ -54,17 +54,17 @@
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
@@ -94,17 +94,17 @@
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
@@ -134,17 +134,17 @@
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage}" 
                             FontSize="20" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>

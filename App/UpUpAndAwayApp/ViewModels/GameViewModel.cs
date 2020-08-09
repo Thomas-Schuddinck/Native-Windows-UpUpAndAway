@@ -29,7 +29,7 @@ namespace UpUpAndAwayApp.ViewModels
             {
                 return _createdGames;
             }
-            private set
+            set
             {
                 _createdGames = value;
                 RaisePropertyChanged(nameof(CreatedGames));
@@ -41,7 +41,7 @@ namespace UpUpAndAwayApp.ViewModels
             {
                 return _startedGames;
             }
-            private set
+            set
             {
                 _startedGames = value;
                 RaisePropertyChanged(nameof(StartedGames));
@@ -53,7 +53,7 @@ namespace UpUpAndAwayApp.ViewModels
             {
                 return _finishedGames;
             }
-            private set
+            set
             {
                 _finishedGames = value;
                 RaisePropertyChanged(nameof(FinishedGames));
@@ -77,6 +77,8 @@ namespace UpUpAndAwayApp.ViewModels
         {
             PartyMembers = new List<Passenger>();
             GetPartyMembersFromAPI();
+            RefreshGames();
+            
         }
 
         private void RaisePropertyChanged(string name)
@@ -90,6 +92,45 @@ namespace UpUpAndAwayApp.ViewModels
             var json = await client.GetStringAsync(new Uri(String.Format("http://localhost:5000/api/Passenger/partymembers/{0}", LoginSingleton.passenger.PassengerId)));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<PassengerDTO>>(json);
             lst.ToList().ForEach(i => PartyMembers.Add(new Passenger(i)));
+        }
+        private async void RefreshGames()
+        {
+            CreatedGames = new ObservableCollection<DisplayGame>();
+            StartedGames = new ObservableCollection<DisplayGame>();
+            FinishedGames = new ObservableCollection<DisplayGame>();
+            HttpClient client = new HttpClient();
+            var json = await client.GetStringAsync(new Uri(String.Format("http://localhost:5000/api/Game/{0}", LoginSingleton.passenger.PassengerId)));
+            var lst = JsonConvert.DeserializeObject<ObservableCollection<GameDTO>>(json);
+            lst.ToList().ForEach(i => AddGame(i.ToDisplayGame()));
+        }
+
+        private async void SendNewGameToAPI(NewGameDTO newGameDTO)
+        {
+            var game = JsonConvert.SerializeObject(newGameDTO);
+            HttpClient client = new HttpClient();
+            var res = await client.PostAsync("http://localhost:5000/api/Game", new StringContent(game, System.Text.Encoding.UTF8, "application/json"));
+            RefreshGames();
+        }
+
+        private NewGameDTO CreateGameDTO(GameType gameType, Passenger opponent)
+        {
+            return new NewGameDTO(LoginSingleton.passenger.PassengerId, opponent.PassengerId, gameType);
+        }
+
+        public void CreateGame(GameType gameType, Passenger opponent)
+        {
+            SendNewGameToAPI(CreateGameDTO(gameType, opponent));
+        }
+
+        private void AddGame(DisplayGame displayGame)
+        {
+            if (displayGame.GameStatus == GameStatus.Created)
+                CreatedGames.Add(displayGame);
+            else if (displayGame.GameStatus == GameStatus.Started)
+                StartedGames.Add(displayGame);
+            else
+                FinishedGames.Add(displayGame);
+
         }
     }
 }

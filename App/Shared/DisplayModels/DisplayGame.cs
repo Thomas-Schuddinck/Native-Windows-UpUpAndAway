@@ -11,6 +11,7 @@ namespace Shared.DisplayModels
     public class DisplayGame : INotifyPropertyChanged
     {
         private string _displayMessage;
+        private GameType _gameType;
 
         public string DisplayMessage
         {
@@ -24,13 +25,28 @@ namespace Shared.DisplayModels
                 NotifyPropertyChanged(nameof(DisplayMessage));
             }
         }
-        public GameStatus GameStatus { get; private set; }
-        public PlayerStatus PlayerStatus { get; private set; }
-        public GamePairDTO GamePairDTO { get; private set; }
-        public Passenger Opponent { get; private set; }
-        public GameType gameType { get; private set; }
+        public GameStatus GameStatus { get; set; }
+        public PlayerStatus PlayerStatus { get; set; }
+        public GamePairDTO GamePairDTO { get; set; }
+        public Passenger Opponent { get; set; }
+        public GameType GameType 
+        {
+            get
+            {
+                return _gameType;
+            }
+            set
+            {
+                _gameType = value;
+                NotifyPropertyChanged(nameof(GameType));
+                NotifyPropertyChanged(nameof(DisplayGameType));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string DisplayGameType => GameType.ToString().ToUpper();
+        public string DisplayOpponent => Opponent.FullName;
 
         public DisplayGame(GameDTO gameDTO)
         {

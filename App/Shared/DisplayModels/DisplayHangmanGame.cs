@@ -25,7 +25,7 @@ namespace Shared.DisplayModels
             {
                 return _encodedWord;
             }
-            private set
+            set
             {
                 _encodedWord = value;
                 NotifyPropertyChanged(nameof(EncodedWord));

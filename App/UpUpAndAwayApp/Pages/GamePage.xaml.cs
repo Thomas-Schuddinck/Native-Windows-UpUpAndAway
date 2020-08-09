@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Shared.Enums;
+using Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +32,13 @@ namespace UpUpAndAwayApp.Pages
             this.ViewModel = new GameViewModel();
         }
         public GameViewModel ViewModel;
+
+        private void CreateNewGame(object sender, RoutedEventArgs e)
+        {
+            var t = (GameType)GameType.SelectedItem;
+            var s = (Passenger)PartyMember.SelectedItem;
+            ViewModel.CreateGame((GameType)GameType.SelectedItem, (Passenger)PartyMember.SelectedItem);
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
