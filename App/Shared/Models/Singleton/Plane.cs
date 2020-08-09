@@ -104,7 +104,7 @@ namespace Shared.Models.Singleton
 
         public Passenger FindPassengerBySeatNumber(int seatnumber)
         {
-            return Seats.FirstOrDefault(s => s.SeatNumber == seatnumber)?.Passenger;
+            return Seats.FirstOrDefault(s => s.SeatId == seatnumber)?.Passenger;
         }
         #endregion
     }

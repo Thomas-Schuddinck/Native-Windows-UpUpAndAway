@@ -21,7 +21,23 @@ namespace API.Data.ServiceInstances
         }
         public ICollection<Seat> GetAll()
         {
-            throw new NotImplementedException();
+            return seats.Include(s => s.Passenger).AsNoTracking().ToList();
+        }
+
+        public bool SwapSeats(int seat1, int seat2)
+        {
+            //Get seats from DB and check for null
+            var s1 = seats.Include(s => s.Passenger).SingleOrDefault(s => s.SeatId == seat1);
+            var s2 = seats.Include(s => s.Passenger).SingleOrDefault(s => s.SeatId == seat2);
+            if (s1 == null || s2 == null)
+                return false;
+
+            var temp = s1.Passenger;//Swap seats
+            s1.Passenger = s2.Passenger;
+            s2.Passenger = temp;
+
+            seats.UpdateRange(new[] { s1, s2 });//Update
+            return context.SaveChanges() == 2;//If everything went fine, there should be 2 updates entries
         }
     }
 }

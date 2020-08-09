@@ -10,7 +10,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Pivot >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+            <ComboBox Width="150" HorizontalContentAlignment="Center" Margin="50,0,0,0" x:Name="GenreFilterBox" SelectionChanged="ApplyFilter" ItemsSource="{x:Bind ViewModel.Genres}"/>
+
+            <TextBox Margin="50,0,0,0" x:Name="SearchBar" KeyUp="ApplyFilter" PlaceholderText="Search By Name"/>
+
+
+        </StackPanel>
+
+        <Pivot Grid.Row="1" x:Name="Pivot" SelectionChanged="ChangePivotView">
             <PivotItem x:Name="Movies" Header="Movies" FontSize="20">
                 <Grid Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
@@ -19,7 +33,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
 
-                    <ListView HorizontalAlignment="Stretch" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Movies, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="MovieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
+                    <ListView x:Name="MoviesView"  HorizontalAlignment="Stretch" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Movies, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="MovieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models:Movie">
                                 <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title, Mode=OneWay, FallbackValue='movie titel'}" Margin="10 0 10 30">
@@ -48,7 +62,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Text="Highlighted" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
 
-                    <ListView HorizontalAlignment="Stretch" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="SerieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
+                    <ListView x:Name="SeriesView" HorizontalAlignment="Stretch" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Series, Mode=OneWay}" Grid.ColumnSpan="2" Grid.RowSpan="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="SerieListItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplateSerie" x:DataType="Models:Serie">
                                 <Grid Height="420" Width="300" AutomationProperties.Name="{x:Bind Path=Title, Mode=OneWay, FallbackValue='serie titel'}" Margin="10 0 10 30">

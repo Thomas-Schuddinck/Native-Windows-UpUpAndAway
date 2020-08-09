@@ -9,28 +9,36 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{x:Bind VM.Items}" HorizontalAlignment="Center">
+        <ListView Grid.Row="0"  ItemsSource="{x:Bind VM.Items}" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Width="300">
             <ListView.ItemTemplate>
-
                 <DataTemplate  x:DataType="models:ReductionItem">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='Productnaam'}" Grid.Column="0" HorizontalAlignment="Left"/>
-                        <TextBox Text="{x:Bind Path=Reduction, Mode=TwoWay, FallbackValue='0'}" Grid.Column="1" HorizontalAlignment="Right" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='Productnaam'}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"  Margin="0 0 0 0">
+                            <TextBox Text="{x:Bind Path=Reduction, Mode=TwoWay, FallbackValue='0'}" HorizontalAlignment="Right" Margin="0 0 0 0"/>
+                        </StackPanel>
+                        
                     </Grid>
                 </DataTemplate>
-                
             </ListView.ItemTemplate>
-            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
-        <Button Content="Save" Click="SaveChanges" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="Save" Click="SaveChanges" Width="100" FontSize="18" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Grid>
 </Page>

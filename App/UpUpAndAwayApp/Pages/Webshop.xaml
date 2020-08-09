@@ -10,6 +10,7 @@
     xmlns:Models1="using:Shared.DisplayModels"
     xmlns:Models2="using:Shared.Models"
     xmlns:local1="using:UpUpAndAwayApp.Converters"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
@@ -34,7 +35,7 @@
         </Button>
         <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PaneClosing="SplitviewPaneClosing" PanePlacement="Right" OpenPaneLength="600" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
             <SplitView.Pane>
-                <Grid>
+                <Grid x:Name="CartGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="7*" />
@@ -43,7 +44,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Grid RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Grid.Column="0" Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -105,18 +106,22 @@
                         <TextBlock Text="{x:Bind Path=ViewModel.Cart.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
                         <Button Content="Place Order" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendOrder" />
                     </StackPanel>
-                    
+
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content >
-                <Grid>
+                <Grid x:Name="ItemsGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+
+
                     <StackPanel x:Name="DetailPane" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="0 0 20 0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -147,7 +152,17 @@
                             <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Description, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"  FontSize="20"/>
                         </Grid>
                     </StackPanel>
-                    <!--<GridView HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="1" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True">
+
+                    <StackPanel Grid.Row="1" x:Name="Filters" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock x:Name="FilterMinValue" Text="Min: " />
+                        <controls:RangeSelector Width="300" x:Name="PriceFilter" Minimum="{x:Bind Path=ViewModel.MinPrice, Mode=OneWay}" Maximum="{x:Bind Path=ViewModel.MaxPrice, Mode=OneWay}" StepFrequency="0.5" ValueChanged="PriceFilter_OnValueChanged">
+                        </controls:RangeSelector>
+                        <TextBlock x:Name="FilterMaxValue" Text="Max: "/>
+                        <TextBox x:Name="NameFilter" KeyUp="ApplyFilter" PlaceholderText="Search By Name" />
+
+                    </StackPanel>
+
+                    <GridView x:Name="ShopGrid" HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="2" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True">
                         <GridView.ItemTemplate>
                             <DataTemplate x:Name="itemding" x:DataType="Models:WebshopItem">
                                 <Grid Height="300" Width="300" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
@@ -175,7 +190,7 @@
                                 </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
-                    </GridView>-->
+                    </GridView>
 
                 </Grid>
             </SplitView.Content>

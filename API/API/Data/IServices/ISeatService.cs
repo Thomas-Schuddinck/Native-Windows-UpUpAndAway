@@ -14,5 +14,13 @@ namespace API.Data.IServices
         /// <returns>List of Seats</returns>
         ICollection<Seat> GetAll();
 
+        /// <summary>
+        /// Swaps the Passengers on both seats. Seat1 must always have a Passenger, Seat2 can be empty.
+        /// </summary>
+        /// <param name="seat1">Seat Passenger is originally sitting on</param>
+        /// <param name="seat2">Seat Passenger will be swapping to.</param>
+        /// <returns>True if successful</returns>
+        bool SwapSeats(int seat1, int seat2);
+
     }
 }

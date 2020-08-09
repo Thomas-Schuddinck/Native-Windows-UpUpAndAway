@@ -5,10 +5,66 @@
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Shared.Models"
+        xmlns:local1="using:UpUpAndAwayApp.Converters"
     mc:Ignorable="d"
+    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local1:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
+    <Grid VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!--Title-->
+            <RowDefinition Height="50"/>
+            <!-- Combobox for passengers -->
 
-    <Grid>
+            <RowDefinition Height="100"/>
+
+            <!-- Label -->
+
+            <RowDefinition Height="50"/>
+            <!-- New seats -->
+
+            <RowDefinition Height="100"/>
+
+            <!-- Label -->
+
+            <RowDefinition Height="50"/>
+            <!-- Save button -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Change Passenger Seats" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30" />
+
+
+        <ComboBox x:Name="CmbFirst"  Width="300" Grid.Row="1"  HorizontalAlignment="Center" ItemsSource="{x:Bind Path=VM.NonEmptySeats, Mode=OneWay}" SelectionChanged="ChangeFirst">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="models:Seat">
+                    <TextBlock Text="{x:Bind Path=SeatId, Mode=OneWay}"/>
+                    <!-- Add full name of passenger  -->
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Text="{x:Bind VM.SelectedSeatInformation, Mode=OneWay}" Grid.Row="2" HorizontalAlignment="Center"/>
+
+        <ComboBox x:Name="CmbSecond" Width="300" HorizontalAlignment="Center" Grid.Row="3" ItemsSource="{x:Bind Path=VM.DisplaySeats, Mode=OneWay}" Visibility="{x:Bind VM.ShowSecond, Mode=OneWay}"  SelectionChanged="ChangeSecond">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="models:Seat">
+                    <TextBlock Text="{x:Bind Path=SeatId, Mode=OneWay}"/>
+
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Text="{x:Bind VM.SwapToInformation, Mode=OneWay}" Grid.Row="4" HorizontalAlignment="Center"/>
+
+
+        <Button Width="300" Grid.Row="5" HorizontalAlignment="Center" Content="Save" Click="SaveChanges" Visibility="{x:Bind VM.CanSave, Converter={StaticResource BoolToVis}, Mode=OneWay}" />
+
+
+
 
     </Grid>
 </Page>

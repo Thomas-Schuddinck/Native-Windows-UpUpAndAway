@@ -1,0 +1,138 @@
+﻿<Page
+    x:Class="UpUpAndAwayApp.Pages.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UpUpAndAwayApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot >
+            <PivotItem x:Name="Created" Header="Created Games" FontSize="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="CreateGame" Grid.Row="0" Grid.Column="0" Visibility="Collapsed" Margin="0 0 20 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!-- form for new game -->
+                    </Grid>
+                    <controls:DataGrid x:Name="dataGridCreated" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{x:Bind ViewModel.CreatedGames}">
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn 
+                            Header="Game" 
+                            Width="*"
+                            Binding="{Binding GameType}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Opponent" 
+                            Width="*"
+                            Binding="{Binding NumberOfItems}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Status" 
+                            Width="*"
+                            Binding="{Binding TotalPrice}" 
+                            FontSize="20" />
+                            <controls:DataGridTemplateColumn Width="SizeToCells">
+                                <controls:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Padding="5 5 5 5">
+                                            <Button Content="Set Word" Click="Button_Click" FontSize="20"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </controls:DataGridTemplateColumn.CellTemplate>
+                            </controls:DataGridTemplateColumn>
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="Started" Header="Started Games" FontSize="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <controls:DataGrid x:Name="dataGridStarted" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{x:Bind ViewModel.StartedGames}">
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn 
+                            Header="Game" 
+                            Width="*"
+                            Binding="{Binding GameType}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Opponent" 
+                            Width="*"
+                            Binding="{Binding NumberOfItems}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Status" 
+                            Width="*"
+                            Binding="{Binding TotalPrice}" 
+                            FontSize="20" />
+                            <controls:DataGridTemplateColumn Width="SizeToCells">
+                                <controls:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Padding="5 5 5 5">
+                                            <Button Content="Open Game" Click="Button_Click" FontSize="20"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </controls:DataGridTemplateColumn.CellTemplate>
+                            </controls:DataGridTemplateColumn>
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="Finished" Header="Finished Games" FontSize="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <controls:DataGrid x:Name="dataGridFinished" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
+                    AutoGenerateColumns="False"
+                    ItemsSource="{x:Bind ViewModel.FinishedGames}">
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn 
+                            Header="Game" 
+                            Width="*"
+                            Binding="{Binding GameType}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Opponent" 
+                            Width="*"
+                            Binding="{Binding NumberOfItems}" 
+                            FontSize="20" />
+                            <controls:DataGridTextColumn 
+                            Header="Status" 
+                            Width="*"
+                            Binding="{Binding TotalPrice}" 
+                            FontSize="20" />
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
