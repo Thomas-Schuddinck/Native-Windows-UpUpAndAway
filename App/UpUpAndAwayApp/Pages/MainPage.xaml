@@ -22,20 +22,26 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Client.Height" Value="40"></Setter>
-                        <Setter Target="Personeel.Height" Value="40"></Setter>
-                        <Setter Target="About.Height" Value="40"></Setter>
+                        <Setter Target="Client.FontSize" Value="20"></Setter>
+                        <Setter Target="Personeel.FontSize" Value="20"></Setter>
+                        <Setter Target="About.FontSize" Value="20"></Setter>
+                        <Setter Target="Client.Height" Value="100"></Setter>
+                        <Setter Target="Personeel.Height" Value="100"></Setter>
+                        <Setter Target="About.Height" Value="100"></Setter>
                     </VisualState.Setters>
                 </VisualState>
 
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" />
+                        <AdaptiveTrigger MinWindowWidth="600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Client.Height" Value="50"></Setter>
-                        <Setter Target="Personeel.Height" Value="50"></Setter>
-                        <Setter Target="About.Height" Value="50"></Setter>
+                        <Setter Target="Client.FontSize" Value="15"></Setter>
+                        <Setter Target="Personeel.FontSize" Value="15"></Setter>
+                        <Setter Target="About.FontSize" Value="15"></Setter>
+                        <Setter Target="Client.Height" Value="75"></Setter>
+                        <Setter Target="Personeel.Height" Value="75"></Setter>
+                        <Setter Target="About.Height" Value="75"></Setter>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -44,9 +50,27 @@
                         <AdaptiveTrigger MinWindowWidth="1200" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Client.Height" Value="60"></Setter>
-                        <Setter Target="Personeel.Height" Value="60"></Setter>
-                        <Setter Target="About.Height" Value="60"></Setter>
+                        <Setter Target="Client.FontSize" Value="15"></Setter>
+                        <Setter Target="Personeel.FontSize" Value="15"></Setter>
+                        <Setter Target="About.FontSize" Value="15"></Setter>
+                        <Setter Target="Client.Height" Value="75"></Setter>
+                        <Setter Target="Personeel.Height" Value="75"></Setter>
+                        <Setter Target="About.Height" Value="75"></Setter>
+                        <Setter Target="Client.Margin">
+                            <Setter.Value>
+                                <Thickness>150,0,150,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="Personeel.Margin">
+                            <Setter.Value>
+                                <Thickness>150,0,150,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="About.Margin">
+                            <Setter.Value>
+                                <Thickness>150,0,150,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

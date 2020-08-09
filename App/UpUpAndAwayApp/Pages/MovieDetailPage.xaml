@@ -9,13 +9,57 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Padding="50,0,50,0">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="posterSmall.Visibility">
+                            <Setter.Value>
+                                <Visibility>Collapsed</Visibility>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="InfoPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target="scrollViewerPlot.(Grid.Column)" Value="0"/>
+                        <Setter Target="scrollViewerPlot.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="scrollViewerPlot.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="InfoPanel.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="playButton.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="playButton.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target="playButton.VerticalAlignment" Value="Center"/>
+                        <Setter Target="scrollViewerPlot.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target="scrollViewerPlot.VerticalAlignment" Value="Stretch"/>
+                        <Setter Target="scrollViewerPlot.(ScrollViewer.VerticalScrollBarVisibility)">
+                            <Setter.Value>
+                                <ScrollBarVisibility>Visible</ScrollBarVisibility>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="scrollViewerPlot.(ScrollViewer.VerticalScrollMode)">
+                            <Setter.Value>
+                                <ScrollMode>Enabled</ScrollMode>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="700"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition x:Name="bigPosterRow" Height="300*"/>
+            <RowDefinition Height="700*"/>
         </Grid.RowDefinitions>
         <AppBar HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <Grid>
@@ -27,7 +71,7 @@
             </Grid>
         </AppBar>
         <Image x:Name="posterBig" Source="{x:Bind Path=ViewModel.CurrentMovie.Poster, Mode=OneWay}" HorizontalAlignment="Center" Stretch="UniformToFill"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Opacity="0.4" RequestedTheme="Dark" Margin="0, 0, 0, 30"/>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" >
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -39,14 +83,15 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <Image x:Name="posterSmall" Source="{x:Bind Path=ViewModel.CurrentMovie.Poster, Mode=OneWay}" HorizontalAlignment="Left" Height="300" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="1" Margin="20, 0, 0, 0">
+            <StackPanel x:Name="InfoPanel" Orientation="Vertical" VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="1" Margin="20, 0, 0, 0">
                 <TextBlock x:Name="titelText" Text="{x:Bind Path=ViewModel.CurrentMovie.Title, Mode=OneWay, FallbackValue='movie titel'}" HorizontalAlignment="Left" FontSize="28" />
                 <TextBlock x:Name="genreText" Text="{x:Bind Path=ViewModel.CurrentMovie.Genre, Mode=OneWay, FallbackValue='movie genre'}" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap" FontStyle="Oblique" />
             </StackPanel>
             <TextBlock x:Name="releaseText" Text="{x:Bind Path=ViewModel.CurrentMovie.Released, Mode=OneWay, FallbackValue='movie release date'}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Right" FontSize="20" Grid.Row="0" Grid.Column="2" />
             <Button x:Name="playButton" Content="Watch Movie" HorizontalAlignment="Left" Width="200" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" FontSize="18" Background="#66295F0F"/>
-            <TextBlock x:Name="plotText" HorizontalAlignment="Center" Text="{x:Bind Path=ViewModel.CurrentMovie.Plot, Mode=OneWay, FallbackValue='movie plot'}" TextWrapping="Wrap" Padding="5" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" FontSize="14"  Margin="20, 0, 0, 0" />
+            <ScrollViewer x:Name="scrollViewerPlot" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+            <TextBlock x:Name="plotText" HorizontalAlignment="Center" Text="{x:Bind Path=ViewModel.CurrentMovie.Plot, Mode=OneWay, FallbackValue='movie plot'}" TextWrapping="Wrap" Padding="5" FontSize="14"  Margin="20, 0, 0, 0" />
+            </ScrollViewer>
         </Grid>
-
     </Grid>
 </Page>
