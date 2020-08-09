@@ -49,22 +49,22 @@
                     </Grid>
                     <controls:DataGrid x:Name="dataGridCreated" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.CreatedGames}">
+                    ItemsSource="{x:Bind ViewModel.CreatedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding DisplayGameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding DisplayOpponent}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding DisplayMessage}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
@@ -89,22 +89,22 @@
                     </Grid.ColumnDefinitions>
                     <controls:DataGrid x:Name="dataGridStarted" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.StartedGames}">
+                    ItemsSource="{x:Bind ViewModel.StartedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding DisplayGameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding DisplayOpponent}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding DisplayMessage}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
@@ -129,22 +129,22 @@
                     </Grid.ColumnDefinitions>
                     <controls:DataGrid x:Name="dataGridFinished" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.FinishedGames}">
+                    ItemsSource="{x:Bind ViewModel.FinishedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding DisplayGameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding DisplayOpponent}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding DisplayMessage}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>

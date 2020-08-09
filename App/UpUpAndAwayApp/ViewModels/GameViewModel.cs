@@ -93,18 +93,22 @@ namespace UpUpAndAwayApp.ViewModels
             var lst = JsonConvert.DeserializeObject<ObservableCollection<PassengerDTO>>(json);
             lst.ToList().ForEach(i => PartyMembers.Add(new Passenger(i)));
         }
-        private async void RefreshGames()
+        private void RefreshGames()
         {
             CreatedGames = new ObservableCollection<DisplayGame>();
             StartedGames = new ObservableCollection<DisplayGame>();
             FinishedGames = new ObservableCollection<DisplayGame>();
+            GetGamesFromAPI();
+        }
+        private async void GetGamesFromAPI()
+        {
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri(String.Format("http://localhost:5000/api/Game/{0}", LoginSingleton.passenger.PassengerId)));
             var lst = JsonConvert.DeserializeObject<ObservableCollection<GameDTO>>(json);
             lst.ToList().ForEach(i => AddGame(i.ToDisplayGame()));
         }
 
-        private async void SendNewGameToAPI(NewGameDTO newGameDTO)
+            private async void SendNewGameToAPI(NewGameDTO newGameDTO)
         {
             var game = JsonConvert.SerializeObject(newGameDTO);
             HttpClient client = new HttpClient();
