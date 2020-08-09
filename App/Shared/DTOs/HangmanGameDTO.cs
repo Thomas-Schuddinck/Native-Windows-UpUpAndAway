@@ -11,7 +11,7 @@ namespace Shared.DTOs
     public class HangmanGameDTO : GameDTO
     {
         public List<Guess> Guesses { get; set; }
-        public string Word { get; private set; }
+        public string Word { get; set; }
 
         public HangmanGameDTO() : base()
         {

@@ -12,6 +12,7 @@ namespace Shared.DisplayModels
     {
         private string _displayMessage;
         private GameType _gameType;
+        private Passenger _opponent;
 
         public string DisplayMessage
         {
@@ -28,7 +29,20 @@ namespace Shared.DisplayModels
         public GameStatus GameStatus { get; set; }
         public PlayerStatus PlayerStatus { get; set; }
         public GamePairDTO GamePairDTO { get; set; }
-        public Passenger Opponent { get; set; }
+        public Passenger Opponent 
+        {
+            get
+            {
+                return _opponent;
+            }
+            set
+            {
+                _opponent = value;
+                NotifyPropertyChanged(nameof(Opponent));
+                NotifyPropertyChanged(nameof(DisplayOpponent));
+                EvaluateDisplayMessage();
+            }
+        }
         public GameType GameType 
         {
             get
@@ -40,6 +54,7 @@ namespace Shared.DisplayModels
                 _gameType = value;
                 NotifyPropertyChanged(nameof(GameType));
                 NotifyPropertyChanged(nameof(DisplayGameType));
+                EvaluateDisplayMessage();
             }
         }
 
