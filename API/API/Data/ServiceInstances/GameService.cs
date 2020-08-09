@@ -29,6 +29,19 @@ namespace API.Data.ServiceInstances
             return CreatePair(newGameDTO) > 0;
         }
 
+        public bool UpdateHangman(SimpleHangmanDTO dto)
+        {
+            var game = (HangmanGame)games.SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
+
+            game.Guesses = dto.Guesses.ToList();
+
+            games.Update(game);
+
+            context.SaveChanges();
+
+            return true;
+        }
+
         public ICollection<Game> GetByUser(int passengerId)
         {
             return games
@@ -49,7 +62,9 @@ namespace API.Data.ServiceInstances
 
         public bool UpdateGame(Game game)
         {
-            throw new NotImplementedException();
+            var gameDB = games.SingleOrDefault(s => s.GameId == game.GameId) ?? throw new ArgumentException();
+
+            return true;
         }
 
         private int CreatePair(NewGameDTO newGameDTO)

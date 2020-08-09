@@ -28,7 +28,14 @@ namespace API.Data.IServices
         /// </summary>
         /// <param name="gameId">ID of the game</param>
         /// <returns>The requested game. returns null if not found</returns>
-        public Game GetById(int gameId);
+        Game GetById(int gameId);
+
+        /// <summary>
+        /// Updates a Hangman game
+        /// </summary>
+        /// <param name="dto">new Data</param>
+        /// <returns>True if successful</returns>
+        bool UpdateHangman(SimpleHangmanDTO dto);
 
         /// <summary>
         /// Returns all the Games of a single Passanger
