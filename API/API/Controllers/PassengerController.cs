@@ -4,6 +4,7 @@ using Shared.DTOs;
 using Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -20,7 +21,8 @@ namespace API.Controllers
         }
 
         // GET api/values
-        //[HttpGet]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Passenger>> Get()
         {
             return Ok(passengerService.GetAll());
@@ -28,6 +30,7 @@ namespace API.Controllers
 
         //GET api/values/5
         [HttpGet("{passengerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Passenger> GetByUser(int passengerId)
         {
             return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)));
@@ -35,6 +38,7 @@ namespace API.Controllers
 
         //GET api/values/5
         [HttpGet("party/{passengerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<int> GetParty(int passengerId)
         {
             PassengerParty p = passengerService.GetParty(passengerId);
@@ -44,6 +48,7 @@ namespace API.Controllers
         }
         //GET api/values/5
         [HttpGet("partymembers/{passengerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Passenger>> GetPartyMembers(int passengerId)
         {
             PassengerParty p = passengerService.GetParty(passengerId);
