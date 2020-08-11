@@ -25,7 +25,8 @@ namespace Shared.Models
         //word word pas achteraf ingesteld
         public void SetWord(string word)
         {
-            Word = word;
+            HangmanGame game = (HangmanGame)(GamePair.FirstGame.GameId == GameId ? GamePair.SecondGame : GamePair.FirstGame);
+            game.Word = word;
             UpdateWaitingStatus();
         }
 
