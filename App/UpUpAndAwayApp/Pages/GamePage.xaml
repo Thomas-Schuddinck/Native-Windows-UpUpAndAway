@@ -70,7 +70,7 @@
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Set Word" Click="Button_Click" FontSize="20"/>
+                                            <Button Content="Set Word" Click="SetWordHangmanGame" FontSize="20"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>

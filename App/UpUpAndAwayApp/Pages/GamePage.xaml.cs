@@ -1,4 +1,5 @@
-﻿using Shared.Enums;
+﻿using Shared.DisplayModels;
+using Shared.Enums;
 using Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,34 @@ namespace UpUpAndAwayApp.Pages
             var t = (GameType)GameType.SelectedItem;
             var s = (Passenger)PartyMember.SelectedItem;
             ViewModel.CreateGame((GameType)GameType.SelectedItem, (Passenger)PartyMember.SelectedItem);
+        }
+
+
+        public void SetWordHangmanGame(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (DisplayGame)button.DataContext;
+            GetWordForGame(item);
+            
+        }
+
+        private async void GetWordForGame(DisplayGame item)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Set Hangman Word",
+                Content = new TextBox(),
+                PrimaryButtonText = "Set Word"
+            };
+
+            // Finally, show the dialog
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                TextBox input = (TextBox)dialog.Content;
+                ViewModel.SetWordForGame(item.GameId, input.Text); 
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

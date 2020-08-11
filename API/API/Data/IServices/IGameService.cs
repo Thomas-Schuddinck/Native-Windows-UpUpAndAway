@@ -17,6 +17,13 @@ namespace API.Data.IServices
         bool CreateGame(NewGameDTO newGameDTO);
 
         /// <summary>
+        /// Set word for HangmanGame.
+        /// </summary>
+        /// <param name="hangmanWord">DTO with info for the word of the game</param>
+        /// <returns>True if successful</returns>
+        bool SetWordForGame(HangmanWordDTO hangmanWordDTO);
+
+        /// <summary>
         /// Update a game
         /// </summary>
         /// <param name="game">The game to be updated</param>

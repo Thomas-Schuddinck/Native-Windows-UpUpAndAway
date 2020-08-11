@@ -19,6 +19,7 @@ namespace Shared.DTOs
         public PlayerStatus PlayerStatus { get; set; }
         public GamePairDTO GamePair { get; set; }
         public GameType GameType { get; set; }
+        public bool IsReady { get; set; }
 
         protected GameDTO()
         {
@@ -34,6 +35,7 @@ namespace Shared.DTOs
             GamePair = new GamePairDTO(game.GamePair);
             Opponent = new PassengerDTO(game.GamePair.FirstGame.GameId == GameId ? game.GamePair.SecondGame.Player : game.GamePair.FirstGame.Player);
             GameType = game.GamePair.GameType;
+            IsReady = game.IsReady;
         }
 
         public abstract DisplayGame ToDisplayGame();

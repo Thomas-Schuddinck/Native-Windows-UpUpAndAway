@@ -11,6 +11,7 @@ namespace Shared.Models
         public GameStatus GameStatus { get; set; }
         public PlayerStatus PlayerStatus { get; set; }
         public GamePair GamePair { get; set; }
+        public bool IsReady { get; set; }
 
         protected Game()
         {
@@ -20,20 +21,33 @@ namespace Shared.Models
         {
             Player = player;
             GameStatus = GameStatus.Created;
+            IsReady = false;
             PlayerStatus = PlayerStatus.Unfinished;
             GamePair = gamePair;
         }
 
-        public void UpdateStatus()
+        public void UpdateGameStatus()
         {
             if(GameStatus != GameStatus.Finished)
             {
+                ChangeIsReady();
                 GameStatus += 1;
                 if (GameStatus == GameStatus.Finished)
+                    IsReady = false;
                     GamePair.UpdateWaitingStatus();
             }                
             else
                 throw new InvalidOperationException("Game is already finished");
+        }
+        public void UpdateWaitingStatus() 
+        {
+            ChangeIsReady();
+            GamePair.UpdateWaitingStatus();
+        }
+
+        public void ChangeIsReady()
+        {
+            IsReady = !IsReady;
         }
 
         public abstract GameDTO CreateDTO();

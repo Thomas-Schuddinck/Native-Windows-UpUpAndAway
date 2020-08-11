@@ -32,13 +32,9 @@ namespace API.Data.ServiceInstances
         public bool UpdateHangman(SimpleHangmanDTO dto)
         {
             var game = (HangmanGame)games.SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
-
             game.Guesses = dto.Guesses.ToList();
-
             games.Update(game);
-
             context.SaveChanges();
-
             return true;
         }
 
@@ -80,6 +76,18 @@ namespace API.Data.ServiceInstances
         private Passenger FindPassenger(int id)
         {
             return passengers.FirstOrDefault(p => p.PassengerId == id);
+        }
+
+        public bool SetWordForGame(HangmanWordDTO dto)
+        {
+            var game = (HangmanGame)games
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
+            game.SetWord(dto.Word);
+            games.Update(game);
+            context.SaveChanges();
+            return true;
         }
     }
 }

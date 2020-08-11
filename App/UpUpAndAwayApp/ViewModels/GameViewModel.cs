@@ -12,6 +12,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace UpUpAndAwayApp.ViewModels
 {
@@ -59,6 +61,7 @@ namespace UpUpAndAwayApp.ViewModels
                 RaisePropertyChanged(nameof(FinishedGames));
             }
         }
+
         public List<Passenger> PartyMembers
         {
             get
@@ -81,11 +84,7 @@ namespace UpUpAndAwayApp.ViewModels
             
         }
 
-        private void RaisePropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
+        #region API Methods
         private async void GetPartyMembersFromAPI()
         {
             HttpClient client = new HttpClient();
@@ -93,13 +92,7 @@ namespace UpUpAndAwayApp.ViewModels
             var lst = JsonConvert.DeserializeObject<ObservableCollection<PassengerDTO>>(json);
             lst.ToList().ForEach(i => PartyMembers.Add(new Passenger(i)));
         }
-        private void RefreshGames()
-        {
-            CreatedGames = new ObservableCollection<DisplayGame>();
-            StartedGames = new ObservableCollection<DisplayGame>();
-            FinishedGames = new ObservableCollection<DisplayGame>();
-            GetGamesFromAPI();
-        }
+
         private async void GetGamesFromAPI()
         {
             HttpClient client = new HttpClient();
@@ -108,7 +101,7 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => AddGame(i.ToDisplayGame()));
         }
 
-            private async void SendNewGameToAPI(NewGameDTO newGameDTO)
+        private async void SendNewGameToAPI(NewGameDTO newGameDTO)
         {
             var game = JsonConvert.SerializeObject(newGameDTO);
             HttpClient client = new HttpClient();
@@ -116,14 +109,27 @@ namespace UpUpAndAwayApp.ViewModels
             RefreshGames();
         }
 
-        private NewGameDTO CreateGameDTO(GameType gameType, Passenger opponent)
+        private async void SendHangmanWordToAPI(HangmanWordDTO wordDTO)
         {
-            return new NewGameDTO(LoginSingleton.passenger.PassengerId, opponent.PassengerId, gameType);
+            var game = JsonConvert.SerializeObject(wordDTO);
+            HttpClient client = new HttpClient();
+            var res = await client.PutAsync("http://localhost:5000/api/Game/word", new StringContent(game, System.Text.Encoding.UTF8, "application/json"));
+            RefreshGames();
+        }
+        #endregion
+
+        #region Support Data Methods
+        private void RaisePropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void CreateGame(GameType gameType, Passenger opponent)
+        private void RefreshGames()
         {
-            SendNewGameToAPI(CreateGameDTO(gameType, opponent));
+            CreatedGames = new ObservableCollection<DisplayGame>();
+            StartedGames = new ObservableCollection<DisplayGame>();
+            FinishedGames = new ObservableCollection<DisplayGame>();
+            GetGamesFromAPI();
         }
 
         private void AddGame(DisplayGame displayGame)
@@ -134,7 +140,30 @@ namespace UpUpAndAwayApp.ViewModels
                 StartedGames.Add(displayGame);
             else
                 FinishedGames.Add(displayGame);
-
         }
+        #endregion
+
+        #region DTO Creators
+        private NewGameDTO CreateGameDTO(GameType gameType, Passenger opponent)
+        {
+            return new NewGameDTO(LoginSingleton.passenger.PassengerId, opponent.PassengerId, gameType);
+        }
+
+        private HangmanWordDTO CreateWordDTO(int gameId, string word)
+        {
+            return new HangmanWordDTO(gameId, word);
+        } 
+        #endregion
+
+        public void SetWordForGame(int gameId, string word)
+        {
+            SendHangmanWordToAPI(CreateWordDTO(gameId, word));
+        }
+
+        public void CreateGame(GameType gameType, Passenger opponent)
+        {
+            SendNewGameToAPI(CreateGameDTO(gameType, opponent));
+        }
+
     }
 }

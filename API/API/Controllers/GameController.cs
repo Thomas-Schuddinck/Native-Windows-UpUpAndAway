@@ -48,6 +48,26 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Sets the word for a hangmangame.
+        /// </summary>
+        /// <param name="dto">DTO containing the new data</param>
+        /// <returns>ActionResult</returns>
+        [HttpPut("word/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult SetWordForHangmanGame([FromBody] HangmanWordDTO dto)
+        {
+            try
+            {
+                return Ok(GameService.SetWordForGame(dto));
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<int> Post([FromBody] NewGameDTO dto)

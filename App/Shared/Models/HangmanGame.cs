@@ -26,7 +26,7 @@ namespace Shared.Models
         public void SetWord(string word)
         {
             Word = word;
-            UpdateStatus();
+            UpdateWaitingStatus();
         }
 
         public override GameDTO CreateDTO()

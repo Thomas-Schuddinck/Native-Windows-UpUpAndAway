@@ -71,8 +71,8 @@ namespace Shared.Models
 
         public void UpdateBothGameStatus()
         {
-            FirstGame.UpdateStatus();
-            SecondGame.UpdateStatus();
+            FirstGame.UpdateGameStatus();
+            SecondGame.UpdateGameStatus();
         }
         public void DetermineGameFactory()
         {

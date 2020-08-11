@@ -13,7 +13,22 @@ namespace Shared.DisplayModels
         private string _displayMessage;
         private GameType _gameType;
         private Passenger _opponent;
+        private bool _isWaiting;
 
+        public int GameId { get; set; }
+        public bool IsReady
+        {
+            get
+            {
+                return _isWaiting;
+            }
+            set
+            {
+                _isWaiting = value;
+                NotifyPropertyChanged(nameof(IsReady));
+                NotifyPropertyChanged(nameof(DisplayMessage));
+            }
+        }
         public string DisplayMessage
         {
             get
@@ -65,10 +80,12 @@ namespace Shared.DisplayModels
 
         public DisplayGame(GameDTO gameDTO)
         {
+            GameId = gameDTO.GameId;
             GameStatus = gameDTO.GameStatus;
             PlayerStatus = gameDTO.PlayerStatus;
             GamePairDTO = gameDTO.GamePair;
             Opponent = new Passenger(gameDTO.Opponent);
+            IsReady = gameDTO.IsReady;
             EvaluateDisplayMessage();
         }
 
@@ -82,7 +99,10 @@ namespace Shared.DisplayModels
             if (GamePairDTO.WaitingStatus == WaitingStatus.NoPlayersReady)
                 DisplayMessage = "Waiting for both players";
             else if (GamePairDTO.WaitingStatus == WaitingStatus.OnePlayerReady)
-                DisplayMessage = "Waiting for one player";
+                if(IsReady)
+                    DisplayMessage = String.Format("Waiting for {0}", Opponent.FirstName);
+                else
+                    DisplayMessage = "Opponent is waiting for you";
             else if (GamePairDTO.IsFinished)
             {
                 if (GamePairDTO.Winner == null)
