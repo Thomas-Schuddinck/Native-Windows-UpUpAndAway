@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -72,6 +73,17 @@ namespace UpUpAndAwayApp.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void HangmanGameClicked(object sender, ItemClickEventArgs e)
+        {
+            var hangmanGame = (DisplayGame)e.ClickedItem;
+            Navigate_To_HangmanGame(hangmanGame);
+        }
+
+        private void Navigate_To_HangmanGame(DisplayGame game)
+        {
+           this.Frame.Navigate(typeof(HangmanGamePage), game, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

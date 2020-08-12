@@ -38,6 +38,13 @@ namespace API.Data.IServices
         Game GetById(int gameId);
 
         /// <summary>
+        /// Returns Hangman game for given id
+        /// </summary>
+        /// <param name="gameId">ID of the Hangman game</param>
+        /// <returns>The requested Hangman game. returns null if not found</returns>
+        HangmanGame GetHangmanById(int gameId);
+
+        /// <summary>
         /// Updates a Hangman game
         /// </summary>
         /// <param name="dto">new Data</param>

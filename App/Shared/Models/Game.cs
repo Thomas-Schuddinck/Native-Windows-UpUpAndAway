@@ -52,5 +52,7 @@ namespace Shared.Models
 
         public abstract GameDTO CreateDTO();
 
+        public abstract void Evaluate();
+
     }
 }

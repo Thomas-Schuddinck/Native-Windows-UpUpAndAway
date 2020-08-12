@@ -33,6 +33,7 @@ namespace API.Data.ServiceInstances
         {
             var game = (HangmanGame)games.SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
             game.Guesses = dto.Guesses.ToList();
+            game.Evaluate();
             games.Update(game);
             context.SaveChanges();
             return true;
@@ -51,6 +52,14 @@ namespace API.Data.ServiceInstances
         public Game GetById(int gameId)
         {
             return games
+                .Include(g => g.GamePair)
+                .Include(g => g.Player)
+                .SingleOrDefault(g => g.GameId == gameId);
+        }
+
+        public HangmanGame GetHangmanById(int gameId)
+        {
+            return (HangmanGame)games
                 .Include(g => g.GamePair)
                 .Include(g => g.Player)
                 .SingleOrDefault(g => g.GameId == gameId);

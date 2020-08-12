@@ -110,7 +110,7 @@
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Open Game" Click="Button_Click" FontSize="20"/>
+                                            <Button Content="Open Game" Click="HangmanGameClicked" FontSize="20"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>

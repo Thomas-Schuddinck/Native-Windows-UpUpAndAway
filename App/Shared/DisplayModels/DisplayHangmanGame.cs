@@ -12,9 +12,33 @@ namespace Shared.DisplayModels
     public class DisplayHangmanGame : INotifyPropertyChanged
     {
         private string _encodedWord;
+        private ObservableCollection<CharGuess> _goodGuesses;
+        private ObservableCollection<CharGuess> _badGuesses;
 
-        public ObservableCollection<CharGuess> GoodGuesses { get; set; }
-        public ObservableCollection<CharGuess> BadGuesses { get; set; }
+        public ObservableCollection<CharGuess> GoodGuesses
+        {
+            get
+            {
+                return _goodGuesses;
+            }
+            set
+            {
+                _goodGuesses = value;
+                NotifyPropertyChanged(nameof(GoodGuessesConverter));
+            }
+        }
+        public ObservableCollection<CharGuess> BadGuesses
+        {
+            get
+            {
+                return _badGuesses;
+            }
+            set
+            {
+                _badGuesses = value;
+                NotifyPropertyChanged(nameof(BadGuessesConverter));
+            }
+        }
         public ObservableCollection<WordGuess> FailedAttempts { get; set; }
         public ObservableCollection<Char> Alfabet { get; set; }
         public List<Guess> AllGuesses { get; set; }
@@ -32,12 +56,32 @@ namespace Shared.DisplayModels
             }
         }
 
+        public string GoodGuessesConverter => string.Join(" - ", GoodGuesses.Select(g => g.Letter));
+        public string BadGuessesConverter => string.Join(" - ", BadGuesses.Select(g => g.Letter));
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public DisplayHangmanGame(HangmanGameDTO hangmanGameDTO)
         {
             Word = hangmanGameDTO.Word;
+            SetupGuesses(hangmanGameDTO.Guesses);
+        }
 
+        private void SetupGuesses(List<Guess> guesses)
+        {
+            foreach(Guess guess in guesses)
+            {
+                AllGuesses.Add(guess);
+                if(guess is WordGuess)
+                    FailedAttempts.Add((WordGuess)guess);
+                else
+                {
+                    if (guess.IsGoodGuess)
+                        GoodGuesses.Add((CharGuess)guess);
+                    else
+                        BadGuesses.Add((CharGuess)guess);
+                }
+            }
         }
 
         private void NotifyPropertyChanged(string propertyName = "")
@@ -49,6 +93,12 @@ namespace Shared.DisplayModels
         public void FinishGame()
         {
             ShowWord();
+        }
+
+        public void EndGameIfLost()
+        {
+            if (AllGuesses.Count(g => !g.IsGoodGuess) >= 11)
+                FinishGame();
         }
 
         public void GuessWord(string word)
