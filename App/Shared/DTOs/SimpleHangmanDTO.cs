@@ -15,6 +15,10 @@ namespace Shared.DTOs
 
         public bool IsReady { get; set; }
 
+        public SimpleHangmanDTO()
+        {
+        }
+
         public SimpleHangmanDTO(HangmanGame hangmanGame)
         {
             GameId = hangmanGame.GameId;

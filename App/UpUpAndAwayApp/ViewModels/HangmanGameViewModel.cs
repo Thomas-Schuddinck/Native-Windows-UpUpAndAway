@@ -9,13 +9,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace UpUpAndAwayApp.ViewModels
 {
     public class HangmanGameViewModel : INotifyPropertyChanged
     {
         private DisplayHangmanGame _hangmanGame;
-        private string _hangmanImage;
+        private ImageSource _hangmanImage;
 
         public DisplayHangmanGame HangmanGame
         {
@@ -30,7 +32,7 @@ namespace UpUpAndAwayApp.ViewModels
 
             }
         }
-        public string HangmanImage
+        public ImageSource HangmanImage
         {
             get
             {
@@ -80,7 +82,10 @@ namespace UpUpAndAwayApp.ViewModels
 
         private void DetermineImageSrc()
         {
-            HangmanImage = string.Format("ms-appx:///Assets/Hangman/Galgje_{0}.png", CalculateTurn().ToString("00"));
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.UriSource = new Uri(string.Format("ms-appx:///Assets/Hangman/Galgje_{0}.png", CalculateTurn().ToString("00")));
+            HangmanImage = bitmapImage;
+
         }
         private int CalculateTurn()
         {
