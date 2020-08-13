@@ -41,7 +41,6 @@ namespace Shared.DisplayModels
             }
         }
         public ObservableCollection<WordGuess> FailedAttempts { get; set; }
-        public ObservableCollection<Char> Alfabet { get; set; }
         public List<Guess> AllGuesses { get; set; }
         public string Word { get; set; }
         public string EncodedWord
@@ -120,7 +119,6 @@ namespace Shared.DisplayModels
 
         public void GuessLetter(char letter)
         {
-            Alfabet.Remove(letter);
             AddCharGuess(new CharGuess(Array.IndexOf(Word.ToCharArray(), letter) == -1, letter));
         } 
         #endregion

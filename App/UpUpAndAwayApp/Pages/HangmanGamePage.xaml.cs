@@ -27,10 +27,49 @@ namespace UpUpAndAwayApp.Pages
         public HangmanGameViewModel ViewModel;
 
         public HangmanGamePage()
-        {
+        {            
             this.InitializeComponent();
+            LetterGuesser.SelectionChanged += LetterGuesser_SelectedIndexChanged;
+            WordGuesser.SelectionChanged += WordGuesser_InputChanged;
+            CheckLetterSelection();
+            CheckWordSelection();
         }
 
+        private void LetterGuesser_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CheckLetterSelection();
+        }
+
+        private void WordGuesser_InputChanged(object sender, RoutedEventArgs e)
+        {
+            CheckWordSelection();
+        }
+
+        void CheckLetterSelection()
+        {
+            if (LetterGuesser.SelectedItem != null)
+            {
+                LetterGuesserButton.IsEnabled = true;
+            }
+            else
+                LetterGuesserButton.IsEnabled = false;
+        }
+
+        void CheckWordSelection()
+        {
+            if (WordGuesser.Text.Trim() != "")
+            {
+                WordGuesserButton.IsEnabled = true;
+            }
+            else
+                WordGuesserButton.IsEnabled = false;
+        }
+
+        private void ResetInput()
+        {
+            WordGuesser.Text = "";
+            LetterGuesser.SelectedItem = null;
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

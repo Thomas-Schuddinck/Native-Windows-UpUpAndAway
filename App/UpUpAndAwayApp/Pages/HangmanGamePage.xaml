@@ -33,10 +33,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="LetterGuesser" Text="" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="10 0 10 0"/>
-                <Button Grid.Row="1" Content="GuessLetter" HorizontalAlignment="Center" />
+                <ComboBox x:Name="LetterGuesser" Header="Letters" HorizontalAlignment="Center" Width="100"  ItemsSource="{x:Bind ViewModel.AvailableChars, Mode=OneWay}" />
+                <Button x:Name="LetterGuesserButton" Grid.Row="1" Content="GuessLetter" HorizontalAlignment="Center"/>
                 <TextBox x:Name="WordGuesser" Text="" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10 0 10 0"/>
-                <Button Content="Guess Word" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
+                <Button x:Name="WordGuesserButton" Content="Guess Word" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
             </Grid>
 
         </StackPanel>

@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Namotion.Reflection;
+using Newtonsoft.Json;
 using Shared.DisplayModels;
 using Shared.DTOs;
 using Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
@@ -18,7 +20,21 @@ namespace UpUpAndAwayApp.ViewModels
     {
         private DisplayHangmanGame _hangmanGame;
         private ImageSource _hangmanImage;
+        private List<Char> _availableLetters;
 
+        public List<Char> AvailableChars
+        {
+            get
+            {
+                return _availableLetters;
+            }
+            set
+            {
+                _availableLetters = value;
+                RaisePropertyChanged(nameof(AvailableChars));
+
+            }
+        }
         public DisplayHangmanGame HangmanGame
         {
             get
@@ -60,6 +76,7 @@ namespace UpUpAndAwayApp.ViewModels
             var game = JsonConvert.DeserializeObject<SimpleHangmanDTO>(json);
             HangmanGame = new DisplayHangmanGame(game);
             DetermineImageSrc();
+            ConfigAvailableChars();
         }
 
 
@@ -71,6 +88,7 @@ namespace UpUpAndAwayApp.ViewModels
 
         public void AddCharGuess(char letter)
         {
+            AvailableChars.Remove(letter);
             HangmanGame.GuessLetter(letter);
             DetermineImageSrc();
         }
@@ -90,6 +108,16 @@ namespace UpUpAndAwayApp.ViewModels
         private int CalculateTurn()
         {
             return HangmanGame.AllGuesses.Count(g => !g.IsGoodGuess);
+        }
+
+        private void ConfigAvailableChars()
+        {
+            AvailableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+            foreach (CharGuess g in HangmanGame.BadGuesses)
+                AvailableChars.Remove(g.Letter);
+            foreach (CharGuess g in HangmanGame.GoodGuesses)
+                AvailableChars.Remove(g.Letter);
+
         }
     }
 }
