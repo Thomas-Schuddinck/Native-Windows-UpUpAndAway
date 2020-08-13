@@ -27,6 +27,7 @@ namespace Shared.DisplayModels
                 _isWaiting = value;
                 NotifyPropertyChanged(nameof(IsReady));
                 NotifyPropertyChanged(nameof(DisplayMessage));
+                NotifyPropertyChanged(nameof(ButtonVisible));
             }
         }
         public string DisplayMessage
@@ -77,6 +78,7 @@ namespace Shared.DisplayModels
 
         public string DisplayGameType => GameType.ToString().ToUpper();
         public string DisplayOpponent => Opponent.FullName;
+        public bool ButtonVisible => !IsReady;
 
         public DisplayGame(GameDTO gameDTO)
         {

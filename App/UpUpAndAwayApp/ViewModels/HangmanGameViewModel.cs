@@ -55,8 +55,9 @@ namespace UpUpAndAwayApp.ViewModels
         {
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri(String.Format("http://localhost:5000/api/Game/hangman/{0}", id)));
-            var game = JsonConvert.DeserializeObject<HangmanGameDTO>(json);
+            var game = JsonConvert.DeserializeObject<SimpleHangmanDTO>(json);
             HangmanGame = new DisplayHangmanGame(game);
+            DetermineImageSrc();
         }
 
 

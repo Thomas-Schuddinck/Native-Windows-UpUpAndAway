@@ -70,14 +70,10 @@ namespace UpUpAndAwayApp.Pages
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void HangmanGameClicked(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void HangmanGameClicked(object sender, ItemClickEventArgs e)
-        {
-            var hangmanGame = (DisplayGame)e.ClickedItem;
+            var button = (Button)sender;
+            var hangmanGame = (DisplayGame)button.DataContext;
             Navigate_To_HangmanGame(hangmanGame);
         }
 

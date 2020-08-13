@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:local1="using:UpUpAndAwayApp.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <local1:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <Grid>
         <Pivot >
             <PivotItem x:Name="Created" Header="Created Games" FontSize="20">
@@ -70,7 +72,7 @@
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Set Word" Click="SetWordHangmanGame" FontSize="20"/>
+                                            <Button Content="Set Word" Click="SetWordHangmanGame" FontSize="20" Visibility="{Binding Path=ButtonVisible, Converter={StaticResource BoolToVis}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>
@@ -110,7 +112,7 @@
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Open Game" Click="HangmanGameClicked" FontSize="20"/>
+                                            <Button Content="Open Game" Click="HangmanGameClicked" FontSize="20" Visibility="{Binding Path=ButtonVisible, Converter={StaticResource BoolToVis}}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>

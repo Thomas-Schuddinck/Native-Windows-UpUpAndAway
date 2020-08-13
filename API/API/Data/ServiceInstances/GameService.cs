@@ -59,10 +59,12 @@ namespace API.Data.ServiceInstances
 
         public HangmanGame GetHangmanById(int gameId)
         {
-            return (HangmanGame)games
-                .Include(g => g.GamePair)
+            var t = games
+                .Include(g => g.GamePair).ThenInclude(gp => gp.FirstGame).ThenInclude(fg => fg.Player)
+                .Include(g => g.GamePair).ThenInclude(gp => gp.SecondGame).ThenInclude(sg => sg.Player)
                 .Include(g => g.Player)
                 .SingleOrDefault(g => g.GameId == gameId);
+            return (HangmanGame)t;
         }
 
         public bool UpdateGame(Game game)

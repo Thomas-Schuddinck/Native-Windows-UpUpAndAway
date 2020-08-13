@@ -12,6 +12,7 @@ namespace Shared.DisplayModels
     public class DisplayHangmanGame : INotifyPropertyChanged
     {
         private string _encodedWord;
+        private int _gameId;
         private ObservableCollection<CharGuess> _goodGuesses;
         private ObservableCollection<CharGuess> _badGuesses;
 
@@ -56,20 +57,25 @@ namespace Shared.DisplayModels
             }
         }
 
-        public string GoodGuessesConverter => string.Join(" - ", GoodGuesses.Select(g => g.Letter));
-        public string BadGuessesConverter => string.Join(" - ", BadGuesses.Select(g => g.Letter));
+        public string GoodGuessesConverter => GoodGuesses.Count == 0 ? "No correct letters yet" : string.Join(" - ", GoodGuesses.Select(g => g.Letter));
+        public string BadGuessesConverter => BadGuesses.Count == 0 ? "No incorrect letters yet" : string.Join(" - ", BadGuesses.Select(g => g.Letter));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DisplayHangmanGame(HangmanGameDTO hangmanGameDTO)
+        public DisplayHangmanGame(SimpleHangmanDTO hangmanGameDTO)
         {
+            _gameId = hangmanGameDTO.GameId;
             Word = hangmanGameDTO.Word;
-            SetupGuesses(hangmanGameDTO.Guesses);
+            SetupGuesses(hangmanGameDTO.Guesses.ToList());
         }
 
         private void SetupGuesses(List<Guess> guesses)
         {
-            foreach(Guess guess in guesses)
+            AllGuesses = new List<Guess>();
+            GoodGuesses = new ObservableCollection<CharGuess>();
+            BadGuesses = new ObservableCollection<CharGuess>();
+            FailedAttempts = new ObservableCollection<WordGuess>();
+            foreach (Guess guess in guesses)
             {
                 AllGuesses.Add(guess);
                 if(guess is WordGuess)

@@ -61,6 +61,7 @@ namespace Shared.Models
             if(WaitingStatus == WaitingStatus.BothPlayersReady)
             {
                 UpdateBothGameStatus();
+                ResetWaitingStatus();
             }
         }
 

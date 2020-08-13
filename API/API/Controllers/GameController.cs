@@ -27,19 +27,12 @@ namespace API.Controllers
             return Ok(GameService.GetByUser(passengerId).Select(g => g.CreateDTO()).ToList());
         }
 
-        [HttpGet("{hangman/gameId}")]
+        [HttpGet("hangman/{gameId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<HangmanGameDTO> GetHangmanById(int gameId)
         {
-            try
-            {
-                return Ok(new HangmanGameDTO(GameService.GetHangmanById(gameId)));
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
+            return Ok(new SimpleHangmanDTO(GameService.GetHangmanById(gameId)));
+
         }
 
 

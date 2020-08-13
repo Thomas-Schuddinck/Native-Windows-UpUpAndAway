@@ -41,8 +41,8 @@
 
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-            <Image x:Name="HangmanPicture" Height="100" Width="100"/>
-            <TextBlock Text="" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+            <Image x:Name="HangmanPicture" Height="100" Width="100" Source="{x:Bind Path=ViewModel.HangmanImage}"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.EncodedWord}" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold" FontSize="32"/>
         </StackPanel>
 
     </Grid>

@@ -9,6 +9,18 @@ namespace Shared.DTOs
     {
         public int GameId { get; set; }
 
+        public string Word { get; set; }
+
         public ICollection<Guess> Guesses { get; set; }
+
+        public bool IsReady { get; set; }
+
+        public SimpleHangmanDTO(HangmanGame hangmanGame)
+        {
+            GameId = hangmanGame.GameId;
+            Word = hangmanGame.Word;
+            Guesses = hangmanGame.Guesses;
+            IsReady = hangmanGame.IsReady;
+        }
     }
 }
