@@ -71,6 +71,21 @@ namespace UpUpAndAwayApp.Pages
             LetterGuesser.SelectedItem = null;
         }
 
+        private void GuessLetter(object sender, RoutedEventArgs e)
+        {
+            char c = (char)LetterGuesser.SelectedValue;
+            LetterGuesser.IsDropDownOpen = false;
+            ViewModel.AddCharGuess(c);
+            ResetInput();
+        }
+
+        private void GuessWord(object sender, RoutedEventArgs e)
+        {
+            ViewModel.AddWordGuess(WordGuesser.Text);
+            ResetInput();
+        }
+
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var game = e.Parameter as DisplayGame;

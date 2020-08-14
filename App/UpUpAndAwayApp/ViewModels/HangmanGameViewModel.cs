@@ -20,9 +20,9 @@ namespace UpUpAndAwayApp.ViewModels
     {
         private DisplayHangmanGame _hangmanGame;
         private ImageSource _hangmanImage;
-        private List<Char> _availableLetters;
+        private ObservableCollection<char> _availableLetters;
 
-        public List<Char> AvailableChars
+        public ObservableCollection<char> AvailableChars
         {
             get
             {
@@ -112,7 +112,7 @@ namespace UpUpAndAwayApp.ViewModels
 
         private void ConfigAvailableChars()
         {
-            AvailableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+            AvailableChars = new ObservableCollection<char>("ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList());
             foreach (CharGuess g in HangmanGame.BadGuesses)
                 AvailableChars.Remove(g.Letter);
             foreach (CharGuess g in HangmanGame.GoodGuesses)

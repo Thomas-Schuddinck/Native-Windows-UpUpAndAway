@@ -34,15 +34,16 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <ComboBox x:Name="LetterGuesser" Header="Letters" HorizontalAlignment="Center" Width="100"  ItemsSource="{x:Bind ViewModel.AvailableChars, Mode=OneWay}" />
-                <Button x:Name="LetterGuesserButton" Grid.Row="1" Content="GuessLetter" HorizontalAlignment="Center"/>
+                <Button x:Name="LetterGuesserButton" Grid.Row="1" Content="GuessLetter" Click="GuessLetter" HorizontalAlignment="Center"/>
                 <TextBox x:Name="WordGuesser" Text="" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10 0 10 0"/>
-                <Button x:Name="WordGuesserButton" Content="Guess Word" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
+                <Button x:Name="WordGuesserButton" Content="Guess Word" Click="GuessWord" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
             </Grid>
 
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <Image x:Name="HangmanPicture"  Source="{x:Bind Path=ViewModel.HangmanImage, Mode=OneWay}"/>
-            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.EncodedWord}" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold" FontSize="32"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.EncodedWord, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold" FontSize="32"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.LettersRemainingConverter, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="30"/>
         </StackPanel>
 
     </Grid>

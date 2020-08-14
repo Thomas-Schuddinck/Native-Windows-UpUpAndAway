@@ -13,33 +13,9 @@ namespace Shared.DisplayModels
     {
         private string _encodedWord;
         private int _gameId;
-        private ObservableCollection<CharGuess> _goodGuesses;
-        private ObservableCollection<CharGuess> _badGuesses;
 
-        public ObservableCollection<CharGuess> GoodGuesses
-        {
-            get
-            {
-                return _goodGuesses;
-            }
-            set
-            {
-                _goodGuesses = value;
-                NotifyPropertyChanged(nameof(GoodGuessesConverter));
-            }
-        }
-        public ObservableCollection<CharGuess> BadGuesses
-        {
-            get
-            {
-                return _badGuesses;
-            }
-            set
-            {
-                _badGuesses = value;
-                NotifyPropertyChanged(nameof(BadGuessesConverter));
-            }
-        }
+        public ObservableCollection<CharGuess> GoodGuesses { get; set; }
+        public ObservableCollection<CharGuess> BadGuesses { get; set; }
         public ObservableCollection<WordGuess> FailedAttempts { get; set; }
         public List<Guess> AllGuesses { get; set; }
         public string Word { get; set; }
@@ -58,14 +34,31 @@ namespace Shared.DisplayModels
 
         public string GoodGuessesConverter => GoodGuesses.Count == 0 ? "No correct letters yet" : string.Join(" - ", GoodGuesses.Select(g => g.Letter));
         public string BadGuessesConverter => BadGuesses.Count == 0 ? "No incorrect letters yet" : string.Join(" - ", BadGuesses.Select(g => g.Letter));
+        public string LettersRemainingConverter => string.Format("{0} letters remaining", EncodedWord.Count(c => c == '_'));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public DisplayHangmanGame(SimpleHangmanDTO hangmanGameDTO)
         {
             _gameId = hangmanGameDTO.GameId;
-            Word = hangmanGameDTO.Word;
+            Word = hangmanGameDTO.Word.ToUpper();
             SetupGuesses(hangmanGameDTO.Guesses.ToList());
+            CreateEncodeWord();
+        }
+
+        private void CreateEncodeWord()
+        {
+            EncodedWord = Word;
+            List<char> goodLetters = GoodGuesses.Select(g => g.Letter).ToList();
+            foreach (char c in Word.Distinct())
+                if (!goodLetters.Contains(c))
+                    EncodedWord = EncodedWord.Replace(c, '_');
+        }
+        private void UpdateReadOnlyProperties()
+        {
+            NotifyPropertyChanged(nameof(GoodGuessesConverter));
+            NotifyPropertyChanged(nameof(BadGuessesConverter));
+            NotifyPropertyChanged(nameof(LettersRemainingConverter));
         }
 
         private void SetupGuesses(List<Guess> guesses)
@@ -119,7 +112,7 @@ namespace Shared.DisplayModels
 
         public void GuessLetter(char letter)
         {
-            AddCharGuess(new CharGuess(Array.IndexOf(Word.ToCharArray(), letter) == -1, letter));
+            AddCharGuess(new CharGuess(Array.IndexOf(Word.ToCharArray(), letter) != -1, letter));
         } 
         #endregion
 
@@ -136,13 +129,8 @@ namespace Shared.DisplayModels
             AllGuesses.Add(guess);
             if (guess.IsGoodGuess)
             {
-                var letterArr = Word.ToCharArray();
                 GoodGuesses.Add(guess);
-                for (int i = 0; i < letterArr.Length; i++)
-                {
-                    if (letterArr[i] == guess.Letter)
-                        InsertLetter(guess.Letter, i);
-                }
+                CreateEncodeWord();
                 if (EvaluateWord(EncodedWord))
                     FinishGame();
             }
@@ -150,14 +138,8 @@ namespace Shared.DisplayModels
             {
                 BadGuesses.Add(guess);
             }
+            UpdateReadOnlyProperties();
         }
-
-        private void InsertLetter(char letter, int index)
-        {
-            StringBuilder sb = new StringBuilder(EncodedWord);
-            sb[index] = letter;
-            EncodedWord = sb.ToString();
-        } 
 
         private void ShowWord()
         {
