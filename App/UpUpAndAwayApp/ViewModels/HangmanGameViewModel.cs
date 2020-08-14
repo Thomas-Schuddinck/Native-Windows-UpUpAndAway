@@ -78,12 +78,25 @@ namespace UpUpAndAwayApp.ViewModels
             DetermineImageSrc();
             ConfigAvailableChars();
         }
+        public void SaveGame()
+        {
+            SaveGameToAPI();
+        }
+
+        private async void SaveGameToAPI()
+        {
+            var game = JsonConvert.SerializeObject(new SimpleHangmanDTO(HangmanGame));
+
+            HttpClient client = new HttpClient();
+            var res = await client.PutAsync("http://localhost:5000/api/Game", new StringContent(game, System.Text.Encoding.UTF8, "application/json"));
+        }
 
 
         public void AddWordGuess(string word)
         {
             HangmanGame.GuessWord(word);
             DetermineImageSrc();
+            Evaluate();
         }
 
         public void AddCharGuess(char letter)
@@ -91,6 +104,13 @@ namespace UpUpAndAwayApp.ViewModels
             AvailableChars.Remove(letter);
             HangmanGame.GuessLetter(letter);
             DetermineImageSrc();
+            Evaluate();
+        }
+
+        private void Evaluate()
+        {
+            if (HangmanGame.IsFinished)
+                SaveGameToAPI();
         }
 
         private void RaisePropertyChanged(string name)

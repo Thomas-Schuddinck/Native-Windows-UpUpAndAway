@@ -91,5 +91,10 @@ namespace UpUpAndAwayApp.Pages
             var game = e.Parameter as DisplayGame;
             this.ViewModel = new HangmanGameViewModel(game);
         }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.SaveGame();
+            base.OnNavigatedFrom(e);
+        }
     }
 }

@@ -23,6 +23,8 @@ namespace Shared.DTOs
             Guesses = hangmanGame.Guesses;
             Word = hangmanGame.Word;
         }
+
+
         /*
         [JsonConstructor]
         public HangmanGameDTO(int gameId, PassengerDTO player, PassengerDTO opponent, GameStatus gameStatus, PlayerStatus playerStatus, GamePairDTO gamePair, GameType gameType)

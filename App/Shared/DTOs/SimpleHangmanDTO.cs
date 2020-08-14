@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Shared.DisplayModels;
 using Shared.Models;
 
 namespace Shared.DTOs
@@ -25,6 +26,14 @@ namespace Shared.DTOs
             Word = hangmanGame.Word;
             Guesses = hangmanGame.Guesses;
             IsReady = hangmanGame.IsReady;
+        }
+
+        public SimpleHangmanDTO(DisplayHangmanGame hangmanGame)
+        {
+            GameId = hangmanGame.GameId;
+            Word = hangmanGame.Word;
+            Guesses = hangmanGame.AllGuesses;
+            IsReady = hangmanGame.IsFinished;
         }
     }
 }

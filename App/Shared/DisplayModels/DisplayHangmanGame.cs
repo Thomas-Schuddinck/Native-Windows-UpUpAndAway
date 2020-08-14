@@ -12,8 +12,8 @@ namespace Shared.DisplayModels
     public class DisplayHangmanGame : INotifyPropertyChanged
     {
         private string _encodedWord;
-        private int _gameId;
 
+        public int GameId { get; set; }
         public ObservableCollection<CharGuess> GoodGuesses { get; set; }
         public ObservableCollection<CharGuess> BadGuesses { get; set; }
         public ObservableCollection<WordGuess> FailedAttempts { get; set; }
@@ -34,13 +34,16 @@ namespace Shared.DisplayModels
 
         public string GoodGuessesConverter => GoodGuesses.Count == 0 ? "No correct letters yet" : string.Join(" - ", GoodGuesses.Select(g => g.Letter));
         public string BadGuessesConverter => BadGuesses.Count == 0 ? "No incorrect letters yet" : string.Join(" - ", BadGuesses.Select(g => g.Letter));
+        public string FailedAttemptsConverter => FailedAttempts.Count == 0 ? "No failed attempts yet" : string.Join(" - ", FailedAttempts.Select(g => g.Word));
         public string LettersRemainingConverter => string.Format("{0} letters remaining", EncodedWord.Count(c => c == '_'));
+
+        public bool IsFinished { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public DisplayHangmanGame(SimpleHangmanDTO hangmanGameDTO)
         {
-            _gameId = hangmanGameDTO.GameId;
+            GameId = hangmanGameDTO.GameId;
             Word = hangmanGameDTO.Word.ToUpper();
             SetupGuesses(hangmanGameDTO.Guesses.ToList());
             CreateEncodeWord();
@@ -90,6 +93,7 @@ namespace Shared.DisplayModels
         #region Public Methods
         public void FinishGame()
         {
+            IsFinished = true;
             ShowWord();
         }
 
@@ -108,6 +112,7 @@ namespace Shared.DisplayModels
             }                
             else
                 AddWordGuess(word, false);
+            NotifyPropertyChanged(nameof(FailedAttemptsConverter));
         }
 
         public void GuessLetter(char letter)
