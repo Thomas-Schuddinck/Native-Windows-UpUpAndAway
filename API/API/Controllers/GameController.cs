@@ -43,19 +43,12 @@ namespace API.Controllers
         /// <returns>ActionResult</returns>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult UpdateHangmanGame([FromBody] SimpleHangmanDTO dto)
         {
-            try
-            {
-                return Ok(GameService.UpdateHangman(dto));
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
-        }
 
+            return Ok(GameService.UpdateHangman(dto));
+
+        }
         /// <summary>
         /// Sets the word for a hangmangame.
         /// </summary>

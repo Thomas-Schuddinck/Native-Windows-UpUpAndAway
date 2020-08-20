@@ -89,6 +89,7 @@ namespace UpUpAndAwayApp.ViewModels
 
             HttpClient client = new HttpClient();
             var res = await client.PutAsync("http://localhost:5000/api/Game", new StringContent(game, System.Text.Encoding.UTF8, "application/json"));
+            var t = 0;
         }
 
 

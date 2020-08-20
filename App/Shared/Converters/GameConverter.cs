@@ -30,6 +30,12 @@ namespace Shared.Converters
             throw new NotImplementedException();
         }
 
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();

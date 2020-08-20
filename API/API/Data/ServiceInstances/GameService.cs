@@ -15,6 +15,7 @@ namespace API.Data.ServiceInstances
         private readonly DbSet<Game> games;
         private readonly DbSet<GamePair> gamePairs;
         private readonly DbSet<Passenger> passengers;
+        private readonly DbSet<Guess> guesses;
 
         public GameService(Context context)
         {
@@ -22,6 +23,7 @@ namespace API.Data.ServiceInstances
             games = context.Games;
             gamePairs = context.GamePairs;
             passengers = context.Passengers;
+            guesses = context.Guesses;
         }
 
         public bool CreateGame(NewGameDTO newGameDTO)
@@ -63,7 +65,9 @@ namespace API.Data.ServiceInstances
                 .Include(g => g.GamePair).ThenInclude(gp => gp.FirstGame).ThenInclude(fg => fg.Player)
                 .Include(g => g.GamePair).ThenInclude(gp => gp.SecondGame).ThenInclude(sg => sg.Player)
                 .Include(g => g.Player)
+                .Include(g => (g as HangmanGame).Guesses)
                 .SingleOrDefault(g => g.GameId == gameId);
+                            
             return (HangmanGame)t;
         }
 
