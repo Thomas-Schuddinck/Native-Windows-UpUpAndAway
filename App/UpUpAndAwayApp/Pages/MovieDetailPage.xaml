@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+                <Button Style="{StaticResource NavigationBackButtonNormalStyle}" Click="GoBack"/>
             </Grid>
         </AppBar>
         <Image x:Name="posterBig" Source="{x:Bind Path=ViewModel.CurrentMovie.Poster, Mode=OneWay}" HorizontalAlignment="Center" Stretch="UniformToFill"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Opacity="0.4" RequestedTheme="Dark" Margin="0, 0, 0, 30"/>

@@ -37,5 +37,10 @@ namespace UpUpAndAwayApp.Pages
         {
             MediaPlayerTool.PlayDefaultMediaFile();
         }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }
