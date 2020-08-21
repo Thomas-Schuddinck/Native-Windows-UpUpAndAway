@@ -40,7 +40,7 @@ namespace API.Data.ServiceInstances
                 .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(gg => (gg as HangmanGame).Guesses)
                 .Include(g => g.Player)
                 .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
-            game.Guesses = dto.Guesses.ToList();
+            game.UpdateGuesses(dto.Guesses.ToList());
             game.Evaluate();
             games.Update(game);
             context.SaveChanges();

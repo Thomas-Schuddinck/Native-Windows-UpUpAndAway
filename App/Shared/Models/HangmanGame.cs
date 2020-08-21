@@ -58,5 +58,33 @@ namespace Shared.Models
             if (CheckIfGuessed())
                 UpdateGameStatus();
         }
+
+        public void UpdateGuesses(List<Guess> list)
+        {
+            foreach (Guess g in list)
+                if (!CheckAlreadyInside(g))
+                    Guesses.Add(g);
+        }
+
+        private bool CheckAlreadyInside(Guess g)
+        {
+            foreach(Guess guess in Guesses)
+            {
+                if (g is WordGuess && guess is WordGuess)
+                {
+                    if ((g as WordGuess).Word == (guess as WordGuess).Word)
+                        return true;
+                }
+                else
+                {
+                    if (g is CharGuess && guess is CharGuess)
+                        if ((g as CharGuess).Letter == (guess as CharGuess).Letter)
+                            return true;
+                }
+
+            }
+            return false;
+
+        }
     }
 }

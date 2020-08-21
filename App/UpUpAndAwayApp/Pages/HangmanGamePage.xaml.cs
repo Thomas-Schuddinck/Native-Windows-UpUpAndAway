@@ -79,6 +79,24 @@ namespace UpUpAndAwayApp.Pages
             ResetInput();
         }
 
+        public async void CreateGameFinishedDialog()
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "Game Finished",
+                Content = "You finished the game!",
+                PrimaryButtonText = "Overview"
+            };
+
+            // Finally, show the dialog
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                NavigateBack();
+            }
+
+        }
+
         private void GuessWord(object sender, RoutedEventArgs e)
         {
             ViewModel.AddWordGuess(WordGuesser.Text);
@@ -89,12 +107,23 @@ namespace UpUpAndAwayApp.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var game = e.Parameter as DisplayGame;
-            this.ViewModel = new HangmanGameViewModel(game);
+            this.ViewModel = new HangmanGameViewModel(game, this);
         }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             ViewModel.SaveGame();
             base.OnNavigatedFrom(e);
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            NavigateBack();
+        }
+
+        private void NavigateBack()
+        {
+            this.Frame.GoBack();
         }
     }
 }

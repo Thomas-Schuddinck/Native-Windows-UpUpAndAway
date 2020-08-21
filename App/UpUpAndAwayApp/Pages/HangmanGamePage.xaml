@@ -10,13 +10,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+        <Button Style="{StaticResource NavigationBackButtonNormalStyle}" Click="GoBack"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
             <Border BorderThickness="0 0 0 1" BorderBrush="Black" Margin="10 0 10 0" >
                 <TextBlock x:Name="GoodLetters" Text="{x:Bind Path=ViewModel.HangmanGame.GoodGuessesConverter, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="24" Foreground="LawnGreen" />
             </Border>
@@ -42,7 +44,7 @@
             </Grid>
 
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Image x:Name="HangmanPicture"  Source="{x:Bind Path=ViewModel.HangmanImage, Mode=OneWay}"/>
             <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.EncodedWord, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold" FontSize="32"/>
             <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.LettersRemainingConverter, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="30"/>

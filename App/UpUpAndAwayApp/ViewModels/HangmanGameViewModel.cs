@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using UpUpAndAwayApp.Pages;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -62,11 +63,14 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
+        public HangmanGamePage HangmanGamePage { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public HangmanGameViewModel(DisplayGame displayGame)
+        public HangmanGameViewModel(DisplayGame displayGame, HangmanGamePage hangmanGamePage)
         {
             GetHangmanGameFromAPI(displayGame.GameId);
+            HangmanGamePage = hangmanGamePage;
         }
 
         private async void GetHangmanGameFromAPI(int id)
@@ -111,7 +115,12 @@ namespace UpUpAndAwayApp.ViewModels
         private void Evaluate()
         {
             if (HangmanGame.IsFinished)
+            {
                 SaveGameToAPI();
+                HangmanGamePage.CreateGameFinishedDialog();
+            }
+
+                
         }
 
         private void RaisePropertyChanged(string name)
