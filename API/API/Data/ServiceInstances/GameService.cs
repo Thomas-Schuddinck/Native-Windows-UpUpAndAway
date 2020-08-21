@@ -33,7 +33,11 @@ namespace API.Data.ServiceInstances
 
         public bool UpdateHangman(SimpleHangmanDTO dto)
         {
-            var game = (HangmanGame)games.SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
+            var game = (HangmanGame)games
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.Player)
+                .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
             game.Guesses = dto.Guesses.ToList();
             game.Evaluate();
             games.Update(game);

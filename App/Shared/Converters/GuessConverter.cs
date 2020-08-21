@@ -17,12 +17,11 @@ namespace Shared.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jo = JObject.Load(reader);
-
-            
             bool? isLetterGuess = (bool?)jo["IsLetter"];
+            bool? isLetterGuess2 = (bool?)jo["isLetter"];
 
             Guess item;
-            if (isLetterGuess.GetValueOrDefault())
+            if (isLetterGuess.GetValueOrDefault() || isLetterGuess2.GetValueOrDefault())
             {
                 item = new CharGuess();
             }

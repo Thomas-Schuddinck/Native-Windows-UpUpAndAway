@@ -35,9 +35,7 @@ namespace Shared.Models
                 if (GameStatus == GameStatus.Finished)
                     IsReady = false;
                     GamePair.UpdateWaitingStatus();
-            }                
-            else
-                throw new InvalidOperationException("Game is already finished");
+            }
         }
         public void UpdateWaitingStatus() 
         {
