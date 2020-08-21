@@ -13,10 +13,10 @@ namespace Shared.DisplayModels
     {
         private string _encodedWord;
 
+        public int GameId { get; set; }
         public ObservableCollection<CharGuess> GoodGuesses { get; set; }
         public ObservableCollection<CharGuess> BadGuesses { get; set; }
         public ObservableCollection<WordGuess> FailedAttempts { get; set; }
-        public ObservableCollection<Char> Alfabet { get; set; }
         public List<Guess> AllGuesses { get; set; }
         public string Word { get; set; }
         public string EncodedWord
@@ -25,19 +25,64 @@ namespace Shared.DisplayModels
             {
                 return _encodedWord;
             }
-            private set
+            set
             {
                 _encodedWord = value;
                 NotifyPropertyChanged(nameof(EncodedWord));
             }
         }
 
+        public string GoodGuessesConverter => GoodGuesses.Count == 0 ? "No correct letters yet" : string.Join(" - ", GoodGuesses.Select(g => g.Letter));
+        public string BadGuessesConverter => BadGuesses.Count == 0 ? "No incorrect letters yet" : string.Join(" - ", BadGuesses.Select(g => g.Letter));
+        public string FailedAttemptsConverter => FailedAttempts.Count == 0 ? "No failed attempts yet" : string.Join(" - ", FailedAttempts.Select(g => g.Word));
+        public string LettersRemainingConverter => string.Format("{0} letters remaining", EncodedWord.Count(c => c == '_'));
+
+        public bool IsFinished { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DisplayHangmanGame(HangmanGameDTO hangmanGameDTO)
+        public DisplayHangmanGame(SimpleHangmanDTO hangmanGameDTO)
         {
-            Word = hangmanGameDTO.Word;
+            GameId = hangmanGameDTO.GameId;
+            Word = hangmanGameDTO.Word.ToUpper();
+            SetupGuesses(hangmanGameDTO.Guesses.ToList());
+            CreateEncodeWord();
+        }
 
+        private void CreateEncodeWord()
+        {
+            EncodedWord = Word;
+            List<char> goodLetters = GoodGuesses.Select(g => g.Letter).ToList();
+            foreach (char c in Word.Distinct())
+                if (!goodLetters.Contains(c))
+                    EncodedWord = EncodedWord.Replace(c, '_');
+        }
+        private void UpdateReadOnlyProperties()
+        {
+            NotifyPropertyChanged(nameof(GoodGuessesConverter));
+            NotifyPropertyChanged(nameof(BadGuessesConverter));
+            NotifyPropertyChanged(nameof(LettersRemainingConverter));
+        }
+
+        private void SetupGuesses(List<Guess> guesses)
+        {
+            AllGuesses = new List<Guess>();
+            GoodGuesses = new ObservableCollection<CharGuess>();
+            BadGuesses = new ObservableCollection<CharGuess>();
+            FailedAttempts = new ObservableCollection<WordGuess>();
+            foreach (Guess guess in guesses)
+            {
+                AllGuesses.Add(guess);
+                if(guess is WordGuess)
+                    FailedAttempts.Add((WordGuess)guess);
+                else
+                {
+                    if (guess.IsGoodGuess)
+                        GoodGuesses.Add((CharGuess)guess);
+                    else
+                        BadGuesses.Add((CharGuess)guess);
+                }
+            }
         }
 
         private void NotifyPropertyChanged(string propertyName = "")
@@ -48,7 +93,14 @@ namespace Shared.DisplayModels
         #region Public Methods
         public void FinishGame()
         {
+            IsFinished = true;
             ShowWord();
+        }
+
+        public void EndGameIfLost()
+        {
+            if (AllGuesses.Count(g => !g.IsGoodGuess) >= 11)
+                FinishGame();
         }
 
         public void GuessWord(string word)
@@ -60,12 +112,12 @@ namespace Shared.DisplayModels
             }                
             else
                 AddWordGuess(word, false);
+            NotifyPropertyChanged(nameof(FailedAttemptsConverter));
         }
 
         public void GuessLetter(char letter)
         {
-            Alfabet.Remove(letter);
-            AddCharGuess(new CharGuess(Array.IndexOf(Word.ToCharArray(), letter) == -1, letter));
+            AddCharGuess(new CharGuess(Array.IndexOf(Word.ToCharArray(), letter) != -1, letter));
         } 
         #endregion
 
@@ -82,13 +134,8 @@ namespace Shared.DisplayModels
             AllGuesses.Add(guess);
             if (guess.IsGoodGuess)
             {
-                var letterArr = Word.ToCharArray();
                 GoodGuesses.Add(guess);
-                for (int i = 0; i < letterArr.Length; i++)
-                {
-                    if (letterArr[i] == guess.Letter)
-                        InsertLetter(guess.Letter, i);
-                }
+                CreateEncodeWord();
                 if (EvaluateWord(EncodedWord))
                     FinishGame();
             }
@@ -96,14 +143,8 @@ namespace Shared.DisplayModels
             {
                 BadGuesses.Add(guess);
             }
+            UpdateReadOnlyProperties();
         }
-
-        private void InsertLetter(char letter, int index)
-        {
-            StringBuilder sb = new StringBuilder(EncodedWord);
-            sb[index] = letter;
-            EncodedWord = sb.ToString();
-        } 
 
         private void ShowWord()
         {

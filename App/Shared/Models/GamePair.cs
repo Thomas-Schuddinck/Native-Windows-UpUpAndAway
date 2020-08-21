@@ -61,6 +61,14 @@ namespace Shared.Models
             if(WaitingStatus == WaitingStatus.BothPlayersReady)
             {
                 UpdateBothGameStatus();
+                ResetWaitingStatus();
+                if (GamesFinished)
+                {
+
+                    DetermineWinnerCalculator();
+                    DetermineWinner();
+                }
+                    
             }
         }
 
@@ -71,8 +79,8 @@ namespace Shared.Models
 
         public void UpdateBothGameStatus()
         {
-            FirstGame.UpdateStatus();
-            SecondGame.UpdateStatus();
+            FirstGame.UpdateGameStatus();
+            SecondGame.UpdateGameStatus();
         }
         public void DetermineGameFactory()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 using Shared.Models;
@@ -22,7 +23,8 @@ namespace API.Controllers
         }
 
         // GET api/values
-        //[HttpGet]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Song>> Get()
         {
             return Ok(songService.GetAll().Select(s => new SongDTO(s)).ToList());

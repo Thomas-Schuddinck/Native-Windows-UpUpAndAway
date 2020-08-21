@@ -1,5 +1,7 @@
 ﻿using API.Data.IServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shared.DTOs;
 using Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,11 @@ namespace API.Data.ServiceInstances
         {
             Passenger p = GetPassenger(id);
             return parties.AsNoTracking().Where(s => s.Passengers.Contains(p)).FirstOrDefault();
+        }
+
+        public ICollection<Passenger> GetPartyMembers(int partyId, int passengerId)
+        {
+            return parties.AsNoTracking().Include(p => p.Passengers).FirstOrDefault(p => p.PassengerPartyId == partyId).Passengers.Where(p => p.PassengerId != passengerId).ToList();
         }
     }
 }

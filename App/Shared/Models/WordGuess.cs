@@ -11,11 +11,13 @@ namespace Shared.Models
 
         public WordGuess()
         {
+            IsLetter = false;
         }
 
         public WordGuess(bool isGoodGuess, string word) : base(isGoodGuess)
         {
             Word = word;
+            IsLetter = false;
         }
     }
 }

@@ -82,15 +82,11 @@ namespace UpUpAndAwayApp.ViewModels
             lst.ToList().ForEach(i => WebshopItems.Add(new WebshopItem(new Consumable(i), this)));
             RaisePropertyChanged(nameof(MinPrice));
             RaisePropertyChanged(nameof(MaxPrice));
-            Debug.WriteLine(MinPrice);
-            Debug.WriteLine(MaxPrice);
         }
 
         public async void SendOrder()
         {
-            var test = LoginSingleton.GetInstance();
             var order = JsonConvert.SerializeObject(new OrderDTO(Cart, LoginSingleton.passenger));
-
             HttpClient client = new HttpClient();
             var res = await client.PostAsync("http://localhost:5000/api/Order", new StringContent(order, System.Text.Encoding.UTF8, "application/json"));
         }

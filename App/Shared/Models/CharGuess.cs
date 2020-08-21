@@ -10,11 +10,13 @@ namespace Shared.Models
 
         public CharGuess()
         {
+            IsLetter = true;
         }
 
         public CharGuess(bool isGoodGuess, char letter) : base(isGoodGuess)
         {
             Letter = letter;
+            IsLetter = true;
         }
     }
 }

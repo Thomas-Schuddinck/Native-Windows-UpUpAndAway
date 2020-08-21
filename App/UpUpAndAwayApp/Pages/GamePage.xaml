@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UpUpAndAwayApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:local1="using:UpUpAndAwayApp.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <local1:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <Grid>
         <Pivot >
             <PivotItem x:Name="Created" Header="Created Games" FontSize="20">
@@ -30,30 +32,47 @@
                         </Grid.ColumnDefinitions>
                         <!-- form for new game -->
                     </Grid>
+                    <Grid Grid.Row="0" Grid.Column="0" Padding="10 10 10 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="0" Grid.Column="0" Margin="0 0 0 10" >
+                            <TextBlock Text="Create New Game" Margin="10 0 10 10" />
+                        </Border>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                            <ComboBox x:Name="GameType" ItemsSource="{x:Bind ViewModel.GameTypes }"  Margin="10 0 10 0"/>
+                            <ComboBox x:Name="PartyMember" ItemsSource="{x:Bind ViewModel.PartyMembers }" DisplayMemberPath="FullName" Margin="10 0 10 0"/>
+                            <Button Content="Create" Click="CreateNewGame"/>
+                        </StackPanel>
+                    </Grid>
                     <controls:DataGrid x:Name="dataGridCreated" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.CreatedGames}">
+                    ItemsSource="{x:Bind ViewModel.CreatedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Set Word" Click="Button_Click" FontSize="20"/>
+                                            <Button Content="Set Word" Click="SetWordHangmanGame" FontSize="20" Visibility="{Binding Path=ButtonVisible, Converter={StaticResource BoolToVis}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>
@@ -72,28 +91,28 @@
                     </Grid.ColumnDefinitions>
                     <controls:DataGrid x:Name="dataGridStarted" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.StartedGames}">
+                    ItemsSource="{x:Bind ViewModel.StartedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Open Game" Click="Button_Click" FontSize="20"/>
+                                            <Button Content="Open Game" Click="HangmanGameClicked" FontSize="20" Visibility="{Binding Path=ButtonVisible, Converter={StaticResource BoolToVis}}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>
@@ -112,22 +131,22 @@
                     </Grid.ColumnDefinitions>
                     <controls:DataGrid x:Name="dataGridFinished" Height="600" Margin="12" Grid.Row="1" Grid.Column="0"
                     AutoGenerateColumns="False"
-                    ItemsSource="{x:Bind ViewModel.FinishedGames}">
+                    ItemsSource="{x:Bind ViewModel.FinishedGames, Mode=OneWay}">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn 
                             Header="Game" 
                             Width="*"
-                            Binding="{Binding GameType}" 
+                            Binding="{Binding DisplayGameType, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Opponent" 
                             Width="*"
-                            Binding="{Binding NumberOfItems}" 
+                            Binding="{Binding DisplayOpponent, Mode=OneWay}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
                             Header="Status" 
                             Width="*"
-                            Binding="{Binding TotalPrice}" 
+                            Binding="{Binding DisplayMessage, Mode=OneWay}" 
                             FontSize="20" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>

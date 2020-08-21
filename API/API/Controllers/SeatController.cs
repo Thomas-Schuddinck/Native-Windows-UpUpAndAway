@@ -23,12 +23,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ICollection<Seat>> GetAll()
         {
             return new OkObjectResult(service.GetAll());
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ICollection<Seat>> SwapSeats([FromBody] SeatSwapDTO dto)
         {
             if (service.SwapSeats(dto.First, dto.Second))
