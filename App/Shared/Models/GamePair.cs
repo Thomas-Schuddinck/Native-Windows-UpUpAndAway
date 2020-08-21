@@ -62,6 +62,13 @@ namespace Shared.Models
             {
                 UpdateBothGameStatus();
                 ResetWaitingStatus();
+                if (GamesFinished)
+                {
+
+                    DetermineWinnerCalculator();
+                    DetermineWinner();
+                }
+                    
             }
         }
 

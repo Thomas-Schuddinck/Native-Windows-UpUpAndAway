@@ -35,7 +35,9 @@ namespace API.Data.ServiceInstances
         {
             var game = (HangmanGame)games
                 .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(gg => (gg as HangmanGame).Guesses)
                 .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(gg => (gg as HangmanGame).Guesses)
                 .Include(g => g.Player)
                 .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
             game.Guesses = dto.Guesses.ToList();
@@ -51,6 +53,7 @@ namespace API.Data.ServiceInstances
                 .Where(g => g.Player.PassengerId == passengerId)
                 .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
                 .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.Winner)
                 .Include(g => g.Player)
                 .AsNoTracking().ToList();
         }

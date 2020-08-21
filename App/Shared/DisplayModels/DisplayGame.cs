@@ -105,7 +105,7 @@ namespace Shared.DisplayModels
                     DisplayMessage = String.Format("Waiting for {0}", Opponent.FirstName);
                 else
                     DisplayMessage = "Opponent is waiting for you";
-            else if (GamePairDTO.IsFinished)
+            if (GamePairDTO.IsFinished)
             {
                 if (GamePairDTO.Winner == null)
                     DisplayMessage = "Draw";
