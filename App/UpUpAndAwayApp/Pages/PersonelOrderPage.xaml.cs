@@ -16,8 +16,8 @@ namespace UpUpAndAwayApp.Pages
     {
         public PersonelOrderPage()
         {
-            this.InitializeComponent();
             this.ViewModel = new OrderViewModel();
+            this.InitializeComponent();
         }
         public OrderViewModel ViewModel;
         public Frame ContentFrame { get; private set; }

@@ -11,6 +11,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailPassenger.TextWrapping" Value="Wrap"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Pivot >
             <PivotItem x:Name="Open" Header="Open Orders" FontSize="20">
                 <Grid>
@@ -48,7 +68,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{x:Bind Path=ViewModel.CurrentOpenOrder.DateTimePlacedConverter, Mode=OneWay, FallbackValue='date placed'}" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentOpenOrder.Passenger.FullName, Mode=OneWay, FallbackValue='name'}" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock x:Name="DetailPassenger" Text="{x:Bind Path=ViewModel.CurrentOpenOrder.Passenger.FullName, Mode=OneWay, FallbackValue='name'}" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                             <TextBlock Text="{x:Bind Path=ViewModel.CurrentOpenOrder.NumberOfItems, Mode=OneWay, FallbackValue='number of items'}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2"/>
                         </Grid>
                         <GridView Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="auto" Width="auto" ItemsSource="{x:Bind Path=ViewModel.CurrentOpenOrder.OrderLines, Mode=OneWay}" SelectionMode="None">
@@ -89,6 +109,7 @@
                             Binding="{Binding DateTimePlacedConverter}" 
                             FontSize="20" />
                             <controls:DataGridTextColumn 
+                                x:Name="Test"
                             Header="Passenger" 
                             Width="*"
                             Binding="{Binding Passenger.FullName}" 
@@ -102,12 +123,12 @@
                             Header="Total" 
                             Width="*"
                             Binding="{Binding TotalPrice}" 
-                            FontSize="20" />
+                            FontSize="20"/>
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Details" Click="OrderListItemClicked" FontSize="20"/>
+                                        <StackPanel Padding="3 3 3 3">
+                                            <Button x:Name="Detailbutton" Content="Details" Click="OrderListItemClicked" FontSize="15"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>
@@ -115,8 +136,8 @@
                             <controls:DataGridTemplateColumn Width="SizeToCells">
                                 <controls:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Padding="5 5 5 5">
-                                            <Button Content="Finish" Click="FinishOrder" FontSize="20"/>
+                                        <StackPanel Padding="3 3 3 3">
+                                            <Button Content="Finish" Click="FinishOrder" FontSize="15"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </controls:DataGridTemplateColumn.CellTemplate>
