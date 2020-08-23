@@ -74,7 +74,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+                <Button Style="{StaticResource NavigationBackButtonNormalStyle}" Click="GoBack"/>
             </Grid>
         </AppBar>
         <Image x:Name="posterBig" Source="{x:Bind Path=ViewModel.CurrentSerie.Poster, Mode=OneWay}" HorizontalAlignment="Center" Stretch="UniformToFill"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Opacity="0.4" RequestedTheme="Dark" Margin="0, 0, 0, 30"/>
@@ -94,14 +94,14 @@
                 <TextBlock x:Name="titelText" Text="{x:Bind Path=ViewModel.CurrentSerie.Title, Mode=OneWay, FallbackValue='serie titel'}" HorizontalAlignment="Left" FontSize="28" />
                 <TextBlock x:Name="genreText" Text="{x:Bind Path=ViewModel.CurrentSerie.Genre, Mode=OneWay, FallbackValue='serie genre'}" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap" FontStyle="Oblique" />
             </StackPanel>
-            <StackPanel Orientation="Vertical"  VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="2" Margin="20, 0, 0, 0">
+            <StackPanel Orientation="Vertical"  VerticalAlignment="Top" Padding="5" Grid.Row="0" Grid.Column="3" Margin="20, 0, 0, 0">
                 <TextBlock x:Name="releaseText" Text="{x:Bind Path=ViewModel.CurrentSerie.Released, Mode=OneWay, FallbackValue='serie release'}" HorizontalAlignment="Right" FontSize="20" Padding="0, 0, 0, 5" />
                 <Border x:Name="episodesBorder" BorderBrush="Black" BorderThickness="0, 1, 0, 0">
                     <TextBlock x:Name="episodesText" Text="{x:Bind Path=ViewModel.CurrentSerie.NumSeasons, Mode=OneWay, FallbackValue='number of seasons'}" HorizontalAlignment="Left" Padding="0, 5, 0, 0" FontSize="18" FontStyle="Oblique" />
                 </Border>
 
             </StackPanel>
-            <StackPanel x:Name="SelectorPanel" Grid.Column="2" Grid.Row="1" Orientation="Vertical">
+            <StackPanel x:Name="SelectorPanel" Grid.Column="4" Grid.Row="1" Orientation="Vertical">
                 <ComboBox x:Name="SeasonsBox" ItemsSource="{x:Bind Path=ViewModel.CurrentSerie.DisplaySeasonsList, Mode=OneWay}" SelectionChanged="SelectSeason" HorizontalAlignment="Stretch"/>
                 <ComboBox x:Name="EpisodeBox" ItemsSource="{x:Bind Path=ViewModel.Episodes, Mode=OneWay}" HorizontalAlignment="Stretch"/>
             </StackPanel>

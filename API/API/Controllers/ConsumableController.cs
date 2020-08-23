@@ -5,6 +5,7 @@ using Shared.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -21,13 +22,16 @@ namespace API.Controllers
         }
 
         // GET api/values
-        //[HttpGet]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Consumable>> Get()
         {
             return Ok(consumableService.GetAll().Select(c => new ConsumableDTO(c)).ToList());
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult UpdateReductions([FromBody] ReductionChangeDTO dto)
         {
             Debug.WriteLine($"Timestamp is {dto.Timestamp}");

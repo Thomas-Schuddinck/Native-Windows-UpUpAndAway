@@ -1,4 +1,5 @@
-﻿using Shared.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Shared.Models;
 using System.Collections.Generic;
 
 namespace API.Data.IServices
@@ -8,5 +9,6 @@ namespace API.Data.IServices
         Passenger GetPassenger(int id);
         PassengerParty GetParty(int id);
         ICollection<Passenger> GetAll();
+        ICollection<Passenger> GetPartyMembers(int partyId, int passengerId);
     }
 }

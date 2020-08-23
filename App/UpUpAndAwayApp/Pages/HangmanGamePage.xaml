@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="UpUpAndAwayApp.Pages.HangmanGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UpUpAndAwayApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Style="{StaticResource NavigationBackButtonNormalStyle}" Click="GoBack"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <Border BorderThickness="0 0 0 1" BorderBrush="Black" Margin="10 0 10 0" >
+                <TextBlock x:Name="GoodLetters" Text="{x:Bind Path=ViewModel.HangmanGame.GoodGuessesConverter, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="24" Foreground="LawnGreen" />
+            </Border>
+            <Border BorderThickness="0 0 0 1" BorderBrush="Black" Margin="10 0 10 0">
+                <TextBlock x:Name="BadLetters" Text="{x:Bind Path=ViewModel.HangmanGame.BadGuessesConverter, Mode=OneWay}" TextWrapping="Wrap"  HorizontalAlignment="Center" FontSize="24" Foreground="IndianRed"/>
+            </Border>
+            <Border BorderThickness="0 0 0 1" BorderBrush="Black" Margin="10 0 10 0">
+                <TextBlock x:Name="BadWords" Text="{x:Bind Path=ViewModel.HangmanGame.FailedAttemptsConverter, Mode=OneWay}" TextWrapping="Wrap"  HorizontalAlignment="Center" FontSize="24" Foreground="IndianRed"/>
+            </Border>
+            <Grid Height="100" Margin="0 10 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="LetterGuesser" Header="Select Letter" HorizontalAlignment="Center" Width="100"  ItemsSource="{x:Bind ViewModel.AvailableChars, Mode=OneWay}" />
+                <Button x:Name="LetterGuesserButton" Grid.Row="1" Content="GuessLetter" Click="GuessLetter" HorizontalAlignment="Center"/>
+                <TextBox x:Name="WordGuesser" Text="" Header="Insert Guess" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                <Button x:Name="WordGuesserButton" Content="Guess Word" Click="GuessWord" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <Image x:Name="HangmanPicture"  Source="{x:Bind Path=ViewModel.HangmanImage, Mode=OneWay}"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.EncodedWord, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontWeight="Bold" FontSize="32"/>
+            <TextBlock Text="{x:Bind Path=ViewModel.HangmanGame.LettersRemainingConverter, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="30"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

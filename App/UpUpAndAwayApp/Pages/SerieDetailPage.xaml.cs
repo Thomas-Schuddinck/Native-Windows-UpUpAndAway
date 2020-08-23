@@ -45,5 +45,10 @@ namespace UpUpAndAwayApp.Pages
             var season = this.SeasonsBox.SelectedIndex + 1;
             ViewModel.SelectedSeason = season;
         }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

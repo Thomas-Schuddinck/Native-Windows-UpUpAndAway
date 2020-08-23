@@ -17,6 +17,13 @@ namespace API.Data.IServices
         bool CreateGame(NewGameDTO newGameDTO);
 
         /// <summary>
+        /// Set word for HangmanGame.
+        /// </summary>
+        /// <param name="hangmanWord">DTO with info for the word of the game</param>
+        /// <returns>True if successful</returns>
+        bool SetWordForGame(HangmanWordDTO hangmanWordDTO);
+
+        /// <summary>
         /// Update a game
         /// </summary>
         /// <param name="game">The game to be updated</param>
@@ -28,7 +35,21 @@ namespace API.Data.IServices
         /// </summary>
         /// <param name="gameId">ID of the game</param>
         /// <returns>The requested game. returns null if not found</returns>
-        public Game GetById(int gameId);
+        Game GetById(int gameId);
+
+        /// <summary>
+        /// Returns Hangman game for given id
+        /// </summary>
+        /// <param name="gameId">ID of the Hangman game</param>
+        /// <returns>The requested Hangman game. returns null if not found</returns>
+        HangmanGame GetHangmanById(int gameId);
+
+        /// <summary>
+        /// Updates a Hangman game
+        /// </summary>
+        /// <param name="dto">new Data</param>
+        /// <returns>True if successful</returns>
+        bool UpdateHangman(SimpleHangmanDTO dto);
 
         /// <summary>
         /// Returns all the Games of a single Passanger

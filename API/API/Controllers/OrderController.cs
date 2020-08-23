@@ -4,6 +4,7 @@ using Shared.DTOs;
 using Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -20,7 +21,8 @@ namespace API.Controllers
         }
 
         // GET api/values
-        //[HttpGet]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Order>> Get()
         {
             return Ok(orderService.GetAll().Select(o => new OrderDTO(o)).ToList());
@@ -28,6 +30,7 @@ namespace API.Controllers
 
         //GET api/values/5
         [HttpGet("{passengerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Order>> GetByUser(int passengerId)
         {
             return Ok(orderService.GetByUser(passengerId).Select(o => new OrderDTO(o)).ToList());
@@ -35,6 +38,7 @@ namespace API.Controllers
 
         // POST api/values
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<int> Post([FromBody] OrderDTO dto)
         {
             return Ok(orderService.PlaceOrder(new Order(dto)));
@@ -42,6 +46,7 @@ namespace API.Controllers
 
         // PUT api/values/5
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<bool> CloseOrder([FromBody] int id)
         {
             return Ok(orderService.FinishOrder(id));

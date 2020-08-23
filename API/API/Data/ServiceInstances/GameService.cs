@@ -15,6 +15,7 @@ namespace API.Data.ServiceInstances
         private readonly DbSet<Game> games;
         private readonly DbSet<GamePair> gamePairs;
         private readonly DbSet<Passenger> passengers;
+        private readonly DbSet<Guess> guesses;
 
         public GameService(Context context)
         {
@@ -22,6 +23,7 @@ namespace API.Data.ServiceInstances
             games = context.Games;
             gamePairs = context.GamePairs;
             passengers = context.Passengers;
+            guesses = context.Guesses;
         }
 
         public bool CreateGame(NewGameDTO newGameDTO)
@@ -29,11 +31,30 @@ namespace API.Data.ServiceInstances
             return CreatePair(newGameDTO) > 0;
         }
 
+        public bool UpdateHangman(SimpleHangmanDTO dto)
+        {
+            var game = (HangmanGame)games
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(gg => (gg as HangmanGame).Guesses)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(gg => (gg as HangmanGame).Guesses)
+                .Include(g => g.Player)
+                .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
+            game.UpdateGuesses(dto.Guesses.ToList());
+            game.Evaluate();
+            games.Update(game);
+            context.SaveChanges();
+            return true;
+        }
+
         public ICollection<Game> GetByUser(int passengerId)
         {
             return games
                 .Where(g => g.Player.PassengerId == passengerId)
-                .Include(g => g.GamePair)
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.Winner)
+                .Include(g => g.Player)
                 .AsNoTracking().ToList();
         }
 
@@ -45,9 +66,23 @@ namespace API.Data.ServiceInstances
                 .SingleOrDefault(g => g.GameId == gameId);
         }
 
+        public HangmanGame GetHangmanById(int gameId)
+        {
+            var t = games
+                .Include(g => g.GamePair).ThenInclude(gp => gp.FirstGame).ThenInclude(fg => fg.Player)
+                .Include(g => g.GamePair).ThenInclude(gp => gp.SecondGame).ThenInclude(sg => sg.Player)
+                .Include(g => g.Player)
+                .Include(g => (g as HangmanGame).Guesses)
+                .SingleOrDefault(g => g.GameId == gameId);
+                            
+            return (HangmanGame)t;
+        }
+
         public bool UpdateGame(Game game)
         {
-            throw new NotImplementedException();
+            var gameDB = games.SingleOrDefault(s => s.GameId == game.GameId) ?? throw new ArgumentException();
+
+            return true;
         }
 
         private int CreatePair(NewGameDTO newGameDTO)
@@ -63,6 +98,18 @@ namespace API.Data.ServiceInstances
         private Passenger FindPassenger(int id)
         {
             return passengers.FirstOrDefault(p => p.PassengerId == id);
+        }
+
+        public bool SetWordForGame(HangmanWordDTO dto)
+        {
+            var game = (HangmanGame)games
+                .Include(g => g.GamePair).ThenInclude(g => g.FirstGame).ThenInclude(g => g.Player)
+                .Include(g => g.GamePair).ThenInclude(g => g.SecondGame).ThenInclude(g => g.Player)
+                .SingleOrDefault(s => s.GameId == dto.GameId) ?? throw new ArgumentException();
+            game.SetWord(dto.Word);
+            games.Update(game);
+            context.SaveChanges();
+            return true;
         }
     }
 }

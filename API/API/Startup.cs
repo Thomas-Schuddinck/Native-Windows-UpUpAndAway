@@ -42,9 +42,8 @@ namespace API
             services.AddScoped<ISongService, SongService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddMvc().AddXmlSerializerFormatters().AddMvcOptions(options => options.EnableEndpointRouting = false);
+            services.AddMvc().AddNewtonsoftJson().AddMvcOptions(options => options.EnableEndpointRouting = false);
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
-
             services.AddSwaggerDocument(config =>
             {
                 config.PostProcess = document =>
@@ -60,6 +59,7 @@ namespace API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Context"));
             });
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSignalR();
 
 
@@ -83,6 +83,7 @@ namespace API
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Data/Resources")),
                 RequestPath = new PathString("/Data/Resources")
             });
+
 
             app.UseEndpoints(endpoints =>
             {

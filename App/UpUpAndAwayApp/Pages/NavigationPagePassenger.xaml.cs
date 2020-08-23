@@ -20,6 +20,7 @@ namespace UpUpAndAwayApp.Pages
             ("weather", typeof(ClientMusic)),
             ("chat", typeof(ClientChat)),
             ("orders", typeof(PassengerOrderPage)),
+            ("games", typeof(GamePage)),
             ("logout", typeof(MainPage))
         };
         public NavPagePassenger()
