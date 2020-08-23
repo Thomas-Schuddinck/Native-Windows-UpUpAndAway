@@ -27,9 +27,9 @@
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xED56;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Tag="weather" Content="Weather">
+            <NavigationViewItem Tag="music" Content="Music">
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE753;"/>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Tag="chat" Content="Chat">
