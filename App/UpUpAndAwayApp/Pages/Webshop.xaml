@@ -18,6 +18,33 @@
         <local1:ReductionToVisibilityConverter x:Key="RedToVis" />
     </Page.Resources>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="detailName.FontSize" Value="16"/>
+                        <Setter Target="detailPrice.FontSize" Value="16"/>
+                        <Setter Target="detailNormalPrice.FontSize" Value="16"/>
+                        <Setter Target="detailReduction.FontSize" Value="16"/>
+                        <Setter Target="detailDescription.FontSize" Value="14"/>
+                        <Setter Target="detailImage.Height" Value="150"/>
+                        <Setter Target="detailImage.Width" Value="150"/>
+                        <Setter Target="detailAmount.Height" Value="35"/>
+                        <Setter Target="detailAdd.Height" Value="30"/>
+                        <Setter Target="Filters.Orientation" Value="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -26,28 +53,28 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="CartButton" RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Width="50" Height="50"  Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
+        <Button x:Name="CartButton" Width="50" Height="50"  Click="ChangeSplitviewStatus" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <SymbolIcon Symbol="Shop" Margin="-20 -20 0 0" >
                 <SymbolIcon.RenderTransform>
                     <CompositeTransform ScaleX="2" ScaleY="2"/>
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
-        <SplitView x:Name="splitview" HorizontalAlignment="Stretch" PaneClosing="SplitviewPaneClosing" PanePlacement="Right" OpenPaneLength="600" DisplayMode="CompactOverlay" Margin="10,5,10,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"  CompactPaneLength="50">
+        <SplitView x:Name="splitview" OpenPaneLength="500" HorizontalAlignment="Stretch" PaneClosing="SplitviewPaneClosing" PanePlacement="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
             <SplitView.Pane>
                 <Grid x:Name="CartGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="7*" />
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid RelativePanel.AlignLeftWithPanel="True" Margin="0 0 10 0" Grid.Column="0" Grid.Row="0">
+                    <Grid Grid.Row="0" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -68,25 +95,25 @@
                             </SymbolIcon>
                         </Button>
                     </Grid>
-                    <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Cart.OrderLines}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
+                    <ListView x:Name="Cart" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" ItemsSource="{x:Bind Path=ViewModel.Cart.OrderLines}"  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate" x:DataType="Models1:DisplayOrderLine">
-                                <Grid HorizontalAlignment="Stretch">
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="90"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay}" Stretch="Fill" Width="100" Height="100"  Grid.Column="0" Grid.Row="0" Margin="10 10 10 10 "/>
-                                    <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='product titel'}"  Foreground="Black" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay, FallbackValue='1'}" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="10 10 10 10 "/>
-                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='prijs'}" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 10 0 10 "/>
-                                    <Button Margin="10 0 0 0" Width="50" Height="50" Grid.Column="4" Grid.Row="0" Click="RemoveFromShoppingCart"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind Path=Consumable.ProductPicture, Mode=OneWay}" Stretch="Fill" Width="100" Height="100" HorizontalAlignment="Stretch"/>
+                                    <TextBlock Text="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='product titel'}" Padding="10 0 10 0" TextWrapping="Wrap"  Foreground="Black" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                    <TextBox Text="{x:Bind Path=Amount, Mode=TwoWay, FallbackValue='1'}" Padding="10 0 10 0" Grid.Column="2" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{x:Bind Path=TotalPrice, Mode=OneWay, FallbackValue='prijs'}" Padding="10 0 10 0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    <Button Width="50" Height="50" Grid.Column="4" Margin="10 0 30 0" Click="RemoveFromShoppingCart"  HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <SymbolIcon Symbol="Delete" Margin="-20 -20 0 0" >
                                             <SymbolIcon.RenderTransform>
                                                 <CompositeTransform ScaleX="2" ScaleY="2" />
@@ -98,11 +125,16 @@
                         </ListView.ItemTemplate>
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <ItemsWrapGrid Orientation="Vertical"/>
+                                <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Stretch" MaximumRowsOrColumns="1"/>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"  Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
-                    <StackPanel Grid.Column="0" Grid.Row="2" >
+                    <StackPanel Grid.Row="2"  VerticalAlignment="Bottom">
                         <TextBlock Text="{x:Bind Path=ViewModel.Cart.TotalPrice, Mode=OneWay, FallbackValue='0'}" FontSize="34" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 10 "/>
                         <Button Content="Place Order" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendOrder" />
                     </StackPanel>
@@ -114,18 +146,15 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-
-
-
                     <StackPanel x:Name="DetailPane" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed" Margin="0 0 20 0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
+                                <RowDefinition Height="20*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -133,36 +162,38 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform" Height="300" Width="300" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
-                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 0 0" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="32"/>
+                            <Image x:Name="detailImage" Source="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ProductPicture, Mode=OneWay, FallbackValue='https://i.redd.it/dqwjbw96up451.jpg'}" Stretch="Uniform" Height="300" Width="300" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+                            <TextBlock x:Name="detailName" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Name, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 0 0" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="32"/>
 
                             <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                                <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" FontSize="32" Padding="0 0 10 0"/>
+                                <TextBlock x:Name="detailPrice" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.PriceAdapter, Mode=OneWay, FallbackValue='item price'}" HorizontalAlignment="Right" FontSize="32" Padding="0 0 10 0"/>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"  Visibility="{x:Bind ViewModel.CurrentWebshopItem.Consumable.Reduction, Converter={StaticResource RedToVis}, Mode=OneWay}">
-                                    <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.NormalPriceAdapter, Mode=OneWay, FallbackValue='price'}" HorizontalAlignment="Right" Foreground="Red" FontSize="32" TextDecorations="Strikethrough" Padding="0 0 10 0" />
+                                    <TextBlock x:Name="detailNormalPrice" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.NormalPriceAdapter, Mode=OneWay, FallbackValue='price'}" HorizontalAlignment="Right" Foreground="Red" FontSize="32" TextDecorations="Strikethrough" Padding="0 0 10 0" />
                                     <Border Background="Red">
-                                        <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ReductionAdapter, Mode=OneWay, FallbackValue='reduction'}" HorizontalAlignment="Right" FontSize="32" Foreground="White" Padding="10 0 10 0"/>
+                                        <TextBlock x:Name="detailReduction" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.ReductionAdapter, Mode=OneWay, FallbackValue='reduction'}" HorizontalAlignment="Right" FontSize="32" Foreground="White" Padding="10 0 10 0"/>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                                <TextBox Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Amount, Mode=TwoWay}" MaxHeight="50" Foreground="White" HorizontalAlignment="Left" Margin="0 0 10 0"/>
-                                <Button Click="SendCurrentToShoppingCart" Content="Add"   Height="50" HorizontalAlignment="Right" Foreground="White" FontFamily="Segoe UI" />
+                                <TextBox x:Name="detailAmount" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Amount, Mode=TwoWay}" MaxHeight="50" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 -5 10 0"/>
+                                <Button x:Name="detailAdd" Click="SendCurrentToShoppingCart" Content="Add"   Height="50" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontFamily="Segoe UI" Margin="0 0 0 0"/>
                             </StackPanel>
-                            <TextBlock Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Description, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"  FontSize="20"/>
+                            <TextBlock x:Name="detailDescription" Text="{x:Bind Path=ViewModel.CurrentWebshopItem.Consumable.Description, Mode=OneWay, FallbackValue='item name'}" TextWrapping="Wrap" Margin="10 0 10 0" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"  FontSize="20"/>
                         </Grid>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" x:Name="Filters" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="FilterMinValue" Text="Min: " />
                         <controls:RangeSelector Width="300" x:Name="PriceFilter" Minimum="{x:Bind Path=ViewModel.MinPrice, Mode=OneWay}" Maximum="{x:Bind Path=ViewModel.MaxPrice, Mode=OneWay}" StepFrequency="0.5" ValueChanged="PriceFilter_OnValueChanged">
                         </controls:RangeSelector>
                         <TextBlock x:Name="FilterMaxValue" Text="Max: "/>
+                        </StackPanel>
                         <TextBox x:Name="NameFilter" KeyUp="ApplyFilter" PlaceholderText="Search By Name" />
 
                     </StackPanel>
 
-                    <GridView x:Name="ShopGrid" HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="2" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True">
+                    <GridView x:Name="ShopGrid" HorizontalAlignment="Left" Margin="0 50 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.WebshopItems, Mode=OneWay}" Grid.Row="2" Grid.Column="0" ItemClick="WebshopItemClicked" SelectionMode="None" IsItemClickEnabled="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True">
                         <GridView.ItemTemplate>
                             <DataTemplate x:Name="itemding" x:DataType="Models:WebshopItem">
                                 <Grid Height="300" Width="300" AutomationProperties.Name="{x:Bind Path=Consumable.Name, Mode=OneWay, FallbackValue='item name'}" Margin="10 0 10 10">
@@ -190,6 +221,11 @@
                                 </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
                     </GridView>
 
                 </Grid>

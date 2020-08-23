@@ -22,11 +22,16 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Left" Text="Songs" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
-                <TextBox x:Name="Titlefilter" KeyUp="Filter_Click" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Title"></TextBox>
-                <TextBox x:Name="Artistfilter" KeyUp="Filter_Click"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" PlaceholderText="Title"></TextBox>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Title: " HorizontalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="Titlefilter" KeyUp="Filter_Click" HorizontalAlignment="Center" PlaceholderText="Title"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Artist: " HorizontalAlignment="Center" Margin="0 0 10 0"/>
+                    <TextBox x:Name="Artistfilter" KeyUp="Filter_Click"  HorizontalAlignment="Center" PlaceholderText="Artist"></TextBox>
+                </StackPanel>
             </Grid>
             <ListView x:Name="SongList" HorizontalAlignment="Left" Margin="0 55 0 0"  VerticalAlignment="Top" ItemsSource="{x:Bind Path=ViewModel.Songs, Mode=OneWay}" Grid.Row="1" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.IsVerticalRailEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
