@@ -38,6 +38,7 @@ namespace Shared.DisplayModels
         public string LettersRemainingConverter => string.Format("{0} letters remaining", EncodedWord.Count(c => c == '_'));
 
         public bool IsFinished { get; set; }
+        public bool WasWordGuessed { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -91,16 +92,17 @@ namespace Shared.DisplayModels
         }
 
         #region Public Methods
-        public void FinishGame()
+        public void FinishGame(bool won)
         {
             IsFinished = true;
+            WasWordGuessed = won;
             ShowWord();
         }
 
-        public void EndGameIfLost()
+        private void EndGameIfLost()
         {
             if (AllGuesses.Count(g => !g.IsGoodGuess) >= 11)
-                FinishGame();
+                FinishGame(false);
         }
 
         public void GuessWord(string word)
@@ -108,7 +110,7 @@ namespace Shared.DisplayModels
             if (EvaluateWord(word))
             {
                 AddWordGuess(word, true);
-                FinishGame();
+                FinishGame(true);
             }                
             else
                 AddWordGuess(word, false);
@@ -125,8 +127,11 @@ namespace Shared.DisplayModels
         private void AddWordGuess(string word, bool isGoodGuess)
         {
             AllGuesses.Add(new WordGuess(isGoodGuess, word));
-            if(!isGoodGuess)
+            if (!isGoodGuess)
+            {
                 FailedAttempts.Add(new WordGuess(isGoodGuess, word));
+                EndGameIfLost();
+            }
         }
 
         private void AddCharGuess(CharGuess guess)
@@ -137,11 +142,12 @@ namespace Shared.DisplayModels
                 GoodGuesses.Add(guess);
                 CreateEncodeWord();
                 if (EvaluateWord(EncodedWord))
-                    FinishGame();
+                    FinishGame(true);
             }
             else
             {
                 BadGuesses.Add(guess);
+                EndGameIfLost();
             }
             UpdateReadOnlyProperties();
         }

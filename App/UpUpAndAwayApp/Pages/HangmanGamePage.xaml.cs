@@ -79,12 +79,12 @@ namespace UpUpAndAwayApp.Pages
             ResetInput();
         }
 
-        public async void CreateGameFinishedDialog()
+        public async void CreateGameFinishedDialog(string msg)
         {
             ContentDialog dialog = new ContentDialog()
             {
                 Title = "Game Finished",
-                Content = "You finished the game!",
+                Content = msg,
                 PrimaryButtonText = "Overview"
             };
 

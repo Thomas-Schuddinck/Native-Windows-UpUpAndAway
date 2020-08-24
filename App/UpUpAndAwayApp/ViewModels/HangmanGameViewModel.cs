@@ -93,7 +93,6 @@ namespace UpUpAndAwayApp.ViewModels
 
             HttpClient client = new HttpClient();
             var res = await client.PutAsync("http://localhost:5000/api/Game", new StringContent(game, System.Text.Encoding.UTF8, "application/json"));
-            var t = 0;
         }
 
 
@@ -117,7 +116,8 @@ namespace UpUpAndAwayApp.ViewModels
             if (HangmanGame.IsFinished)
             {
                 SaveGameToAPI();
-                HangmanGamePage.CreateGameFinishedDialog();
+                string message = HangmanGame.WasWordGuessed ? "You finished the game!" : "You're out of guesses";
+                HangmanGamePage.CreateGameFinishedDialog(message);
             }
 
                 
