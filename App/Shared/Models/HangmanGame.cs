@@ -1,4 +1,5 @@
 ﻿using Shared.DTOs;
+using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,8 @@ namespace Shared.Models
         public override void Evaluate()
         {
             if (CheckIfGuessed())
-                UpdateGameStatus();
+                if(this.GameStatus != GameStatus.Finished)
+                    UpdateWaitingStatus();
         }
 
         public void UpdateGuesses(List<Guess> list)
