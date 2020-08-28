@@ -182,14 +182,16 @@
                         </Grid>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" x:Name="Filters" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="FilterMinValue" Text="Min: " />
-                        <controls:RangeSelector Width="300" x:Name="PriceFilter" Minimum="{x:Bind Path=ViewModel.MinPrice, Mode=OneWay}" Maximum="{x:Bind Path=ViewModel.MaxPrice, Mode=OneWay}" StepFrequency="0.5" ValueChanged="PriceFilter_OnValueChanged">
-                        </controls:RangeSelector>
-                        <TextBlock x:Name="FilterMaxValue" Text="Max: "/>
+                    <StackPanel Margin="50 0 0 0" Grid.Row="1" x:Name="Filters" Orientation="Horizontal" HorizontalAlignment="Left">
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Margin="0 0 10 0" x:Name="FilterMinValue" Text="Min" />
+                            <controls:RangeSelector Width="300" x:Name="PriceFilter" Minimum="{x:Bind Path=ViewModel.MinPrice, Mode=OneWay}" Maximum="{x:Bind Path=ViewModel.MaxPrice, Mode=OneWay}" StepFrequency="0.5" ValueChanged="PriceFilter_OnValueChanged">
+                                </controls:RangeSelector>
+                            <TextBlock Margin="10 0 0 0" x:Name="FilterMaxValue" Text="Max"/>
                         </StackPanel>
-                        <TextBox x:Name="NameFilter" KeyUp="ApplyFilter" PlaceholderText="Search By Name" />
+
+                        <TextBox Margin="50 0 0 0" x:Name="NameFilter" KeyUp="ApplyFilter" PlaceholderText="Search By Name" VerticalAlignment="Center" />
 
                     </StackPanel>
 
