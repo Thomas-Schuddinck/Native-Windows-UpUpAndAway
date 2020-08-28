@@ -28,13 +28,10 @@ namespace Shared.Models
 
         public void UpdateGameStatus()
         {
+            ChangeIsReady();
             if(GameStatus != GameStatus.Finished)
             {
-                ChangeIsReady();
                 GameStatus += 1;
-                if (GameStatus == GameStatus.Finished)
-                    IsReady = false;
-                    GamePair.UpdateWaitingStatus();
             }
         }
         public void UpdateWaitingStatus() 

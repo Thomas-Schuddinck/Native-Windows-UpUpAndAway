@@ -64,7 +64,6 @@ namespace Shared.Models
                 ResetWaitingStatus();
                 if (GamesFinished)
                 {
-
                     DetermineWinnerCalculator();
                     DetermineWinner();
                 }
