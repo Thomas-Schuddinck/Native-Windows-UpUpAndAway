@@ -1,6 +1,6 @@
 # Native-Windows-UpUpAndAway
 
-This app is made for the Native apps 2: mobile apps voor Windows course.
+This app is made for the *Native apps 2: mobile apps voor Windows* course.
 
 
 # Setup
@@ -26,7 +26,7 @@ Passengers are required to log in. This is done with their Passenger ID (see tab
 
 ### Personel Screen
 Personel can do plenty of things. They can receive and handle the orders placed by passengers, change the price of items and change the allocated seat of a Passenger (both swapping 2 Passengers and placing him or her in an empty seat).
-The personal screen is shared between all personel.
+The personel screen is shared between all personel.
 
 # Data
 
