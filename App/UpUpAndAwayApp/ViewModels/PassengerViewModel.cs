@@ -17,17 +17,13 @@ namespace UpUpAndAwayApp.ViewModels
         {
         }
 
-        public async Task LoginPassenger(string id, string password)
+        public async Task LoginPassenger(string id)
         {
             HttpClient client = new HttpClient();
             try
             {
                 var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id))).ConfigureAwait(false);
                 var passenger = new Passenger(JsonConvert.DeserializeObject<PassengerDTO>(jsonResponse));
-                if(passenger.FullName != password)
-                {
-                    throw new Exception("Password is wrong");
-                }
                 this.Passenger = passenger;
                 loggedIn.login(Passenger);
                 var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
