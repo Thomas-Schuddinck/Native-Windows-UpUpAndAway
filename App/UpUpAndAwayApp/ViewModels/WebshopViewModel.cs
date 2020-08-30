@@ -37,7 +37,6 @@ namespace UpUpAndAwayApp.ViewModels
             {
                 LoginSingleton.Cart = value;
                 _cart = value;
-                _cart.CleanUpOrderLines();
                 RaisePropertyChanged(nameof(Cart));
             }
         }
@@ -111,7 +110,10 @@ namespace UpUpAndAwayApp.ViewModels
         {
             DisplayOrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
             if (o == null)
-                Cart.OrderLines.Add(new DisplayOrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
+            {
+                if (webshopItem.Amount > 0)
+                    Cart.OrderLines.Add(new DisplayOrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
+            }
             else
                 o.Amount += webshopItem.Amount;
             webshopItem.ResetAmount();

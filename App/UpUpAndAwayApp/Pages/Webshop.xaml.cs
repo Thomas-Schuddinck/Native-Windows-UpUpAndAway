@@ -34,7 +34,8 @@ namespace UpUpAndAwayApp.Pages
         {
             var button = (Button)sender;
             var item = (WebshopItem)button.DataContext;
-            ViewModel.AddToShoppingCart(item);
+            if(item.Amount != 0)
+                ViewModel.AddToShoppingCart(item);
             NotifyNewChanges();
         }
         public void ClearCart(object sender, RoutedEventArgs e)

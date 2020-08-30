@@ -26,7 +26,6 @@ namespace Shared.DisplayModels
                 NotifyPropertyChanged(nameof(AmountPrice));
                 NotifyPropertyChanged(nameof(TotalPrice));
                 _order.ForceUpdate();
-
             }
         }
         public Consumable Consumable { get; private set; }
