@@ -109,6 +109,8 @@ namespace UpUpAndAwayApp.ViewModels
 
         public void AddToShoppingCart(WebshopItem webshopItem)
         {
+            if (webshopItem.Amount <= 0)
+                return;
             DisplayOrderLine o = Cart.OrderLines.FirstOrDefault(ol => ol.Consumable.ConsumableId == webshopItem.Consumable.ConsumableId);
             if (o == null)
                 Cart.OrderLines.Add(new DisplayOrderLine(webshopItem.Amount, webshopItem.Consumable, Cart));
