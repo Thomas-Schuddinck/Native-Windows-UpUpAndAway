@@ -24,8 +24,7 @@ namespace UpUpAndAwayApp.Pages
         {
             ("orders", typeof(PersonelOrderPage)),
             ("promotions", typeof(ChangeReduction)),
-            ("messaging", typeof(Webshop)),
-            ("chat", typeof(Notification)),
+            ("messaging", typeof(Notification)),
             ("seats", typeof(SeatManagement)),
             ("logout", typeof(MainPage))
         };
@@ -55,7 +54,7 @@ namespace UpUpAndAwayApp.Pages
                 //vm.Disconnect();
                 this.Frame.Navigate(_page, null, transitionInfo);
             }
-            else if (item.Tag.Equals("chat"))
+            else if (item.Tag.Equals("messaging"))
             {
                 this.vm = new PersonnelChatViewModel();
                 try
