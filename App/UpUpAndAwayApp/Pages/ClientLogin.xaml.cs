@@ -25,25 +25,16 @@ namespace UpUpAndAwayApp
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string login = Login.Text;
-            string password = Passwd.Password.ToString();
             try
             {
-                Task task = ViewModel.LoginPassenger(login, password);
+                Task task = ViewModel.LoginPassenger(login);
                 task.Wait();
                 this.Frame.Navigate(typeof(NavPagePassenger));
             }
             catch (Exception er)
             {
                 var p = new ContentDialog();
-                if (er.Message.Contains("Password is wrong"))
-                {
-                    p.Title = "Your password is wrong";
-                    p.Content = "Your password sould be 'FirstName LastName'";
-                }
-                else
-                {
-                    p.Title = "Connection error";
-                }
+                p.Title = "Connection error";
                 p.CloseButtonText = "close";
                 p.ShowAsync();
             }
