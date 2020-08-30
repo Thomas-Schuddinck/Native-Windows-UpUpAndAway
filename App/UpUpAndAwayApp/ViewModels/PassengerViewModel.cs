@@ -29,6 +29,9 @@ namespace UpUpAndAwayApp.ViewModels
                 var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
                 var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
                 loggedIn.joinGroup(party);
+                var jsonResponseSeat = await client.GetStringAsync(new Uri(GeneratePassengerSeatRequestString(id))).ConfigureAwait(false);
+                var seat = new Seat(JsonConvert.DeserializeObject<SeatDTO>(jsonResponseSeat));
+                loggedIn.orderSeat(seat);
                 ChatViewModel model = new ChatViewModel();
                 await model.Connect();
             } 
@@ -45,6 +48,11 @@ namespace UpUpAndAwayApp.ViewModels
         private string GeneratePassengerRequestString(string id)
         {
             return String.Format("http://localhost:5000/api/passenger/{0}", id);
+        }
+
+        private string GeneratePassengerSeatRequestString(string id)
+        {
+            return String.Format("http://localhost:5000/api/Seat/{0}", id);
         }
 
         private string GeneratePassengerPartyRequestString(string id)

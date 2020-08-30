@@ -129,6 +129,7 @@
                 </Grid.RowDefinitions>
             <Grid x:Name="InformationPanel" Grid.RowSpan="3" Grid.Row="1" Background="#FFC3EFFD">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
@@ -140,25 +141,31 @@
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="FlightCode" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid x:Name="SeatNumber" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="Flight Code:&#x09;" Foreground="Black"></TextBlock>
-                        <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.flightcode}" Foreground="Black"></TextBlock>
+                        <TextBlock Text="Seatnumber:&#x09;" Foreground="Black"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.person.seat.SeatId , Mode=OneWay}" Foreground="Black"></TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid x:Name="FlightOrigin" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch">
+                <Grid x:Name="FlightCode" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Flight Code:&#x09;" Foreground="Black"></TextBlock>
+                        <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.flightcode, Mode=OneWay}" Foreground="Black"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="FlightOrigin" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Departure:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.origin}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid x:Name="FlightDestination" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch">
+                <Grid x:Name="FlightDestination" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="Destination:" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock Text="{x:Bind Path=ViewModel.flightInfoSingleton.destination}" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid x:Name="Weather" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch">
+                <Grid x:Name="Weather" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="4" Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
                         <RowDefinition Height="50*"/>
