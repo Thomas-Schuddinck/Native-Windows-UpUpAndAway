@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,24 +50,34 @@ namespace UpUpAndAwayApp.Pages
             var button = (Button)sender;
             var item = (DisplayGame)button.DataContext;
             GetWordForGame(item);
-            
+
         }
 
         private async void GetWordForGame(DisplayGame item)
         {
-            ContentDialog dialog = new ContentDialog()
-            {
-                Title = "Set Hangman Word",
-                Content = new TextBox(),
-                PrimaryButtonText = "Set Word"
-            };
 
-            // Finally, show the dialog
-            ContentDialogResult result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
+            while (true)
             {
-                TextBox input = (TextBox)dialog.Content;
-                ViewModel.SetWordForGame(item.GameId, input.Text); 
+                var dialog = new ContentDialog
+                {
+                    Title = "Set Hangman Word",
+                    Content = new TextBox(),
+                    PrimaryButtonText = "Set Word"
+                };
+
+                // Finally, show the dialog
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    var input = (TextBox)dialog.Content;
+                    var text = input.Text;
+
+                    if (Regex.IsMatch(text, "^([a-zA-Z]+([- ])?)+[a-zA-Z]+$"))
+                    {
+                        ViewModel.SetWordForGame(item.GameId, input.Text);
+                        return;
+                    }
+                }
             }
 
         }
@@ -79,7 +91,7 @@ namespace UpUpAndAwayApp.Pages
 
         private void Navigate_To_HangmanGame(DisplayGame game)
         {
-           this.Frame.Navigate(typeof(HangmanGamePage), game, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            this.Frame.Navigate(typeof(HangmanGamePage), game, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

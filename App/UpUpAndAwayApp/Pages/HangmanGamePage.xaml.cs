@@ -1,12 +1,15 @@
 ﻿using Shared.DisplayModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using UpUpAndAwayApp.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -14,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -99,6 +103,12 @@ namespace UpUpAndAwayApp.Pages
 
         private void GuessWord(object sender, RoutedEventArgs e)
         {
+            if (!Regex.IsMatch(this.WordGuesser.Text, "^([a-zA-Z]+([- ])?)+[a-zA-Z]+$"))
+            {
+                this.WordGuesser.BorderBrush=new SolidColorBrush(Colors.Red);
+                ResetInput();
+                return;
+            }
             ViewModel.AddWordGuess(WordGuesser.Text);
             ResetInput();
         }
@@ -124,6 +134,11 @@ namespace UpUpAndAwayApp.Pages
         private void NavigateBack()
         {
             this.Frame.GoBack();
+        }
+
+        private void ResetBorderColour(object sender, RoutedEventArgs e)
+        {
+            this.WordGuesser.ClearValue(BorderBrushProperty);
         }
     }
 }
