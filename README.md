@@ -1,6 +1,6 @@
 # Native-Windows-UpUpAndAway
 
-This app is made for the Native apps 2: mobile apps voor Windows course.
+This app is made for the *Native apps 2: mobile apps voor Windows* course.
 
 
 # Setup
