@@ -33,6 +33,8 @@ namespace API.Data.ServiceInstances
             return passengers.AsNoTracking().FirstOrDefault(s => s.PassengerId == id);
         }
 
+
+
         public PassengerParty GetParty(int id)
         {
             Passenger p = GetPassenger(id);
@@ -42,6 +44,13 @@ namespace API.Data.ServiceInstances
         public ICollection<Passenger> GetPartyMembers(int partyId, int passengerId)
         {
             return parties.AsNoTracking().Include(p => p.Passengers).FirstOrDefault(p => p.PassengerPartyId == partyId).Passengers.Where(p => p.PassengerId != passengerId).ToList();
+        }
+
+        public PassengerParty GetPartyOfPassenger(int passId)
+        {
+            return parties.Include(s => s.Passengers)
+                .AsNoTracking().SingleOrDefault(s => s.Passengers
+                    .Any(t => t.PassengerId == passId));
         }
     }
 }

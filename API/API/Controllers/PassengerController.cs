@@ -33,7 +33,9 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Passenger> GetByUser(int passengerId)
         {
-            return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)));
+            var pass = passengerService.GetPassenger(passengerId);
+            var party = passengerService.GetPartyOfPassenger(passengerId);
+            return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)) { PartyID = party.PassengerPartyId });
         }
 
         //GET api/values/5

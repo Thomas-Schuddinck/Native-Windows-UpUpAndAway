@@ -10,5 +10,6 @@ namespace API.Data.IServices
         PassengerParty GetParty(int id);
         ICollection<Passenger> GetAll();
         ICollection<Passenger> GetPartyMembers(int partyId, int passengerId);
+        PassengerParty GetPartyOfPassenger(int passId);
     }
 }
