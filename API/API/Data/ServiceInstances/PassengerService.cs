@@ -37,18 +37,18 @@ namespace API.Data.ServiceInstances
 
         public Seat GetPassengerBySeatnumber(int seatnumber)
         {
-            return seats.AsNoTracking().Include(s => s.Passenger).Where(s => s.SeatId == seatnumber).FirstOrDefault();
+            return seats.AsNoTracking().Include(s => s.Passenger).FirstOrDefault(s => s.SeatId == seatnumber);
         }
 
         public PassengerParty GetParty(int id)
         {
             Passenger p = GetPassenger(id);
-            return parties.AsNoTracking().Where(s => s.Passengers.Contains(p)).FirstOrDefault();
+            return parties.AsNoTracking().FirstOrDefault(s => s.Passengers.Contains(p));
         }
 
         public ICollection<Passenger> GetPartyMembers(int partyId, int passengerId)
         {
-            return parties.AsNoTracking().Include(p => p.Passengers).FirstOrDefault(p => p.PassengerPartyId == partyId).Passengers.Where(p => p.PassengerId != passengerId).ToList();
+            return parties.AsNoTracking().Include(p => p.Passengers).FirstOrDefault(p => p.PassengerPartyId == partyId)?.Passengers.Where(p => p.PassengerId != passengerId).ToList();
         }
 
         public PassengerParty GetPartyOfPassenger(int passId)

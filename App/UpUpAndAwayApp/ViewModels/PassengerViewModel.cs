@@ -30,7 +30,7 @@ namespace UpUpAndAwayApp.ViewModels
                 loggedIn.login(Passenger);
                 var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(passenger.PassengerId.ToString())));
                 var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
-                loggedIn.joinGroup(party);
+                loggedIn.PassengerGroupId=party;
                 var jsonResponseSeat = await client.GetStringAsync(new Uri(GeneratePassengerSeatRequestString(passenger.PassengerId.ToString()))).ConfigureAwait(false);
                 var seat = new Seat(JsonConvert.DeserializeObject<SeatDTO>(jsonResponseSeat));
                 loggedIn.orderSeat(seat);

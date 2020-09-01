@@ -65,12 +65,12 @@ namespace UpUpAndAwayApp.ViewModels
         public async Task Connect()
         {
             await hubConnection.StartAsync();
-            await hubConnection.InvokeAsync("JoinRoom", LoginSingleton.passengerGroupId.ToString());
+            await hubConnection.InvokeAsync("JoinRoom", LoginSingleton.GetInstance().PassengerGroupId);
         }
 
         public async Task SendMessage(string message)
         {
-            await hubConnection.InvokeAsync("SendMessage", LoginSingleton.passengerGroupId.ToString(), LoginSingleton.passenger.FullName, message);
+            await hubConnection.InvokeAsync("SendMessage", LoginSingleton.GetInstance().PassengerGroupId, LoginSingleton.passenger.FullName, message);
         }
 
         public async Task Disconnect()

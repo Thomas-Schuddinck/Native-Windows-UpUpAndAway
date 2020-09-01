@@ -9,13 +9,12 @@ namespace Shared.DisplayModels.Singleton
         public Seat seat;
         public static DisplayOrder Cart = new DisplayOrder();
 
-        public static string passengerGroupId { get; private set; }
+        public string PassengerGroupId { get; set; }
 
         private LoginSingleton()
         {
         }
         public void login(Passenger p) { passenger = p; }
-        public void joinGroup(string id) { passengerGroupId = id; }
         public void orderSeat(Seat s) { seat = s; }
         public static LoginSingleton GetInstance() => instance;
     }
