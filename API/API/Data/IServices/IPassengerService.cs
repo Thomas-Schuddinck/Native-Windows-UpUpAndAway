@@ -8,6 +8,7 @@ namespace API.Data.IServices
     {
         Passenger GetPassenger(int id);
         PassengerParty GetParty(int id);
+        Seat GetPassengerBySeatnumber(int seatnumber);
         ICollection<Passenger> GetAll();
         ICollection<Passenger> GetPartyMembers(int partyId, int passengerId);
     }

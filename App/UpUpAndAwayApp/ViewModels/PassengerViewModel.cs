@@ -24,18 +24,24 @@ namespace UpUpAndAwayApp.ViewModels
             {
                 var jsonResponse = await client.GetStringAsync(new Uri(GeneratePassengerRequestString(id))).ConfigureAwait(false);
                 var passenger = new Passenger(JsonConvert.DeserializeObject<PassengerDTO>(jsonResponse));
+                if (passenger.PassengerId == -1)
+                    throw new ArgumentException("blabla");
                 this.Passenger = passenger;
                 loggedIn.login(Passenger);
-                var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(id)));
+                var jsonResponseparty = await client.GetStringAsync(new Uri(GeneratePassengerPartyRequestString(passenger.PassengerId.ToString())));
                 var party = jsonResponseparty == null ? Passenger.FullName : jsonResponseparty;
                 loggedIn.joinGroup(party);
-                var jsonResponseSeat = await client.GetStringAsync(new Uri(GeneratePassengerSeatRequestString(id))).ConfigureAwait(false);
+                var jsonResponseSeat = await client.GetStringAsync(new Uri(GeneratePassengerSeatRequestString(passenger.PassengerId.ToString()))).ConfigureAwait(false);
                 var seat = new Seat(JsonConvert.DeserializeObject<SeatDTO>(jsonResponseSeat));
                 loggedIn.orderSeat(seat);
                 ChatViewModel model = new ChatViewModel();
                 await model.Connect();
-            } 
-            catch(HttpRequestException e) 
+            }
+            catch (ArgumentException e)
+            {
+                throw;
+            }
+            catch (HttpRequestException e) 
             {
                 throw new Exception("connection failed");
             }
@@ -45,9 +51,9 @@ namespace UpUpAndAwayApp.ViewModels
             }
         }
 
-        private string GeneratePassengerRequestString(string id)
+        private string GeneratePassengerRequestString(string seatnr)
         {
-            return String.Format("http://localhost:5000/api/passenger/{0}", id);
+            return String.Format("http://localhost:5000/api/passenger/login/{0}", seatnr);
         }
 
         private string GeneratePassengerSeatRequestString(string id)

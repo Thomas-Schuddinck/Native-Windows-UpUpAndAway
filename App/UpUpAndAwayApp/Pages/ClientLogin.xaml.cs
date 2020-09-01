@@ -34,7 +34,10 @@ namespace UpUpAndAwayApp
             catch (Exception er)
             {
                 var p = new ContentDialog();
-                p.Title = "Connection error";
+                if(er is AggregateException && er.InnerException is ArgumentException)
+                    p.Title = "Incorrect seatnumber";
+                else
+                    p.Title = "Connection error";
                 p.CloseButtonText = "close";
                 p.ShowAsync();
             }

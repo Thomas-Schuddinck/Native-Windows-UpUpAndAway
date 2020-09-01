@@ -49,9 +49,17 @@ namespace Shared.Models
 
         public Passenger(PassengerDTO passengerDTO)
         {
-            PassengerId = passengerDTO.PassengerId;
-            FirstName = passengerDTO.FirstName;
-            LastName = passengerDTO.LastName;
+            if (passengerDTO.Exists)
+            {
+                PassengerId = passengerDTO.PassengerId;
+                FirstName = passengerDTO.FirstName;
+                LastName = passengerDTO.LastName;
+            }
+            else
+            {
+                PassengerId = -1;
+            }
+
         }
 
         public Passenger(string firstName, string lastName)

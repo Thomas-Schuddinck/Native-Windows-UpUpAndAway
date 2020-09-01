@@ -7,16 +7,21 @@ namespace Shared.DTOs
         public int PassengerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool Exists { get; set; }
 
         public PassengerDTO()
         {
         }
 
-        public PassengerDTO(Passenger passenger)
+        public PassengerDTO(Passenger passenger = null)
         {
-            PassengerId = passenger.PassengerId;
-            FirstName = passenger.FirstName;
-            LastName = passenger.LastName;
+            Exists = passenger != null;
+            if (passenger != null)
+            {
+                PassengerId = passenger.PassengerId;
+                FirstName = passenger.FirstName;
+                LastName = passenger.LastName;
+            }
         }
     }
 }

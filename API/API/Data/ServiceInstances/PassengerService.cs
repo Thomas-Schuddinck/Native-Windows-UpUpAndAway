@@ -14,12 +14,14 @@ namespace API.Data.ServiceInstances
 
         private readonly Context context;
         private readonly DbSet<Passenger> passengers;
+        private readonly DbSet<Seat> seats;
         private readonly DbSet<PassengerParty> parties;
 
         public PassengerService(Context context)
         {
             this.context = context;
             passengers = context.Passengers;
+            seats = context.Seats;
             parties = context.PassengerParties;
         }
 
@@ -31,6 +33,11 @@ namespace API.Data.ServiceInstances
         public Passenger GetPassenger(int id)
         {
             return passengers.AsNoTracking().FirstOrDefault(s => s.PassengerId == id);
+        }
+
+        public Seat GetPassengerBySeatnumber(int seatnumber)
+        {
+            return seats.AsNoTracking().Include(s => s.Passenger).Where(s => s.SeatId == seatnumber).FirstOrDefault();
         }
 
         public PassengerParty GetParty(int id)

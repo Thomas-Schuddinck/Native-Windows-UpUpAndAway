@@ -36,6 +36,16 @@ namespace API.Controllers
             return Ok(new PassengerDTO(passengerService.GetPassenger(passengerId)));
         }
 
+        [HttpGet("login/{seatnr}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<Passenger> LoginUser(int seatnr)
+        {
+            Seat s = passengerService.GetPassengerBySeatnumber(seatnr);
+            return Ok(new PassengerDTO(s == null ? null : passengerService.GetPassengerBySeatnumber(seatnr).Passenger));
+        }
+
+        
+
         //GET api/values/5
         [HttpGet("party/{passengerId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
