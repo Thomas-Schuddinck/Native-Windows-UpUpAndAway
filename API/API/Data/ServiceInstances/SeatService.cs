@@ -24,6 +24,11 @@ namespace API.Data.ServiceInstances
             return seats.Include(s => s.Passenger).AsNoTracking().ToList();
         }
 
+        public Seat GetByPassenger(int passengerid)
+        {
+            return seats.Include(s => s.Passenger).AsNoTracking().Where(s => s.Passenger.PassengerId == passengerid).FirstOrDefault();
+        }
+
         public bool SwapSeats(int seat1, int seat2)
         {
             //Get seats from DB and check for null

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.DTOs;
+using System;
 
 namespace Shared.Models
 {
@@ -30,6 +31,11 @@ namespace Shared.Models
         public Seat()
         {
 
+        }
+        public Seat(SeatDTO seatdto)
+        {
+            this.SeatId = seatdto.SeatId;
+            this.Passenger = null;
         }
 
         public Seat(int seatNumber)

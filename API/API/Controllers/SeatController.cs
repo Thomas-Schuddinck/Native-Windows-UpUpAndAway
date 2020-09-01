@@ -29,6 +29,13 @@ namespace API.Controllers
             return new OkObjectResult(service.GetAll());
         }
 
+        [HttpGet("{passengerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<int> GetByPassenger(int passengerid)
+        {
+            return new OkObjectResult(new SeatDTO(service.GetByPassenger(passengerid)));
+        }
+
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

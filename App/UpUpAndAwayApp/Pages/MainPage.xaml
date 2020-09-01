@@ -24,10 +24,8 @@
                     <VisualState.Setters>
                         <Setter Target="Client.FontSize" Value="20"></Setter>
                         <Setter Target="Personeel.FontSize" Value="20"></Setter>
-                        <Setter Target="About.FontSize" Value="20"></Setter>
                         <Setter Target="Client.Height" Value="100"></Setter>
                         <Setter Target="Personeel.Height" Value="100"></Setter>
-                        <Setter Target="About.Height" Value="100"></Setter>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -38,10 +36,8 @@
                     <VisualState.Setters>
                         <Setter Target="Client.FontSize" Value="15"></Setter>
                         <Setter Target="Personeel.FontSize" Value="15"></Setter>
-                        <Setter Target="About.FontSize" Value="15"></Setter>
                         <Setter Target="Client.Height" Value="75"></Setter>
                         <Setter Target="Personeel.Height" Value="75"></Setter>
-                        <Setter Target="About.Height" Value="75"></Setter>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -52,21 +48,14 @@
                     <VisualState.Setters>
                         <Setter Target="Client.FontSize" Value="15"></Setter>
                         <Setter Target="Personeel.FontSize" Value="15"></Setter>
-                        <Setter Target="About.FontSize" Value="15"></Setter>
                         <Setter Target="Client.Height" Value="75"></Setter>
                         <Setter Target="Personeel.Height" Value="75"></Setter>
-                        <Setter Target="About.Height" Value="75"></Setter>
                         <Setter Target="Client.Margin">
                             <Setter.Value>
                                 <Thickness>150,0,150,0</Thickness>
                             </Setter.Value>
                         </Setter>
                         <Setter Target="Personeel.Margin">
-                            <Setter.Value>
-                                <Thickness>150,0,150,0</Thickness>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="About.Margin">
                             <Setter.Value>
                                 <Thickness>150,0,150,0</Thickness>
                             </Setter.Value>
@@ -89,7 +78,6 @@
         </Canvas>
         <Button x:Name="Client" Click="PassengerLogin" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Passenger Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="2" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
         <Button x:Name="Personeel" Click="StaffLogin" HorizontalAlignment="Stretch" Background="#33C2F0" Content="Staff Login" CornerRadius="10" VerticalAlignment="Center" Grid.Row="3" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
-        <Button x:Name="About" Grid.Row="4" HorizontalAlignment="Stretch" Background="#33C2F0" Content="About" CornerRadius="10" VerticalAlignment="Center" Margin="20,0,20,0" BorderBrush="#FF2890B2"/>
     </Grid>
 
 </Page>

@@ -50,7 +50,8 @@ namespace UpUpAndAwayApp.Pages
             }
             else
             {
-                model.SendWarningToPassenger(MessageBox.Text, Passengerlist.SelectedItem.ToString());
+                if(Passengerlist.SelectedItem!=null)
+                    model.SendWarningToPassenger(MessageBox.Text, Passengerlist.SelectedItem.ToString());
             }
         }
 

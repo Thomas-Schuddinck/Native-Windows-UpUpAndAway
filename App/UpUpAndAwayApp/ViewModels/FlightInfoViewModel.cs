@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Shared.DisplayModels;
+using Shared.DisplayModels.Singleton;
 using Shared.Models.Singleton;
 using System;
 using System.ComponentModel;
@@ -25,12 +26,14 @@ namespace UpUpAndAwayApp.ViewModels
         }
 
         public FlightInfoSingleton flightInfoSingleton;
+        public LoginSingleton person;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public FlightInfoViewModel()
         {
             getWeather();
+            person = LoginSingleton.GetInstance();
             flightInfoSingleton = FlightInfoSingleton.GetInstance();
         }
 

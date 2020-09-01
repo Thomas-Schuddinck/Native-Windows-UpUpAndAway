@@ -1,4 +1,5 @@
-﻿using Shared.Models.Singleton;
+﻿using Shared.DisplayModels.Singleton;
+using Shared.Models.Singleton;
 using UpUpAndAwayApp.ViewModels;
 using Windows.UI.Xaml.Controls;
 
@@ -12,6 +13,7 @@ namespace UpUpAndAwayApp.Pages
     public sealed partial class FlightInformation : Page
     {
         public FlightInfoViewModel ViewModel { get; set; }
+        public LoginSingleton person = LoginSingleton.GetInstance();
 
         public FlightInformation()
         {
