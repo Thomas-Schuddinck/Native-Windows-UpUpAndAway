@@ -11,5 +11,6 @@ namespace API.Data.IServices
         Seat GetPassengerBySeatnumber(int seatnumber);
         ICollection<Passenger> GetAll();
         ICollection<Passenger> GetPartyMembers(int partyId, int passengerId);
+        PassengerParty GetPartyOfPassenger(int passId);
     }
 }

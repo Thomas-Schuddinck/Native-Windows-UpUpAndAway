@@ -50,5 +50,12 @@ namespace API.Data.ServiceInstances
         {
             return parties.AsNoTracking().Include(p => p.Passengers).FirstOrDefault(p => p.PassengerPartyId == partyId).Passengers.Where(p => p.PassengerId != passengerId).ToList();
         }
+
+        public PassengerParty GetPartyOfPassenger(int passId)
+        {
+            return parties.Include(s => s.Passengers)
+                .AsNoTracking().SingleOrDefault(s => s.Passengers
+                    .Any(t => t.PassengerId == passId));
+        }
     }
 }

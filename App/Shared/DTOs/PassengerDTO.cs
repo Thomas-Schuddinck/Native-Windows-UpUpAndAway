@@ -7,6 +7,7 @@ namespace Shared.DTOs
         public int PassengerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int PartyID { get; set; }
         public bool Exists { get; set; }
 
         public PassengerDTO()
