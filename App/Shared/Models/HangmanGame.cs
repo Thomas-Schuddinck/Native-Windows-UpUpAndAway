@@ -56,7 +56,7 @@ namespace Shared.Models
 
         public override void Evaluate()
         {
-            if (CheckIfGuessed())
+            if (CheckIfGuessed() && !IsReady)
                 if(this.GameStatus != GameStatus.Finished)
                     UpdateWaitingStatus();
         }
